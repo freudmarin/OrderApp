@@ -1,4 +1,4 @@
-package com.diegokrupitza.template.springresttemplate;
+package com.marindulja.template.springresttemplate;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

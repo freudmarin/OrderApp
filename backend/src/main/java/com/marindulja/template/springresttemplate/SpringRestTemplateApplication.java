@@ -1,4 +1,4 @@
-package com.diegokrupitza.template.springresttemplate;
+package com.marindulja.template.springresttemplate;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
