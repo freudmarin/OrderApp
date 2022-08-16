@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="44e993c7-11f5-4c91-b37e-f2df5ec7726d" name="Changes" comment="Login almost finished" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="false" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="false" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="MavenRunner">
+    <option name="skipTests" value="true" />
+  </component>
+  <component name="ProjectId" id="2CeqBzCGkGFrRdqvNVWoSAR9ExZ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/frontend/src/app" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.DirectoryMappings" />
+    <property name="ts.external.directory.path" value="C:\Users\User\IdeaProjects\OrderApp\frontend\node_modules\typescript\lib" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\User\IdeaProjects\OrderApp\frontend\src\app" />
+      <recent name="C:\Users\User\IdeaProjects\OrderApp\backend\src\main\resources" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\IdeaProjects\OrderApp\frontend\src\app\services" />
+      <recent name="C:\Users\User\IdeaProjects\OrderApp\frontend" />
+      <recent name="C:\Users\User\IdeaProjects\OrderApp" />
+      <recent name="C:\Users\User\IdeaProjects\OrderApp\OrderApp\frontend" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.diegokrupitza.template.springresttemplate" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.SpringRestTemplateApplication">
+    <configuration name="com.diegokrupitza.template.springresttemplate in spring-rest-template" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="spring-rest-template" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.diegokrupitza.template.springresttemplate.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.diegokrupitza.template.springresttemplate" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="E2E Tests (frontend)" type="JavaScriptTestRunnerProtractor">
+      <config-file value="$PROJECT_DIR$/frontend/e2e/protractor.conf.js" />
+      <node-interpreter value="project" />
+      <protractor-package value="" />
+      <protractor-options value="" />
+      <envs />
+      <scope-kind value="ALL" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Angular Application" type="JavascriptDebugType" uri="http://localhost:4200">
+      <method v="2" />
+    </configuration>
+    <configuration name="SpringRestTemplateApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="spring-rest-template" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.marindulja.template.springresttemplate.SpringRestTemplateApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Angular CLI Server" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/frontend/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="JavaScript Debug.Angular Application" />
+      <item itemvalue="JUnit.com.diegokrupitza.template.springresttemplate in spring-rest-template" />
+      <item itemvalue="npm.Angular CLI Server" />
+      <item itemvalue="Protractor.E2E Tests (frontend)" />
+      <item itemvalue="Spring Boot.SpringRestTemplateApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.com.diegokrupitza.template.springresttemplate in spring-rest-template" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="44e993c7-11f5-4c91-b37e-f2df5ec7726d" name="Changes" comment="" />
+      <created>1659173268125</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1659173268125</updated>
+      <workItem from="1659173269344" duration="55000" />
+      <workItem from="1659173339004" duration="4132000" />
+      <workItem from="1659179129135" duration="5490000" />
+      <workItem from="1659185265809" duration="584000" />
+      <workItem from="1659185962322" duration="48000" />
+      <workItem from="1659186037873" duration="5146000" />
+      <workItem from="1659191373362" duration="534000" />
+      <workItem from="1659191936344" duration="2645000" />
+      <workItem from="1659194754618" duration="382000" />
+      <workItem from="1659195247438" duration="1491000" />
+      <workItem from="1659196780555" duration="2496000" />
+      <workItem from="1659210777392" duration="150000" />
+      <workItem from="1659211013943" duration="63000" />
+      <workItem from="1659211094609" duration="504000" />
+      <workItem from="1659211777890" duration="652000" />
+      <workItem from="1659212706381" duration="885000" />
+      <workItem from="1659214005082" duration="4623000" />
+      <workItem from="1659257839384" duration="2034000" />
+      <workItem from="1659260684178" duration="4050000" />
+      <workItem from="1659264890309" duration="98000" />
+      <workItem from="1659265046653" duration="2040000" />
+      <workItem from="1659268034862" duration="95000" />
+      <workItem from="1659268204656" duration="23000" />
+      <workItem from="1659268283829" duration="627000" />
+      <workItem from="1659622910217" duration="74000" />
+      <workItem from="1659623335428" duration="895000" />
+      <workItem from="1659624318262" duration="2436000" />
+      <workItem from="1659627808216" duration="968000" />
+      <workItem from="1659628843131" duration="1619000" />
+      <workItem from="1659862264848" duration="2870000" />
+      <workItem from="1659865795451" duration="2488000" />
+      <workItem from="1659868323008" duration="1000" />
+      <workItem from="1659868357977" duration="1643000" />
+      <workItem from="1659870180251" duration="389000" />
+      <workItem from="1659870859154" duration="13802000" />
+      <workItem from="1659981884105" duration="1985000" />
+      <workItem from="1659984068355" duration="12000" />
+      <workItem from="1659984127640" duration="15000" />
+      <workItem from="1659984163785" duration="58000" />
+      <workItem from="1659984263753" duration="190000" />
+      <workItem from="1659984498239" duration="652000" />
+      <workItem from="1660077211870" duration="2951000" />
+      <workItem from="1660080231551" duration="2910000" />
+      <workItem from="1660083622146" duration="300000" />
+      <workItem from="1660084201015" duration="209000" />
+      <workItem from="1660084499458" duration="2032000" />
+      <workItem from="1660206154577" duration="1109000" />
+      <workItem from="1660207550098" duration="5983000" />
+      <workItem from="1660253346953" duration="326000" />
+      <workItem from="1660331687674" duration="2000" />
+      <workItem from="1660332033613" duration="242000" />
+      <workItem from="1660657301352" duration="1168000" />
+    </task>
+    <task id="LOCAL-00001" summary="Login almost finished">
+      <created>1660657504904</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1660657504904</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/OrderApp" />
+      <path value="$PROJECT_DIR$/frontend" />
+    </ignored-roots>
+    <MESSAGE value="Login almost finished" />
+    <option name="LAST_COMMIT_MESSAGE" value="Login almost finished" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/app/components/login/login.component.ts</url>
+          <line>34</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/app/components/login/login.component.ts</url>
+          <line>35</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/app/auth/login/login.component.ts</url>
+          <line>39</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/controller/AuthController.java</url>
+          <line>26</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
