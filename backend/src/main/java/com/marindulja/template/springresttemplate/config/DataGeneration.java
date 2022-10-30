@@ -36,15 +36,12 @@ public class DataGeneration {
     public void generateData() {
         log.info("Starting to add dummy data!");
 
-        List<Role> allUsers = roleRepository.findAll();
-        List<Role> simpleUser = Collections.singletonList(roleRepository.findByName(ApplicationRoles.Identifier.USER).get());
-
         List<User> users = new ArrayList<>();
         if (userRepository.count() ==0) {
             users = Arrays.asList(
-                    new User("test", passwordEncoder.encode("12345"), simpleUser),
-                    new User("admin", passwordEncoder.encode("12345"), allUsers)
-            );
+                    new User("test", passwordEncoder.encode("12345"), "Test", "Seller", roleRepository.findByName(ApplicationRoles.Identifier.USER).get()),
+                    new User("admin", passwordEncoder.encode("12345"),"Marin Dulja", "Shop Manager",
+                            roleRepository.findByName(ApplicationRoles.Identifier.ADMIN).get()));
 
             userRepository.saveAll(users);
         }

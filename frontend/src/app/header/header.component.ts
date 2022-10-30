@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../auth/auth.service";
+import {LocalStorageService} from 'ngx-webstorage';
+import {UserPayload} from "../user/user-payload";
+import {Role} from "../user/role";
+import {UserRetrieved} from "../user/user-retrieved";
 
 @Component({
   selector: 'app-header',
@@ -8,12 +12,22 @@ import {AuthService} from "../auth/auth.service";
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public authService: AuthService) {
+  user: UserRetrieved;
+
+  constructor(private authenticationService: AuthService) {
+    this.authenticationService.user.subscribe(x => this.user = x);
   }
 
-  ngOnInit(): void {
+  get isAdmin() {
+    return this.user && this.user.role === Role.Admin;
   }
+
+  get isUser() {
+    return this.user != null
+  }
+  ngOnInit(): void {
+    }
   logout() {
-    this.authService.logout();
+    this.authenticationService.logout();
   }
 }

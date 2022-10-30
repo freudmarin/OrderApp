@@ -4,7 +4,54 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44e993c7-11f5-4c91-b37e-f2df5ec7726d" name="Changes" comment="Login almost finished" />
+    <list default="true" id="44e993c7-11f5-4c91-b37e-f2df5ec7726d" name="Changes" comment="Login almost finished">
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/user/user-details/user.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/user/user-details/user.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/user/user-details/user.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/SpringRestTemplateApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/SpringRestTemplateApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/config/DataGeneration.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/config/DataGeneration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/config/WebConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/dto/RegisterRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/exception/PostNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/exception/NotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/exception/SpringBlogException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/exception/OrderAppException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/model/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/model/BaseEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/model/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/model/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/security/ApplicationRoles.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/security/ApplicationRoles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/security/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/security/JwtAuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/security/JwtProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/security/JwtProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/service/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/service/AuthenticationResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/service/AuthenticationResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/service/UserDetailsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/service/UserDetailsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/springblog.jks" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/auth.guard.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/auth/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth/jwt-aut-response.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/auth/login/login.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/auth/login/login.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth/register-payload.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/user/user-payload.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth/register-success/register-success.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth/register-success/register-success.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth/register-success/register-success.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth/register-success/register-success.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth/register/register.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth/register/register.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth/register/register.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/user/user-details/user.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth/register/register.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/header/header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/header/header.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/header/header.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/header/header.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/http-client-interceptor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/auth-interceptor.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,6 +62,7 @@
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -64,34 +112,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RequestMappingsPanelOrder0" value="0" />
-    <property name="RequestMappingsPanelOrder1" value="1" />
-    <property name="RequestMappingsPanelWidth0" value="75" />
-    <property name="RequestMappingsPanelWidth1" value="75" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/frontend/src/app" />
-    <property name="node.js.detected.package.tslint" value="true" />
-    <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.DirectoryMappings" />
-    <property name="ts.external.directory.path" value="C:\Users\User\IdeaProjects\OrderApp\frontend\node_modules\typescript\lib" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.haulmont.jpb.viewMode&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\User\\IdeaProjects\\OrderApp\\frontend\\node_modules\\typescript\\lib&quot;
+  }
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\User\IdeaProjects\OrderApp\frontend\src\app" />
       <recent name="C:\Users\User\IdeaProjects\OrderApp\backend\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\IdeaProjects\OrderApp\frontend\src\app\user\user-details" />
+      <recent name="C:\Users\User\IdeaProjects\OrderApp\frontend\src\app\user" />
+      <recent name="C:\Users\User\IdeaProjects\OrderApp\frontend\src\app" />
       <recent name="C:\Users\User\IdeaProjects\OrderApp\frontend\src\app\services" />
       <recent name="C:\Users\User\IdeaProjects\OrderApp\frontend" />
-      <recent name="C:\Users\User\IdeaProjects\OrderApp" />
-      <recent name="C:\Users\User\IdeaProjects\OrderApp\OrderApp\frontend" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.diegokrupitza.template.springresttemplate" />
@@ -134,7 +177,6 @@
     <configuration name="SpringRestTemplateApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="spring-rest-template" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.marindulja.template.springresttemplate.SpringRestTemplateApplication" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -163,6 +205,12 @@
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpringBeansView">
+    <option name="showModules" value="false" />
+  </component>
+  <component name="SpringGeneralSettings">
+    <option name="allowAutoConfigurationMode" value="true" />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="44e993c7-11f5-4c91-b37e-f2df5ec7726d" name="Changes" comment="" />
@@ -221,7 +269,109 @@
       <workItem from="1660253346953" duration="326000" />
       <workItem from="1660331687674" duration="2000" />
       <workItem from="1660332033613" duration="242000" />
-      <workItem from="1660657301352" duration="1168000" />
+      <workItem from="1660657301352" duration="5574000" />
+      <workItem from="1660663517681" duration="3240000" />
+      <workItem from="1660702663171" duration="597000" />
+      <workItem from="1660703292311" duration="331000" />
+      <workItem from="1660703648045" duration="1572000" />
+      <workItem from="1660705285327" duration="6411000" />
+      <workItem from="1660935418324" duration="8005000" />
+      <workItem from="1661615385126" duration="12394000" />
+      <workItem from="1662052165221" duration="2077000" />
+      <workItem from="1662224011361" duration="4662000" />
+      <workItem from="1662868745386" duration="11000" />
+      <workItem from="1665239670875" duration="12068000" />
+      <workItem from="1665297914609" duration="3000" />
+      <workItem from="1665318953738" duration="624000" />
+      <workItem from="1665426443926" duration="5000" />
+      <workItem from="1665819816159" duration="28000" />
+      <workItem from="1665819886746" duration="23000" />
+      <workItem from="1665835608777" duration="84000" />
+      <workItem from="1665836047412" duration="170000" />
+      <workItem from="1665836393529" duration="807000" />
+      <workItem from="1665837470899" duration="251000" />
+      <workItem from="1665837760900" duration="14000" />
+      <workItem from="1665837849124" duration="684000" />
+      <workItem from="1665838568038" duration="1520000" />
+      <workItem from="1665840232038" duration="16000" />
+      <workItem from="1665840312088" duration="70000" />
+      <workItem from="1665840399733" duration="630000" />
+      <workItem from="1665841079320" duration="26000" />
+      <workItem from="1665841137417" duration="112000" />
+      <workItem from="1665841292988" duration="19000" />
+      <workItem from="1665841328812" duration="2898000" />
+      <workItem from="1665844941055" duration="15000" />
+      <workItem from="1665845099526" duration="152000" />
+      <workItem from="1665845378906" duration="173000" />
+      <workItem from="1665845614509" duration="87000" />
+      <workItem from="1665845830414" duration="1997000" />
+      <workItem from="1665891254720" duration="3000" />
+      <workItem from="1665931038673" duration="10484000" />
+      <workItem from="1666083756002" duration="716000" />
+      <workItem from="1666086656438" duration="63000" />
+      <workItem from="1666086911224" duration="10000" />
+      <workItem from="1666087783323" duration="2347000" />
+      <workItem from="1666090437138" duration="60000" />
+      <workItem from="1666090601910" duration="5000" />
+      <workItem from="1666090991751" duration="61000" />
+      <workItem from="1666091097102" duration="24000" />
+      <workItem from="1666091483128" duration="117000" />
+      <workItem from="1666091754568" duration="38000" />
+      <workItem from="1666091950475" duration="29000" />
+      <workItem from="1666094497495" duration="24000" />
+      <workItem from="1666094953451" duration="24000" />
+      <workItem from="1666095024753" duration="13000" />
+      <workItem from="1666100697743" duration="14000" />
+      <workItem from="1666103405607" duration="114000" />
+      <workItem from="1666103542802" duration="11000" />
+      <workItem from="1666103644077" duration="26000" />
+      <workItem from="1666104666213" duration="26000" />
+      <workItem from="1666105317861" duration="37000" />
+      <workItem from="1666106607601" duration="215000" />
+      <workItem from="1666114758543" duration="26000" />
+      <workItem from="1666118948941" duration="14000" />
+      <workItem from="1666530945089" duration="453000" />
+      <workItem from="1666531499629" duration="94000" />
+      <workItem from="1666531634431" duration="579000" />
+      <workItem from="1666532314789" duration="12000" />
+      <workItem from="1666533004536" duration="337000" />
+      <workItem from="1666533398681" duration="358000" />
+      <workItem from="1666533773618" duration="76000" />
+      <workItem from="1666533905833" duration="104000" />
+      <workItem from="1666534217881" duration="340000" />
+      <workItem from="1666534627310" duration="104000" />
+      <workItem from="1666534759240" duration="86000" />
+      <workItem from="1666534867503" duration="982000" />
+      <workItem from="1666535874607" duration="9979000" />
+      <workItem from="1666546029161" duration="5627000" />
+      <workItem from="1666598657017" duration="20000" />
+      <workItem from="1666648293852" duration="156000" />
+      <workItem from="1666648493896" duration="46000" />
+      <workItem from="1666648561498" duration="902000" />
+      <workItem from="1666649524889" duration="68000" />
+      <workItem from="1666649622787" duration="50000" />
+      <workItem from="1666649690873" duration="2888000" />
+      <workItem from="1666652744267" duration="104000" />
+      <workItem from="1666652893085" duration="56000" />
+      <workItem from="1666653034023" duration="208000" />
+      <workItem from="1666653264288" duration="88000" />
+      <workItem from="1666653377955" duration="159000" />
+      <workItem from="1666653558784" duration="478000" />
+      <workItem from="1666654069785" duration="701000" />
+      <workItem from="1666654823006" duration="57000" />
+      <workItem from="1666654894779" duration="10409000" />
+      <workItem from="1666682690917" duration="8000" />
+      <workItem from="1666737249631" duration="54000" />
+      <workItem from="1666861347661" duration="41000" />
+      <workItem from="1666861433886" duration="6677000" />
+      <workItem from="1666992386179" duration="733000" />
+      <workItem from="1667056385713" duration="8000" />
+      <workItem from="1667130881820" duration="4712000" />
+      <workItem from="1667135699665" duration="2267000" />
+      <workItem from="1667138014546" duration="49000" />
+      <workItem from="1667138082434" duration="3585000" />
+      <workItem from="1667141732759" duration="53000" />
+      <workItem from="1667141805309" duration="4570000" />
     </task>
     <task id="LOCAL-00001" summary="Login almost finished">
       <created>1660657504904</created>
@@ -230,7 +380,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660657504904</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Login almost finished">
+      <created>1660658515704</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1660658515704</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -269,16 +426,161 @@
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/app/user/user-details/user.component.ts</url>
+          <line>52</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/app/user/user-details/user.component.ts</url>
+          <line>53</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/app/user/user.service.ts</url>
+          <line>19</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/app/user/users-list/users-list.component.ts</url>
+          <line>26</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/app/header/header.component.html</url>
+          <line>22</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/app/auth/auth.service.ts</url>
+          <line>41</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/app/auth/auth.service.ts</url>
+          <line>21</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/app/auth/auth.service.ts</url>
+          <line>22</line>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/app/auth/auth.service.ts</url>
+          <line>31</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/app/auth/auth.service.ts</url>
+          <line>17</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/frontend/src/app/auth/login/login.component.ts</url>
           <line>39</line>
-          <option name="timeStamp" value="5" />
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/app/auth/login/login.component.ts</url>
+          <line>35</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/app/user/user.service.ts</url>
+          <line>16</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/app/auth-interceptor.ts</url>
+          <line>21</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/app/auth/auth.service.ts</url>
+          <line>23</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/app/user/user-details/user.component.ts</url>
+          <line>39</line>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/app/user/users-list/users-list.component.ts</url>
+          <line>23</line>
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/app/auth-interceptor.ts</url>
+          <line>15</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="58" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/controller/AuthController.java</url>
-          <line>26</line>
-          <option name="timeStamp" value="4" />
+          <url>file://$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/security/JwtAuthenticationFilter.java</url>
+          <line>47</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/security/JwtAuthenticationFilter.java</url>
+          <line>33</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/service/UserDetailsServiceImpl.java</url>
+          <line>69</line>
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/config/SecurityConfig.java</url>
+          <line>40</line>
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/controller/UsersController.java</url>
+          <line>31</line>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/security/JwtProvider.java</url>
+          <line>39</line>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/service/AuthService.java</url>
+          <line>32</line>
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/security/JwtProvider.java</url>
+          <line>29</line>
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/security/JwtProvider.java</url>
+          <line>20</line>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/config/SecurityConfig.java</url>
+          <line>37</line>
+          <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/config/SecurityConfig.java</url>
+          <line>47</line>
+          <option name="timeStamp" value="56" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backend/src/main/java/com/marindulja/template/springresttemplate/security/JwtAuthenticationFilter.java</url>
+          <line>31</line>
+          <option name="timeStamp" value="57" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

@@ -1,17 +1,20 @@
 package com.marindulja.template.springresttemplate.model;
 
 import lombok.*;
+import org.hibernate.Hibernate;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @MappedSuperclass
-@Data
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
 public abstract class BaseEntity<T extends Number> {
 
     @Id
@@ -31,6 +34,9 @@ public abstract class BaseEntity<T extends Number> {
     @Setter(AccessLevel.NONE)
     private LocalDateTime updatedAt;
 
+    public BaseEntity(Long id) {
+    }
+
     @PrePersist
     private void setCreatedAt() {
         this.createdAt = LocalDateTime.now();
@@ -40,5 +46,18 @@ public abstract class BaseEntity<T extends Number> {
     @PreUpdate
     private void setUpdatedAt() {
         this.updatedAt = LocalDateTime.now();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        BaseEntity<?> that = (BaseEntity<?>) o;
+        return id != null && Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

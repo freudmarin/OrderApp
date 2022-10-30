@@ -1,11 +1,15 @@
 package com.marindulja.template.springresttemplate.service;
 
-import com.marindulja.template.springresttemplate.dto.RegisterRequest;
 import com.marindulja.template.springresttemplate.dto.LoginRequest;
 import com.marindulja.template.springresttemplate.model.User;
 import com.marindulja.template.springresttemplate.repository.UserRepository;
 import com.marindulja.template.springresttemplate.security.JwtProvider;
+import com.sun.security.auth.UserPrincipal;
+import javassist.NotFoundException;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,35 +20,23 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class AuthService {
-
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    UserService userService;
     @Autowired
     private JwtProvider jwtProvider;
-
-    public void signup(RegisterRequest registerRequest) {
-        User user = new User();
-        user.setUsername(registerRequest.getUsername());
-        user.setPassword(encodePassword(registerRequest.getPassword()));
-
-        userRepository.save(user);
-    }
-
-    private String encodePassword(String password) {
-        return passwordEncoder.encode(password);
-    }
-
     public AuthenticationResponse login(LoginRequest loginRequest) {
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
                 loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authenticate);
+        String role = userService.loadUserByUsername(loginRequest.getUsername()).getAuthorities().
+                stream().map(grantedAuthority -> StringUtils.remove(grantedAuthority.getAuthority(),"ROLE_")).findFirst().get();
         String authenticationToken = jwtProvider.generateToken(authenticate);
-        return new AuthenticationResponse(authenticationToken, loginRequest.getUsername());
+        return new AuthenticationResponse(authenticationToken, loginRequest.getUsername(),role);
     }
 
     public Optional<org.springframework.security.core.userdetails.User> getCurrentUser() {

@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-import {LoginPayload} from '../login-payload';
 import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
+import {LoginPayload} from "../loginPayload";
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,11 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   loginPayload: LoginPayload;
-  showError: boolean = false;
+  isLoggedIn = false;
+  isLoginFailed = false;
+  submitted: boolean;
+  errorMessage = '';
+
   constructor(private authService: AuthService, private router: Router) {
     this.loginForm = new FormGroup({
       username: new FormControl(),
@@ -29,17 +33,21 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submitted = true;
     this.loginPayload.username = this.loginForm.get('username').value;
     this.loginPayload.password = this.loginForm.get('password').value;
 
-    this.authService.login(this.loginPayload).subscribe(data => {
-      if (data) {
-        console.log('login success');
-        this.router.navigateByUrl('/home');
-      } else {
-        this.showError = true;
-        console.log('Login failed');
-      }
+    this.authService.login(this.loginPayload.username, this.loginPayload.password).subscribe(data => {
+      this.isLoggedIn = true;
+      console.log('login success');
+      this.router.navigateByUrl('/home');
+    }, error => {
+      this.errorMessage = "Login Error, Please enter again your credentials"
+      this.isLoginFailed = true;
     });
+  }
+
+  get loginFormControl() {
+    return this.loginForm.controls;
   }
 }

@@ -4,26 +4,29 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
-import {RegisterComponent} from './auth/register/register.component';
+import {UserComponent} from './user/user-details/user.component';
 import {LoginComponent} from './auth/login/login.component';
-import {RegisterSuccessComponent} from './auth/register-success/register-success.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {Ng2Webstorage} from 'ngx-webstorage';
 import {HomeComponent} from './home/home.component';
-import {HttpClientInterceptor} from './http-client-interceptor';
 import {FooterComponent} from "./footer/footer.component";
+import { UsersListComponent } from './user/users-list/users-list.component';
+import {AuthInterceptor} from "./auth-interceptor";
+//import {AuthGuard} from "./auth.guard";
+import {Role} from "./user/role";
+import {AuthGuard} from "./auth.guard";
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    RegisterComponent,
+    UserComponent,
     LoginComponent,
-    RegisterSuccessComponent,
     HomeComponent,
-    FooterComponent
+    FooterComponent,
+    UsersListComponent
   ],
   imports: [
     BrowserModule,
@@ -33,14 +36,14 @@ import {FooterComponent} from "./footer/footer.component";
     Ng2Webstorage.forRoot(),
     RouterModule.forRoot([
       {path: '', component: HomeComponent},
-      {path: 'register', component: RegisterComponent},
+      {path: 'users', component: UsersListComponent, canActivate: [AuthGuard],  data: { roles: [Role.Admin] }},
+      {path: 'user', component: UserComponent, canActivate: [AuthGuard],  data: { roles: [Role.Admin] }},
+      {path: 'user/:id', component: UserComponent, canActivate: [AuthGuard],  data: { roles: [Role.Admin] }},
       {path: 'login', component: LoginComponent},
-      {path: 'register-success', component: RegisterSuccessComponent},
       {path: 'home', component: HomeComponent},
-    ]),
-    HttpClientModule
+    ]), HttpClientModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: HttpClientInterceptor, multi: true}],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule {

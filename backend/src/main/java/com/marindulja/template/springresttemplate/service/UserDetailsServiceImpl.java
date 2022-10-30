@@ -1,44 +1,116 @@
 package com.marindulja.template.springresttemplate.service;
 
+import com.marindulja.template.springresttemplate.dto.UserDto;
+import com.marindulja.template.springresttemplate.exception.OrderAppException;
 import com.marindulja.template.springresttemplate.model.Role;
 import com.marindulja.template.springresttemplate.model.User;
+import com.marindulja.template.springresttemplate.repository.RoleRepository;
 import com.marindulja.template.springresttemplate.repository.UserRepository;
 import javassist.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
 public class UserDetailsServiceImpl implements UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+
+    private final PasswordEncoder passwordEncoder;
+
+    private ModelMapper mapper = new ModelMapper();
+
+    public UserDetailsServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
 
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserDto> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        return users.stream().map(user -> mapToDTO(user)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Role> getAllRoles() {
+        return roleRepository.findAll();
+
     }
 
     @Override
     public User findByUsername(String username) throws NotFoundException {
 
-            return userRepository.findByUsername(username)
-                    .orElseThrow(() ->
-                            new NotFoundException(String.format("User with the username %s does not exist!", username))
-                    );
+        return userRepository.findByUsername(username)
+                .orElseThrow(() ->
+                        new NotFoundException(String.format("User with the username %s does not exist!", username))
+                );
     }
+
+    @Override
+    public UserDto addUser(UserDto userToBeAdded) {
+        User user = new User();
+        user.setUsername(userToBeAdded.getUsername());
+        user.setPassword(passwordEncoder.encode(userToBeAdded.getPassword()));
+        user.setJobTitle(userToBeAdded.getJobTitle());
+        user.setFullName(userToBeAdded.getFullName());
+        user.setRole(roleRepository.findByName(userToBeAdded.getRole().getName()).orElseThrow(() -> new com.marindulja.template.springresttemplate.exception.NotFoundException("This role was not found")));
+        User savedUser = userRepository.save(user);
+        return mapToDTO(savedUser);
+    }
+
+    public ResponseEntity<UserDto> getUserById(long id) {
+        Optional<User> userData = userRepository.findById(id);
+        if (userData.isPresent()) {
+            return new ResponseEntity<>(mapToDTO(userData.get()), HttpStatus.OK);
+        } else {
+            throw new com.marindulja.template.springresttemplate.exception.NotFoundException("User not found");
+        }
+    }
+
+    public ResponseEntity<UserDto> updateUserById(long id, UserDto userDto) {
+        Optional<User> userData = userRepository.findById(id);
+        if (userData.isPresent()) {
+            User _user = userData.get();
+            _user.setRole(userDto.getRole());
+            _user.setUsername(userDto.getUsername());
+            _user.setFullName(userDto.getFullName());
+            _user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+            User updatedUser = userRepository.save(_user);
+
+            return new ResponseEntity<>(mapToDTO(updatedUser), HttpStatus.OK);
+        } else {
+            throw new com.marindulja.template.springresttemplate.exception.NotFoundException("User not found");
+        }
+    }
+
+    public ResponseEntity<HttpStatus> deleteUserById(long id) {
+        try {
+            userRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            throw new com.marindulja.template.springresttemplate.exception.NotFoundException("User not found");
+        }
+    }
+
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -46,8 +118,8 @@ public class UserDetailsServiceImpl implements UserService {
         try {
             User user = findByUsername(username);
 
-            String[] roles = (String[]) user.getRoles().stream().map(Role::getName).toArray(String[]::new);
-            List<GrantedAuthority> grantedAuthorities = AuthorityUtils.createAuthorityList(roles);
+            String role = user.getRole().getName();
+            List<GrantedAuthority> grantedAuthorities = AuthorityUtils.createAuthorityList("ROLE_" + role);
 
             return new org.springframework.security.core.userdetails.User(
                     Long.toString(user.getId()),
@@ -62,5 +134,16 @@ public class UserDetailsServiceImpl implements UserService {
 
     private Collection<? extends GrantedAuthority> getAuthorities(String role_user) {
         return Collections.singletonList(new SimpleGrantedAuthority(role_user));
+    }
+
+
+    private UserDto mapToDTO(User user) {
+        UserDto userDto = mapper.map(user, UserDto.class);
+        return userDto;
+    }
+
+    private User mapToEntity(UserDto userDto) {
+        User user = mapper.map(userDto, User.class);
+        return user;
     }
 }

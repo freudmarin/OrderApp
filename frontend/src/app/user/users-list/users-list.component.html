@@ -1,0 +1,28 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2>Users List</h2>
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Fullname</th>
+        <th>UserName</th>
+        <th>Roles</th>
+        <th>JobTitle</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{user.fullName}}</td>
+        <td>{{user.username}}</td>
+        <td> {{user.role.name}} </td>
+        <td>{{user.jobTitle}}</td>
+        <td><button (click)="deleteEmployee(user.id)" class="btn btn-danger">Delete</button>
+          <button [routerLink]="['/user/', user.id]" class="btn btn-info" style="margin-left: 10px">Details</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
