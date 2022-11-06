@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
 import {LoginPayload} from "../loginPayload";
@@ -18,10 +18,10 @@ export class LoginComponent implements OnInit {
   submitted: boolean;
   errorMessage = '';
 
-  constructor(private authService: AuthService, private router: Router) {
-    this.loginForm = new FormGroup({
-      username: new FormControl(),
-      password: new FormControl()
+  constructor(private authService: AuthService, private router: Router, public fb:FormBuilder) {
+    this.loginForm = this.fb.group({
+      username:  ['',Validators.required],
+      password:  ['',Validators.required]
     });
     this.loginPayload = {
       username: '',
@@ -36,15 +36,16 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     this.loginPayload.username = this.loginForm.get('username').value;
     this.loginPayload.password = this.loginForm.get('password').value;
-
-    this.authService.login(this.loginPayload.username, this.loginPayload.password).subscribe(data => {
-      this.isLoggedIn = true;
-      console.log('login success');
-      this.router.navigateByUrl('/home');
-    }, error => {
-      this.errorMessage = "Login Error, Please enter again your credentials"
-      this.isLoginFailed = true;
-    });
+    if (this.loginForm.valid) {
+      this.authService.login(this.loginPayload.username, this.loginPayload.password).subscribe(data => {
+        this.isLoggedIn = true;
+        console.log('login success');
+        this.router.navigateByUrl('/home');
+      }, error => {
+        this.errorMessage = "Login Error, Please enter again your credentials"
+        this.isLoginFailed = true;
+      });
+    }
   }
 
   get loginFormControl() {

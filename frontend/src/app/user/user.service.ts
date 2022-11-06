@@ -20,8 +20,8 @@ export class UserService {
     return this.httpClient.post<UserPayload>(this.usersUrl + '/add', user);
   }
 
-  getRoles(): Observable<Role[]> {
-    return this.httpClient.get<Role[]>(this.usersUrl + '/roles');
+  getRoles(): Observable<String[]> {
+    return this.httpClient.get<String[]>(this.usersUrl + '/roles');
   }
 
   get(id) {

@@ -1,12 +1,11 @@
-package com.marindulja.template.springresttemplate.service;
+package com.marindulja.template.springresttemplate.service.users;
 
 import com.marindulja.template.springresttemplate.dto.UserDto;
-import com.marindulja.template.springresttemplate.exception.OrderAppException;
 import com.marindulja.template.springresttemplate.model.Role;
 import com.marindulja.template.springresttemplate.model.User;
-import com.marindulja.template.springresttemplate.repository.RoleRepository;
 import com.marindulja.template.springresttemplate.repository.UserRepository;
 import javassist.NotFoundException;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -20,30 +19,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
 
     private final PasswordEncoder passwordEncoder;
 
     private ModelMapper mapper = new ModelMapper();
-
-    public UserDetailsServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
-
-
     @Override
     public List<UserDto> getAllUsers() {
         List<User> users = userRepository.findAll();
@@ -51,8 +39,8 @@ public class UserDetailsServiceImpl implements UserService {
     }
 
     @Override
-    public List<Role> getAllRoles() {
-        return roleRepository.findAll();
+    public List<String> getAllRoles() {
+        return Arrays.asList(Role.values()).stream().map(r->r.getAuthority()).collect(Collectors.toList());
 
     }
 
@@ -72,7 +60,7 @@ public class UserDetailsServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(userToBeAdded.getPassword()));
         user.setJobTitle(userToBeAdded.getJobTitle());
         user.setFullName(userToBeAdded.getFullName());
-        user.setRole(roleRepository.findByName(userToBeAdded.getRole().getName()).orElseThrow(() -> new com.marindulja.template.springresttemplate.exception.NotFoundException("This role was not found")));
+        user.setRole(userToBeAdded.getRole());
         User savedUser = userRepository.save(user);
         return mapToDTO(savedUser);
     }
@@ -93,6 +81,7 @@ public class UserDetailsServiceImpl implements UserService {
             _user.setRole(userDto.getRole());
             _user.setUsername(userDto.getUsername());
             _user.setFullName(userDto.getFullName());
+            _user.setJobTitle(userDto.getJobTitle());
             _user.setPassword(passwordEncoder.encode(userDto.getPassword()));
             User updatedUser = userRepository.save(_user);
 
@@ -118,7 +107,7 @@ public class UserDetailsServiceImpl implements UserService {
         try {
             User user = findByUsername(username);
 
-            String role = user.getRole().getName();
+            String role = user.getRole().getAuthority();
             List<GrantedAuthority> grantedAuthorities = AuthorityUtils.createAuthorityList("ROLE_" + role);
 
             return new org.springframework.security.core.userdetails.User(

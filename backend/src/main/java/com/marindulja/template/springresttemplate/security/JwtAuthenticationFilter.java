@@ -1,7 +1,7 @@
 package com.marindulja.template.springresttemplate.security;
 
 import com.marindulja.template.springresttemplate.repository.UserRepository;
-import com.marindulja.template.springresttemplate.service.UserDetailsServiceImpl;
+import com.marindulja.template.springresttemplate.service.users.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

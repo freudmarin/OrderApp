@@ -1,30 +1,27 @@
 package com.marindulja.template.springresttemplate.controller;
 
 import com.marindulja.template.springresttemplate.dto.UserDto;
-import com.marindulja.template.springresttemplate.model.Role;
 import com.marindulja.template.springresttemplate.service.AuthService;
-import com.marindulja.template.springresttemplate.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.marindulja.template.springresttemplate.service.users.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin(origins = "http://localhost:4200")
+@PreAuthorize("hasRole('ADMIN')")
 public class UsersController {
 
-    @Autowired
-    private UserService userDetailsService;
-
-    @Autowired
-    private AuthService authService;
+    private final UserService userDetailsService;
 
     @PostMapping("/add")
-    public ResponseEntity addUser(@RequestBody UserDto userDto) {
-      return new ResponseEntity(userDetailsService.addUser(userDto), HttpStatus.OK);
+    public ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto) {
+      return new ResponseEntity<>(userDetailsService.addUser(userDto), HttpStatus.OK);
     }
 
     @GetMapping("/")
@@ -33,7 +30,7 @@ public class UsersController {
     }
 
     @GetMapping("/roles")
-    public List<Role> getAllRoles() {
+    public List<String> getAllRoles() {
         return userDetailsService.getAllRoles();
     }
 

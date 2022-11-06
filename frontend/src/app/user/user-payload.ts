@@ -7,5 +7,5 @@ export class UserPayload {
   password: String;
   confirmPassword: String;
   jobTitle: String;
-  role : FetchedRole;
+  role : String;
 }

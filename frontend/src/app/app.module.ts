@@ -12,11 +12,13 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {Ng2Webstorage} from 'ngx-webstorage';
 import {HomeComponent} from './home/home.component';
 import {FooterComponent} from "./footer/footer.component";
-import { UsersListComponent } from './user/users-list/users-list.component';
+import {UsersListComponent} from './user/users-list/users-list.component';
 import {AuthInterceptor} from "./auth-interceptor";
 //import {AuthGuard} from "./auth.guard";
 import {Role} from "./user/role";
 import {AuthGuard} from "./auth.guard";
+import {CategoriesListComponent} from './category/categories-list/categories-list.component';
+import { CategoryComponent } from './category/category/category.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import {AuthGuard} from "./auth.guard";
     LoginComponent,
     HomeComponent,
     FooterComponent,
-    UsersListComponent
+    UsersListComponent,
+    CategoriesListComponent,
+    CategoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +43,10 @@ import {AuthGuard} from "./auth.guard";
       {path: 'users', component: UsersListComponent, canActivate: [AuthGuard],  data: { roles: [Role.Admin] }},
       {path: 'user', component: UserComponent, canActivate: [AuthGuard],  data: { roles: [Role.Admin] }},
       {path: 'user/:id', component: UserComponent, canActivate: [AuthGuard],  data: { roles: [Role.Admin] }},
+      {path: 'login', component: LoginComponent},
+      {path: 'categories', component: CategoriesListComponent, canActivate: [AuthGuard],  data: { roles: [Role.Admin, Role.User] }},
+      {path: 'category', component: CategoryComponent, canActivate: [AuthGuard],  data: { roles: [Role.Admin] }},
+      {path: 'category/:id', component: CategoryComponent, canActivate: [AuthGuard],  data: { roles: [Role.Admin] }},
       {path: 'login', component: LoginComponent},
       {path: 'home', component: HomeComponent},
     ]), HttpClientModule

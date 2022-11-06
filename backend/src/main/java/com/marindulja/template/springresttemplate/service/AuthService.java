@@ -1,20 +1,15 @@
 package com.marindulja.template.springresttemplate.service;
 
 import com.marindulja.template.springresttemplate.dto.LoginRequest;
-import com.marindulja.template.springresttemplate.model.User;
-import com.marindulja.template.springresttemplate.repository.UserRepository;
 import com.marindulja.template.springresttemplate.security.JwtProvider;
-import com.sun.security.auth.UserPrincipal;
-import javassist.NotFoundException;
+import com.marindulja.template.springresttemplate.service.users.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

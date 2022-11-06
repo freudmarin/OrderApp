@@ -1,4 +1,4 @@
-package com.marindulja.template.springresttemplate.service;
+package com.marindulja.template.springresttemplate.service.users;
 
 
 import com.marindulja.template.springresttemplate.dto.UserDto;
@@ -20,7 +20,7 @@ public interface UserService extends UserDetailsService {
      */
     List<UserDto> getAllUsers();
 
-    List<Role> getAllRoles();
+    List<String> getAllRoles();
 
     /**
      * Find a user by its username

@@ -36,7 +36,7 @@ export class UsersListComponent implements OnInit {
     this.retrieveUsers();
   }
 
-  deleteEmployee(id: number) {
+  deleteUser(id: number) {
     this.userService.delete(id)
       .subscribe(
         data => {
@@ -44,6 +44,10 @@ export class UsersListComponent implements OnInit {
           this.refreshList();
         },
         error => console.log(error));
+  }
+
+  addUser() {
+    this.router.navigate(['user']);
   }
 
 

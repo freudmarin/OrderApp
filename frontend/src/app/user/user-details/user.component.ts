@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from "../user.service";
 import {UserPayload} from "../user-payload";
 import {CustomValidationService} from "../custom-validation.service";
-import { Role } from '../role';
+import {Role} from '../role';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +16,7 @@ export class UserComponent implements OnInit {
   onUpdate : boolean;
   userForm: FormGroup;
   userPayload: UserPayload;
-  roles: Role[];
+  roles: String[];
   submitted = false;
 
   constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router,

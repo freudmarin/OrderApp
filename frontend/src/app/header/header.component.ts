@@ -1,21 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit, Output} from '@angular/core';
 import {AuthService} from "../auth/auth.service";
-import {LocalStorageService} from 'ngx-webstorage';
-import {UserPayload} from "../user/user-payload";
 import {Role} from "../user/role";
 import {UserRetrieved} from "../user/user-retrieved";
+import {BehaviorSubject, Observable} from "rxjs";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
   user: UserRetrieved;
 
-  constructor(private authenticationService: AuthService) {
-    this.authenticationService.user.subscribe(x => this.user = x);
+  constructor(private authenticationService: AuthService,private route: ActivatedRoute) {
+    this.authenticationService.user.subscribe(x => this.user = x)
+  }
+
+  ngOnInit(): void {
+
   }
 
   get isAdmin() {
@@ -25,8 +29,6 @@ export class HeaderComponent implements OnInit {
   get isUser() {
     return this.user != null
   }
-  ngOnInit(): void {
-    }
   logout() {
     this.authenticationService.logout();
   }

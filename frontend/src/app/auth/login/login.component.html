@@ -1,5 +1,5 @@
 <div class="container">
-  <form class="form-signin" [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+  <form class="form-signin" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <h1 class="h3 mb-3 font-weight-normal">Please Sign in</h1>
     <div class="form-group">
       <label for="inputUsername" class="sr-only">Username</label>
@@ -25,7 +25,7 @@
   </form>
   <div class="alert alert-danger"
        role="alert"
-       *ngIf="isLoginFailed">
+       *ngIf="isLoginFailed && submitted">
     Login failed: {{ errorMessage }}
   </div>
 </div>

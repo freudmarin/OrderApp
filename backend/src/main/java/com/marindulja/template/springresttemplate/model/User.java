@@ -5,6 +5,8 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -30,18 +32,20 @@ public class User extends BaseEntity<Long> {
     @NotBlank(message = "Job title is mandatory")
     @Column(name = "job_title",nullable = false)
     private String jobTitle;
-
-    @ManyToOne()
-    @JoinTable(name = "user_roles",
-            joinColumns =
-                    { @JoinColumn(name = "user_id", referencedColumnName = "id") },
-            inverseJoinColumns =
-                    { @JoinColumn(name = "role_id", referencedColumnName = "id") })
     private Role role;
 
-    public User(Long id,  @NonNull String username, Role role) {
-        super(id);
+    @OneToMany(
+            mappedBy = "customer",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Order> orders = new ArrayList<>();
+
+    public User(String username, String password, String fullName, String jobTitle, Role role) {
         this.username = username;
+        this.password = password;
+        this.fullName = fullName;
+        this.jobTitle = jobTitle;
         this.role = role;
     }
 
