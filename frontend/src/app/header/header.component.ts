@@ -4,6 +4,7 @@ import {Role} from "../user/role";
 import {UserRetrieved} from "../user/user-retrieved";
 import {BehaviorSubject, Observable} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
+import {RoleManagementService} from "../role-management.service";
 
 @Component({
   selector: 'app-header',
@@ -11,24 +12,15 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-
-  user: UserRetrieved;
-
-  constructor(private authenticationService: AuthService,private route: ActivatedRoute) {
-    this.authenticationService.user.subscribe(x => this.user = x)
+  public  roleManagementService : RoleManagementService;
+  constructor(roleManagementService: RoleManagementService, public  authenticationService: AuthService) {
+    this.roleManagementService = roleManagementService;
   }
 
   ngOnInit(): void {
 
   }
 
-  get isAdmin() {
-    return this.user && this.user.role === Role.Admin;
-  }
-
-  get isUser() {
-    return this.user != null
-  }
   logout() {
     this.authenticationService.logout();
   }
