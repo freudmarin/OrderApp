@@ -12,8 +12,8 @@ import {RoleManagementService} from "../../role-management.service";
 export class CategoriesListComponent implements OnInit {
   categories: Category[] = [];
   public  roleManagementService : RoleManagementService;
-  constructor(public  categoryService: CategoryService, private router: Router, roleManagementService: RoleManagementService) {
-    this.roleManagementService = roleManagementService;
+  constructor(public categoryService: CategoryService, private router: Router, roleManagementService: RoleManagementService) {
+  this.roleManagementService = roleManagementService;
   }
 
   ngOnInit() {

@@ -1,0 +1,45 @@
+<div class="container-xl">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-6">
+            <h4 *ngIf="!roleManagementService.isAdmin"><b>Manage customers</b></h4>
+            <h4 *ngIf="roleManagementService.isAdmin"><b>View Customers</b></h4>
+          </div>
+          <div class="col-sm-6">
+            <button *ngIf="!roleManagementService.isAdmin" class="btn btn-success" (click)="addCustomer()">
+              <span> Add Customer</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <table class="table table-striped table-hover table-bordered table-content">
+        <thead>
+        <tr class="center-align">
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Address</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let customer of customers">
+          <td>{{customer.firstName}}</td>
+          <td>{{customer.lastName}}</td>
+          <td>{{customer.address}}</td>
+          <td *ngIf="!roleManagementService.isAdmin" align="center">
+            <a href="#" [routerLink]="['/customer/', customer.id]" class="btn btn-info">Edit</a>
+            <button type="button" (click)="deleteCustomer(customer.id)" class="btn btn-danger"
+                    style="margin-left: 5px;"> Delete
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td *ngIf="customers.length == 0" colspan="6">No customers were found</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

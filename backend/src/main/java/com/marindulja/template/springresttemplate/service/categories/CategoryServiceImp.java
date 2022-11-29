@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class CategoryServiceImp implements  CategoryService {
+public class CategoryServiceImp implements CategoryService {
 
     private final CategoryRepository categoryRepository;
     private ModelMapper mapper = new ModelMapper();
@@ -25,7 +25,7 @@ public class CategoryServiceImp implements  CategoryService {
     @Override
     public List<CategoryDto> getAllCategories() {
         List<Category> categories = categoryRepository.findAll();
-        return categories.stream().map(category -> mapToDTO(category)).collect(Collectors.toList());
+        return categories.stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
     @Override

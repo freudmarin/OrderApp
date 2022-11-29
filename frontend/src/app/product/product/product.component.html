@@ -1,0 +1,56 @@
+<div class="container justify-content-center">
+  <form class="form-signin" [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <h1 class="h3 mb-3 font-weight-normal" *ngIf="!onUpdate"> Please add the product</h1>
+    <h1 class="h3 mb-3 font-weight-normal" *ngIf="onUpdate"> Please update the product</h1>
+    <div class="form-group">
+      <label for="inputProductCode" >Product Code</label>
+      <input type="text" id="inputProductCode" [formControlName]="'productCode'" class="form-control" placeholder="Product Code" >
+      <span class="text-danger"
+            *ngIf="(productFormControl.productCode.touched || submitted) && productFormControl.productCode.errors?.required">
+                               Product Code is required
+                            </span>
+    </div>
+    <div class="form-group">
+      <label for="inputProductName">Product Name</label>
+      <input type="text" id="inputProductName" [formControlName]="'productName'" class="form-control" placeholder="Product Name" >
+      <span class="text-danger"
+            *ngIf="(productFormControl.productName.touched || submitted) && productFormControl.productName.errors?.required">
+                                Product Name is required
+                            </span>
+    </div>
+    <div class="form-group">
+      <label for="inputJobTitle" >Description</label>
+      <input type="text" id="inputJobTitle" [formControlName]="'description'" class="form-control" placeholder="Product Description" >
+    </div>
+
+    <div class="form-group">
+      <label for="category" >Category</label>
+      <select id="category" [formControlName]="'category'" class="form-control" >
+        <!--At ngValue we pass the object and display the value-->
+        <option *ngFor="let category of categories"  [ngValue]="category">{{category.name}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="unitPrice" >Price</label>
+      <input type="number" id="unitPrice" [formControlName]="'unitPrice'" class="form-control" placeholder="Price">
+      <span class="text-danger" *ngIf="productFormControl.unitPrice.hasError('min')">
+                                Unit price can't be less than 0
+                            </span>
+    </div>
+
+    <div class="form-group">
+      <label for="unitInStock" >Quantity</label>
+      <input type="number" id="unitInStock" [formControlName]="'unitInStock'" class="form-control" placeholder="Quantity">
+      <span class="text-danger"
+            *ngIf="productFormControl.unitInStock.hasError('min')">
+                                Quantity can't be less than 0
+                            </span>
+    </div>
+
+    <button *ngIf="!onUpdate" class="btn btn-lg btn-primary btn-block" type="submit">
+      Add Product</button>
+    <button *ngIf="onUpdate" class="btn btn-lg btn-primary btn-block" type="submit">
+      Update Product</button>
+  </form>
+</div>

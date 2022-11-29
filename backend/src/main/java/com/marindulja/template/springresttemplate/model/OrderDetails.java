@@ -14,13 +14,13 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "order_details")
-public class OrderDetails  extends BaseEntity<Long> {
+public class OrderDetails extends BaseEntity<Long> {
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", nullable = true)
+    @JoinColumn(name = "order_id")
     private Order order;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = true)
+    @JoinColumn(name = "product_id")
     private Product product;
 
     private BigDecimal quantity;

@@ -1,8 +1,9 @@
 <div class="container justify-content-center">
   <form class="form-signin" [formGroup]="userForm" (ngSubmit)="onSubmit()">
-    <h1 class="h3 mb-3 font-weight-normal">Please add the user</h1>
+    <h1 class="h3 mb-3 font-weight-normal" *ngIf="!onUpdate"> Please add the user</h1>
+    <h1 class="h3 mb-3 font-weight-normal" *ngIf="onUpdate"> Please update the user</h1>
     <div class="form-group">
-      <label for="inputConfirmPassword" >Full Name</label>
+      <label for="inputFullName" >Full Name</label>
       <input type="text" id="inputFullName" [formControlName]="'fullName'" class="form-control" placeholder="Full Name" >
       <span class="text-danger"
             *ngIf="(userFormControl.fullName.touched || submitted) && userFormControl.fullName.errors?.required">

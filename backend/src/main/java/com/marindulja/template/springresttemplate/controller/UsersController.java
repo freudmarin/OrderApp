@@ -1,7 +1,6 @@
 package com.marindulja.template.springresttemplate.controller;
 
 import com.marindulja.template.springresttemplate.dto.UserDto;
-import com.marindulja.template.springresttemplate.service.AuthService;
 import com.marindulja.template.springresttemplate.service.users.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -19,6 +19,10 @@ import {Role} from "./user/role";
 import {AuthGuard} from "./auth.guard";
 import {CategoriesListComponent} from './category/categories-list/categories-list.component';
 import { CategoryComponent } from './category/category/category.component';
+import { CustomerComponent } from './customer/customer/customer.component';
+import {CustomersListComponent} from "./customer/customers-list/customers-list.component";
+import { ProductsListComponent } from './product/products-list/products-list.component';
+import { ProductComponent } from './product/product/product.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +35,10 @@ import { CategoryComponent } from './category/category/category.component';
     UsersListComponent,
     CategoriesListComponent,
     CategoryComponent,
+    CustomersListComponent,
+    CustomerComponent,
+    ProductsListComponent,
+    ProductComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +55,12 @@ import { CategoryComponent } from './category/category/category.component';
       {path: 'categories', component: CategoriesListComponent, canActivate: [AuthGuard],  data: { roles: [Role.Admin, Role.User] }},
       {path: 'category', component: CategoryComponent, canActivate: [AuthGuard],  data: { roles: [Role.Admin] }},
       {path: 'category/:id', component: CategoryComponent, canActivate: [AuthGuard],  data: { roles: [Role.Admin] }},
+      {path: 'customers', component: CustomersListComponent, canActivate: [AuthGuard],  data: { roles: [Role.Admin, Role.User] }},
+      {path: 'customer', component: CustomerComponent, canActivate: [AuthGuard],  data: { roles: [Role.User] }},
+      {path: 'customer/:id', component: CustomerComponent, canActivate: [AuthGuard],  data: { roles: [Role.User] }},
+      {path: 'products', component:ProductsListComponent, canActivate: [AuthGuard],  data: { roles: [Role.Admin, Role.User] }},
+      {path: 'product', component: ProductComponent, canActivate: [AuthGuard],  data: { roles: [Role.User] }},
+      {path: 'product/:id', component: ProductComponent, canActivate: [AuthGuard],  data: { roles: [Role.User] }},
       {path: 'login', component: LoginComponent},
       {path: 'home', component: HomeComponent},
     ]), HttpClientModule

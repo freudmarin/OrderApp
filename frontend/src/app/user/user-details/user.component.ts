@@ -4,7 +4,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from "../user.service";
 import {UserPayload} from "../user-payload";
 import {CustomValidationService} from "../custom-validation.service";
-import {Role} from '../role';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +12,7 @@ import {Role} from '../role';
 })
 export class UserComponent implements OnInit {
   id: number;
-  onUpdate : boolean;
+  onUpdate: boolean;
   userForm: FormGroup;
   userPayload: UserPayload;
   roles: String[];
@@ -38,7 +37,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params.id;
-    if(this.id > 0) {
+    if (this.id > 0) {
       this.onUpdate = true;
       this.userService.get(this.id).subscribe(data => {
         this.userForm.patchValue(data);
@@ -51,18 +50,18 @@ export class UserComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-      if (!this.id) {
-        this.userService.addUser(this.userForm.value).subscribe(data => {
-          console.log('user added');
-          this.router.navigateByUrl('/users');
-        });
-      } else {
-        this.onUpdate = true;
-        this.userService.update(this.id, this.userForm.value).subscribe(data => {
-          console.log('update usccess');
-          this.router.navigateByUrl('/users');
-        });
-      }
+    if (!this.id) {
+      this.userService.addUser(this.userForm.value).subscribe(data => {
+        console.log('user added');
+        this.router.navigateByUrl('/users');
+      });
+    } else {
+      this.onUpdate = true;
+      this.userService.update(this.id, this.userForm.value).subscribe(data => {
+        console.log('update usccess');
+        this.router.navigateByUrl('/users');
+      });
+    }
   }
 
   get userFormControl() {

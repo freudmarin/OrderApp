@@ -36,17 +36,19 @@ export class CategoryComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    if (!this.id) {
-      this.categoryService.addCategory(this.categoryForm.value).subscribe(data => {
-        console.log('user added');
-        this.router.navigateByUrl('/categories');
-      });
-    } else {
-      this.onUpdate = true;
-      this.categoryService.update(this.id, this.categoryForm.value).subscribe(data => {
-        console.log('update usccess');
-        this.router.navigateByUrl('/categories');
-      });
+    if (this.categoryForm.valid) {
+      if (!this.id) {
+        this.categoryService.addCategory(this.categoryForm.value).subscribe(data => {
+          console.log('user added');
+          this.router.navigateByUrl('/categories');
+        });
+      } else {
+        this.onUpdate = true;
+        this.categoryService.update(this.id, this.categoryForm.value).subscribe(data => {
+          console.log('update usccess');
+          this.router.navigateByUrl('/categories');
+        });
+      }
     }
   }
 

@@ -26,11 +26,11 @@ public class User extends BaseEntity<Long> {
     private String password;
 
     @NotBlank(message = "Full name is mandatory")
-    @Column(name = "full_name",nullable = false)
+    @Column(name = "full_name", nullable = false)
     private String fullName;
 
     @NotBlank(message = "Job title is mandatory")
-    @Column(name = "job_title",nullable = false)
+    @Column(name = "job_title", nullable = false)
     private String jobTitle;
     private Role role;
 
