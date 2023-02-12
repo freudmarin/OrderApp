@@ -1,0 +1,51 @@
+<div class="container-xl">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-6">
+            <h4 *ngIf="!roleManagementService.isAdmin"><b>Manage Products</b></h4>
+            <h4 *ngIf="roleManagementService.isAdmin"><b>View Products</b></h4>
+          </div>
+          <div class="col-sm-6">
+            <button *ngIf="!roleManagementService.isAdmin" class="btn btn-success" (click)="addProduct()">
+              <span> Add Product</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <table class="table table-striped table-hover table-bordered table-content">
+        <thead>
+        <tr class="center-align">
+          <th>Product Code</th>
+          <th>Product Name</th>
+          <th>Product Description</th>
+          <th>Category</th>
+          <th>Unit Price</th>
+          <th>Unit in stock</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{product.productCode}}</td>
+          <td>{{product.productName}}</td>
+          <td>{{product.description}}</td>
+          <td>{{product.category.name}}</td>
+          <td>{{product.unitPrice}}</td>
+          <td>{{product.unitInStock}}</td>
+          <td *ngIf="!roleManagementService.isAdmin" align="center">
+            <a href="#" [routerLink]="['/product/', product.id]" class="btn btn-info">Edit</a>
+            <button type="button" (click)="deleteProduct(product.id)" class="btn btn-danger"
+                    style="margin-left: 5px;"> Delete
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td *ngIf="products.length == 0" colspan="6">No products were found</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

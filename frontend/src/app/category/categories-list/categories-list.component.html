@@ -1,0 +1,39 @@
+<div class="container-xl">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-6">
+            <h4 *ngIf="roleManagementService.isAdmin"><b>Manage Categories</b></h4>
+            <h4 *ngIf="!roleManagementService.isAdmin"><b>View Categories</b></h4>
+          </div>
+          <div class="col-sm-6">
+            <button *ngIf="roleManagementService.isAdmin" class="btn btn-success" (click)="addCategory()">
+              <span> Add Category </span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <table class="table table-striped table-hover table-bordered table-content">
+        <thead>
+        <tr class="center-align">
+          <th>Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let category of categories">
+          <td>{{category.name}}</td>
+          <td  *ngIf="roleManagementService.isAdmin" align="center">
+            <a href="#" [routerLink]="['/category/', category.id]" class="btn btn-info">Edit</a>
+            <button type="button"  (click)="deleteCategory(category.id)" class="btn btn-danger" style="margin-left: 5px;"> Delete
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td *ngIf="categories.length == 0" colspan="6">No categories were found</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+
+<div class="container-xl">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-6">
+            <h4><b>Manage Users</b></h4>
+          </div>
+          <div class="col-sm-6">
+            <button class="btn btn-success" (click)="addUser()">
+              <span> Add User </span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <table class="table table-striped table-hover table-bordered table-content">
+        <thead>
+        <tr class="center-align">
+          <th>FullName</th>
+          <th>UserName</th>
+          <th>Role</th>
+          <th>JobTitle</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{user.fullName}}</td>
+          <td>{{user.username}}</td>
+          <td> {{user.role}} </td>
+          <td>{{user.jobTitle}}</td>
+          <td align="center">
+            <a href="#" [routerLink]="['/user/', user.id]" class="btn btn-info">Edit</a>
+            <button type="button"  (click)="deleteUser(user.id)" class="btn btn-danger" style="margin-left: 5px;"> Delete
+             </button>
+          </td>
+        </tr>
+        <tr>
+          <td *ngIf="users.length == 0" colspan="6">No User Found</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+

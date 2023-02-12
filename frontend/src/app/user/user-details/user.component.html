@@ -1,0 +1,63 @@
+<div class="container justify-content-center">
+  <form class="form-signin" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <h1 class="h3 mb-3 font-weight-normal" *ngIf="!onUpdate"> Please add the user</h1>
+    <h1 class="h3 mb-3 font-weight-normal" *ngIf="onUpdate"> Please update the user</h1>
+    <div class="form-group">
+      <label for="inputFullName" >Full Name</label>
+      <input type="text" id="inputFullName" [formControlName]="'fullName'" class="form-control" placeholder="Full Name" >
+      <span class="text-danger"
+            *ngIf="(userFormControl.fullName.touched || submitted) && userFormControl.fullName.errors?.required">
+                               Full Name is required
+                            </span>
+    </div>
+    <div class="form-group">
+      <label for="inputUsername">Username</label>
+      <input type="text" id="inputUsername" [formControlName]="'username'" class="form-control" placeholder="Username" >
+      <span class="text-danger"
+            *ngIf="(userFormControl.username.touched || submitted) && userFormControl.username.errors?.required">
+                                User Name is required
+                            </span>
+    </div>
+    <div class="form-group">
+      <label for="inputJobTitle" >Job Title</label>
+      <input type="text" id="inputJobTitle" [formControlName]="'jobTitle'" class="form-control" placeholder="Job Title" >
+      <span class="text-danger"
+            *ngIf="(userFormControl.jobTitle.touched || submitted) && userFormControl.jobTitle.errors?.required">
+                               Job Title is required
+                            </span>
+    </div>
+
+    <div class="form-group">
+      <label for="role" >Role</label>
+      <select id="role" [formControlName]="'role'" class="form-control" >
+        <option *ngFor="let role of roles" [ngValue]="role">{{ role}}</option>
+      </select>
+    </div>
+
+    <div class="form-group" *ngIf="!onUpdate">
+      <label for="inputPassword" >Password</label>
+      <input type="password" id="inputPassword" [formControlName]="'password'" class="form-control" placeholder="Password">
+      <span class="text-danger"
+            *ngIf="(userFormControl.password.touched || submitted) && !onUpdate && userFormControl.password.errors?.required">
+                                Password is required
+                            </span>
+    </div>
+    <div class="form-group" *ngIf="!onUpdate">
+      <label for="inputConfirmPassword" > Confirm Password</label>
+      <input type="password" id="inputConfirmPassword" [formControlName]="'confirmPassword'" class="form-control" placeholder="Confirm Password" >
+      <span class="text-danger"
+            *ngIf="(userFormControl.confirmPassword.touched || submitted) && !onUpdate && userFormControl.confirmPassword.errors?.required">
+                                Confirm Password is required
+                            </span>
+      <span class="text-danger"
+            *ngIf="userFormControl.confirmPassword.touched && !onUpdate && userFormControl.confirmPassword.errors?.passwordMismatch">
+                                Passwords does not match
+                            </span>
+    </div>
+
+    <button *ngIf="!onUpdate" class="btn btn-lg btn-primary btn-block" type="submit">
+      Add User</button>
+    <button *ngIf="onUpdate" class="btn btn-lg btn-primary btn-block" type="submit">
+      Update User</button>
+  </form>
+</div>
