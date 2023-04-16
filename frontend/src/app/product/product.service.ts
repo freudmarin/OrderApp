@@ -13,7 +13,7 @@ export class ProductService {
   }
 
   getAll() {
-    return this.httpClient.get<Product[]>(this.productsUrl + '/');
+    return this.httpClient.get<Product[]>(this.productsUrl);
   }
   addProduct(product): Observable<Product> {
     return this.httpClient.post<Product>(this.productsUrl + '/add', product);

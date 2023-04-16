@@ -12,32 +12,32 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/categories")
+@RequestMapping("api/categories")
 @PreAuthorize("hasRole('ADMIN')")
 public class CategoryController {
     private final CategoryService categoryService;
 
-    @PostMapping("/add")
+    @PostMapping("add")
     public ResponseEntity<CategoryDto> adCategory(@RequestBody CategoryDto categoryDto) {
         return new ResponseEntity<>(categoryService.addCategory(categoryDto), HttpStatus.OK);
     }
 
-    @GetMapping("/")
+    @GetMapping()
     public List<CategoryDto> getAllCategories() {
         return categoryService.getAllCategories();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<CategoryDto> getUserById(@PathVariable("id") long id) {
         return categoryService.getCategoryById(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     public ResponseEntity<CategoryDto> updateUser(@PathVariable("id") long id, @RequestBody CategoryDto category) {
         return categoryService.updateUserById(id, category);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") long id) {
         return categoryService.deleteCategoryById(id);
     }

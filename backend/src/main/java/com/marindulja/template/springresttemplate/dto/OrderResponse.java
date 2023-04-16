@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
-public class OrderRequestResponse {
-    private OrderDto order;
+public class OrderResponse {
+    private OrderResponseDto order;
     private List<OrderItemDto> items;
 }

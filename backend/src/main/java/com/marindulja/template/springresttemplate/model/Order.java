@@ -1,19 +1,16 @@
 package com.marindulja.template.springresttemplate.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "orders")
 public class Order extends BaseEntity<Long> {
@@ -30,5 +27,13 @@ public class Order extends BaseEntity<Long> {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<OrderDetails> orderDetails = new ArrayList<>();
+    private List<OrderItem> orderDetails = new ArrayList<>();
+
+    @Column(name = "total_price")
+    private Double totalPrice;
+
+    public Order(Customer customer, User user) {
+        this.customer = customer;
+        this.user = user;
+    }
 }

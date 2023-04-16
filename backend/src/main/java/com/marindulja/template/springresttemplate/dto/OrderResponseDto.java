@@ -7,8 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class OrderItemDto {
-    private Double price;
-    private  int quantity;
-    private  String productCode;
+public class OrderResponseDto {
+    private Long orderId;
+    private String customerName;
 }

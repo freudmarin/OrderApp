@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {CustomerService} from "../../customer/customer.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "../product.service";
 import {CategoryService} from "../../category/category-service";
@@ -26,8 +25,9 @@ export class ProductComponent implements OnInit {
       productName: ['', Validators.required],
       description: [''],
       category: ['', Validators.required],
-      unitPrice: ['', Validators.min(0)],
-      unitInStock: ['', Validators.min(0)]
+      unitPrice: ['', [Validators.required, Validators.min(0)]],
+      unitInStock: ['', [Validators.required,Validators.min(1)]],
+      discount : ['', [Validators.required, Validators.min(1), Validators.max(100)]]
     });
   }
 
@@ -65,5 +65,4 @@ export class ProductComponent implements OnInit {
   get productFormControl() {
     return this.productForm.controls;
   }
-
 }

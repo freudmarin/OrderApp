@@ -11,32 +11,32 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/customers")
+@RequestMapping("api/customers")
 public class CustomerController {
 
     private final CustomerService customerService;
 
-    @PostMapping("/add")
+    @PostMapping("add")
     public ResponseEntity<CustomerDto> addCustomer(@RequestBody CustomerDto customerDto) {
         return new ResponseEntity<>(customerService.addCustomer(customerDto), HttpStatus.OK);
     }
 
-    @GetMapping("/")
+    @GetMapping()
     public List<CustomerDto> getAllCustomers() {
         return customerService.getAllCustomers();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<CustomerDto> getCustomerById(@PathVariable("id") long id) {
         return customerService.getCustomerById(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     public ResponseEntity<CustomerDto> updateCustomer(@PathVariable("id") long id, @RequestBody CustomerDto customer) {
         return customerService.updateCustomerById(id, customer);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<HttpStatus> deleteCustomer(@PathVariable("id") long id) {
         return customerService.deleteCustomerById(id);
     }

@@ -19,8 +19,8 @@
                             </span>
     </div>
     <div class="form-group">
-      <label for="inputJobTitle" >Description</label>
-      <input type="text" id="inputJobTitle" [formControlName]="'description'" class="form-control" placeholder="Product Description" >
+      <label for="inputDesc" >Description</label>
+      <input type="text" id="inputDesc" [formControlName]="'description'" class="form-control" placeholder="Product Description" >
     </div>
 
     <div class="form-group">
@@ -34,7 +34,8 @@
     <div class="form-group">
       <label for="unitPrice" >Price</label>
       <input type="number" id="unitPrice" [formControlName]="'unitPrice'" class="form-control" placeholder="Price">
-      <span class="text-danger" *ngIf="productFormControl.unitPrice.hasError('min')">
+      <span class="text-danger" *ngIf="(productFormControl.unitPrice.touched || submitted) && productFormControl.unitPrice.errors?.required
+      || productFormControl.unitPrice.hasError('min')">
                                 Unit price can't be less than 0
                             </span>
     </div>
@@ -43,9 +44,22 @@
       <label for="unitInStock" >Quantity</label>
       <input type="number" id="unitInStock" [formControlName]="'unitInStock'" class="form-control" placeholder="Quantity">
       <span class="text-danger"
-            *ngIf="productFormControl.unitInStock.hasError('min')">
-                                Quantity can't be less than 0
+            *ngIf="(productFormControl.unitInStock.touched || submitted) && productFormControl.unitInStock.errors?.required
+              || productFormControl.unitInStock.hasError('min')">
+                                Quantity can't be less than 1
                             </span>
+
+    </div>
+
+    <div class="form-group">
+      <label for="discount"> Discount</label>
+      <input type="number" id="discount" [formControlName]="'discount'" class="form-control" placeholder="Discount">
+      <span class="text-danger"
+            *ngIf="(productFormControl.discount.touched || submitted) && productFormControl.discount.errors?.required
+              || (productFormControl.discount.hasError('min') || productFormControl.discount.hasError('max'))">
+                  Discount should be between 1 and 100
+                            </span>
+
     </div>
 
     <button *ngIf="!onUpdate" class="btn btn-lg btn-primary btn-block" type="submit">

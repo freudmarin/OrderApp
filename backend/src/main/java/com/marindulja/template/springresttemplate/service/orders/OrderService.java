@@ -1,20 +1,16 @@
 package com.marindulja.template.springresttemplate.service.orders;
 
-import com.marindulja.template.springresttemplate.dto.OrderDto;
 import com.marindulja.template.springresttemplate.dto.OrderItemDto;
-import com.marindulja.template.springresttemplate.dto.OrderRequestResponse;
+import com.marindulja.template.springresttemplate.dto.OrderResponse;
+import com.marindulja.template.springresttemplate.dto.OrderResponseDto;
 import com.marindulja.template.springresttemplate.dto.PlaceOrderDto;
 import com.marindulja.template.springresttemplate.exception.OrderAppException;
 import com.marindulja.template.springresttemplate.model.Order;
 import com.marindulja.template.springresttemplate.model.OrderItem;
 import com.marindulja.template.springresttemplate.model.Product;
-import com.marindulja.template.springresttemplate.repository.CustomerRepository;
-import com.marindulja.template.springresttemplate.repository.OrderRepository;
-import com.marindulja.template.springresttemplate.repository.ProductRepository;
-import com.marindulja.template.springresttemplate.repository.UserRepository;
+import com.marindulja.template.springresttemplate.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -26,7 +22,8 @@ import java.util.stream.Collectors;
 public class OrderService {
     private final OrderRepository orderRepository;
 
-    private final OrderItemsService orderItemsService;
+
+    private final OrderItemsRepository orderItemsRepository;
 
     private final CustomerRepository customerRepository;
 
@@ -41,15 +38,14 @@ public class OrderService {
         placeOrderDto.setCustomerId(customerID);
         Double totalPrice = 0.00;
         Order order = saveOrder(placeOrderDto);
+        //has to be improved
+        orderItemsRepository.saveAll(orderItemsDto.stream().map(o-> new OrderItem(
+                order,
+                productRepository.findByProductCode(o.getProductCode()).get(),
+                o.getQuantity(),
+                productRepository.findByProductCode(o.getProductCode()).get().getUnitPrice())).collect(Collectors.toList()));
         for (OrderItemDto orderItemDto : orderItemsDto) {
-            Product product = productRepository.findById(orderItemDto.getProductId()).get();
-            OrderItem orderItem = new OrderItem(
-                    order,
-                    product,
-                    orderItemDto.getQuantity(),
-                    orderItemDto.getPrice(),
-                    orderItemDto.getDiscount());
-            orderItemsService.addOrderedProducts(orderItem);
+            Product product = productRepository.findByProductCode(orderItemDto.getProductCode()).get();
 
             if (product.getUnitInStock() - orderItemDto.getQuantity() > 0) {
                 product.setUnitInStock(product.getUnitInStock() - orderItemDto.getQuantity());
@@ -57,7 +53,7 @@ public class OrderService {
             } else {
                 throw new OrderAppException(HttpStatus.BAD_REQUEST, "You cannot make this order, because there is not enough stock left");
             }
-            totalPrice += orderItemDto.getPrice() * orderItemDto.getQuantity() - ((double) orderItemDto.getDiscount() /100 * orderItemDto.getPrice() * orderItem.getQuantity());
+            totalPrice += product.getUnitPrice() * orderItemDto.getQuantity() - ((double) product.getDiscount() /100 * product.getUnitPrice() * orderItemDto.getQuantity());
         }
         orderRepository.updateOrder(totalPrice, order.getId());
     }
@@ -72,32 +68,30 @@ public class OrderService {
         return order;
     }
 
-    public List<OrderRequestResponse> listAllOrders() {
-        List<OrderRequestResponse> orderList = orderRepository.findAll().stream()
+    public List<OrderResponse> listAllOrders() {
+        List<OrderResponse> orderList = orderRepository.findAll().stream()
                 .map(order ->
-                        new OrderRequestResponse(mapOrderToOrderDto(order) ,
+                        new OrderResponse(mapOrderToOrderDto(order) ,
                                 order.getOrderDetails().stream().map(this::mapOrderItemsToOrderItemsDto).collect(Collectors.toList())))
                 .collect(Collectors.toList());
         return orderList;
     }
 
-    public List<OrderRequestResponse> listOrders(Long user_id) {
-        List<OrderRequestResponse> orderList = orderRepository.findAllByUserIdOrderByCreatedAtDesc(user_id).stream()
+    public List<OrderResponse> listOrders(Long user_id) {
+        List<OrderResponse> orderList = orderRepository.findAllByUserIdOrderByCreatedAtDesc(user_id).stream()
                 .map(order ->
-                        new OrderRequestResponse(mapOrderToOrderDto(order) ,
+                        new OrderResponse(mapOrderToOrderDto(order) ,
                                 order.getOrderDetails().stream().map(this::mapOrderItemsToOrderItemsDto).collect(Collectors.toList())))
                                 .collect(Collectors.toList());
         return orderList;
     }
 
-    private OrderDto mapOrderToOrderDto(Order order) {
-        return new OrderDto(order.getId(),
-                order.getCustomer().getId());
+    private OrderResponseDto mapOrderToOrderDto(Order order) {
+        return new OrderResponseDto(order.getId(),
+                order.getCustomer().getFirstName() +" " +order.getCustomer().getLastName());
     }
 
     private OrderItemDto mapOrderItemsToOrderItemsDto(OrderItem orderItem) {
-        return new OrderItemDto(orderItem.getUnitPrice(),
-                orderItem.getQuantity(), orderItem.getProduct().getId(),
-                orderItem.getDiscount());
+        return new OrderItemDto(orderItem.getProduct().getUnitPrice(), orderItem.getQuantity(), orderItem.getProduct().getProductCode());
     }
 }

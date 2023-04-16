@@ -18,30 +18,30 @@ public class UsersController {
 
     private final UserService userDetailsService;
 
-    @PostMapping("/add")
+    @PostMapping("add")
     public ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto) {
       return new ResponseEntity<>(userDetailsService.addUser(userDto), HttpStatus.OK);
     }
 
-    @GetMapping("/")
+    @GetMapping()
     public List<UserDto> getAllUsers() {
         return userDetailsService.getAllUsers();
     }
 
-    @GetMapping("/roles")
+    @GetMapping("roles")
     public List<String> getAllRoles() {
         return userDetailsService.getAllRoles();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<UserDto> getUserById(@PathVariable("id") long id) {
        return userDetailsService.getUserById(id);
     }
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     public ResponseEntity<UserDto> updateUser(@PathVariable("id") long id, @RequestBody UserDto user) {
         return userDetailsService.updateUserById(id, user);
     }
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") long id) {
         return userDetailsService.deleteUserById(id);
     }

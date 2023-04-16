@@ -8,4 +8,5 @@ export class Product {
   category : Category;
   unitPrice : number;
   unitInStock : number;
+  discount : number;
 }
