@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PlaceOrderComponent } from './place-order.component';
+import {PlaceOrderComponent} from './place-order.component';
 
 describe('PlaceOrderComponent', () => {
   let component: PlaceOrderComponent;

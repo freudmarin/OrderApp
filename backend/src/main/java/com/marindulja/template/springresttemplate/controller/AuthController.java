@@ -1,9 +1,7 @@
 package com.marindulja.template.springresttemplate.controller;
 
 import com.marindulja.template.springresttemplate.dto.LoginRequest;
-import com.marindulja.template.springresttemplate.security.JwtProvider;
 import com.marindulja.template.springresttemplate.service.AuthService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,11 +15,10 @@ import javax.validation.Valid;
 @RequestMapping("api/auth")
 public class AuthController {
 
-    @Autowired
-    private AuthService authService;
-
-    @Autowired
-    private JwtProvider jwtProvider;
+    private final AuthService authService;
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
 
     @PostMapping("login")
     public ResponseEntity<?> login(@RequestBody @Valid LoginRequest loginDto) {

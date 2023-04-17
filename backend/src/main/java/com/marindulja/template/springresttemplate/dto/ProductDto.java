@@ -1,6 +1,5 @@
 package com.marindulja.template.springresttemplate.dto;
 
-import com.marindulja.template.springresttemplate.model.Category;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,5 +21,8 @@ public class ProductDto {
     private Long unitPrice;
     @NotBlank(message = "Stock number is mandatory")
     private Long unitInStock;
+
+    @NotBlank(message = "Stock number is mandatory")
+    private Long discount;
 
 }

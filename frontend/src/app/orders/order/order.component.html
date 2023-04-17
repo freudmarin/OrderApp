@@ -1,47 +1,45 @@
-<div class="container-xl">
-  <div class="table-responsive">
-    <div class="table-wrapper">
-      <div class="table-title">
-        <div class="row">
-            <div class="col-sm-6">
-              <h4 *ngIf="!roleManagementService.isAdmin"><b>Orders of {{roleManagementService.user.username}}</b></h4>
-              <h4 *ngIf="roleManagementService.isAdmin"><b>All orders</b></h4>
-            </div>
-          <div class="col-sm-6">
-            <button *ngIf="!roleManagementService.isAdmin" class="btn btn-success" (click)="displayPlaceOrderPage()">
-              <span> Place Order</span>
-            </button>
-          </div>
-            <table class="table table-striped table-hover table-bordered table-content">
-              <thead>
-              <tr class="center-align">
-              <tr>
-                <th>Order ID</th>
-                <th>Customer Full Name</th>
-                <th>Items</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr *ngFor="let order of orders">
-                <td>{{ order.order.orderId }}</td>
-                <td>{{ order.order.customerName }}</td>
-                <td>
-                  <ul>
-                    <li *ngFor="let item of order.items">
-                      Product Code: {{ item.productCode }}
-                      Quantity: {{ item.quantity }}
-                      Price: {{ item.price }}
-                    </li>
-                  </ul>
-                </td>
-              </tr>
-              <tr>
-                <td *ngIf="orders.length == 0" colspan="6">No products were found</td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+<div class="mat-elevation-z2">
+  <mat-toolbar>
+    <div class="mat-toolbar-row">
+      <div class="col-sm-6">
+        <h4 *ngIf="!roleManagementService.isAdmin"><b>Orders of {{roleManagementService.user.username}}</b></h4>
+        <h4 *ngIf="roleManagementService.isAdmin"><b>All orders</b></h4>
+      </div>
+      <div class="col-sm-6">
+        <button mat-raised-button *ngIf="!roleManagementService.isAdmin" color="primary" (click)="displayPlaceOrderPage()">
+          <mat-icon>add_shopping_cart</mat-icon>
+          <span>Place Order</span>
+        </button>
       </div>
     </div>
+  </mat-toolbar>
+  <div class="mat-table-responsive">
+    <table mat-table class="mat-elevation-z2" [dataSource]="orders">
+      <ng-container matColumnDef="orderId">
+        <th mat-header-cell *matHeaderCellDef>Order ID</th>
+        <td mat-cell *matCellDef="let order">{{ order.order.orderId }}</td>
+      </ng-container>
+      <ng-container matColumnDef="customerName">
+        <th mat-header-cell *matHeaderCellDef>Customer Full Name</th>
+        <td mat-cell *matCellDef="let order">{{ order.order.customerName }}</td>
+      </ng-container>
+      <ng-container matColumnDef="items">
+        <th mat-header-cell *matHeaderCellDef>Items</th>
+        <td mat-cell *matCellDef="let order">
+          <ul>
+            <li *ngFor="let item of order.items">
+              Product Code: {{ item.productCode }}
+              Quantity: {{ item.quantity }}
+              Price: {{ item.price }}
+            </li>
+          </ul>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="['orderId', 'customerName', 'items']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['orderId', 'customerName', 'items'];"></tr>
+      <tr mat-row *matNoDataRow>
+        <td colspan="6" class="mat-cell" *matNoData>No products were found</td>
+      </tr>
+    </table>
   </div>
+</div>

@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
 import {LoginPayload} from "../loginPayload";
+import {MatDialog} from "@angular/material/dialog";
+import {DialogComponent} from "../../utils/dialog.component";
 
 @Component({
   selector: 'app-login',
@@ -14,11 +16,11 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loginPayload: LoginPayload;
   isLoggedIn = false;
-  isLoginFailed = false;
   submitted: boolean;
   errorMessage = '';
 
-  constructor(private authService: AuthService, private router: Router, public fb:FormBuilder) {
+  constructor(private authService: AuthService, private router: Router, public fb:FormBuilder,
+  private dialog: MatDialog) {
     this.loginForm = this.fb.group({
       username:  ['',Validators.required],
       password:  ['',Validators.required]
@@ -37,13 +39,16 @@ export class LoginComponent implements OnInit {
     this.loginPayload.username = this.loginForm.get('username').value;
     this.loginPayload.password = this.loginForm.get('password').value;
     if (this.loginForm.valid) {
-      this.authService.login(this.loginPayload.username, this.loginPayload.password).subscribe(data => {
+      this.authService.login(this.loginPayload.username, this.loginPayload.password).subscribe((data) => {
         this.isLoggedIn = true;
         console.log('login success');
         this.router.navigateByUrl('/home');
       }, error => {
-        this.errorMessage = "Login Error, Please enter again your credentials"
-        this.isLoginFailed = true;
+        this.isLoggedIn = true;
+        this.dialog.open(DialogComponent, {
+          data: { title: 'Login Failed', message: 'Wrong Credentials'},
+          panelClass: 'custom-dialog'
+        });
       });
     }
   }

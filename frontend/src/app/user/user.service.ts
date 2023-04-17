@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {UserPayload} from "./user-payload";
-import {Role} from "./role";
+import {Page} from "../page";
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +13,13 @@ export class UserService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getAll() {
-    return this.httpClient.get<UserPayload[]>(this.usersUrl + '/');
+    getAllPaginated(request) :Observable<Page<UserPayload>> {
+      const params = request;
+      return this.httpClient.get<Page<UserPayload>>(this.usersUrl + '/paginated', {params});
+  }
+
+  getAll()  {
+    return this.httpClient.get<UserPayload[]>(this.usersUrl);
   }
   addUser(user): Observable<UserPayload> {
     return this.httpClient.post<UserPayload>(this.usersUrl + '/add', user);

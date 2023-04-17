@@ -10,6 +10,10 @@ import com.marindulja.template.springresttemplate.model.OrderItem;
 import com.marindulja.template.springresttemplate.model.Product;
 import com.marindulja.template.springresttemplate.repository.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -41,11 +45,11 @@ public class OrderService {
         //has to be improved
         orderItemsRepository.saveAll(orderItemsDto.stream().map(o-> new OrderItem(
                 order,
-                productRepository.findByProductCode(o.getProductCode()).get(),
+                productRepository.findByProductCode(o.getProductCode()).orElseThrow(),
                 o.getQuantity(),
-                productRepository.findByProductCode(o.getProductCode()).get().getUnitPrice())).collect(Collectors.toList()));
+                productRepository.findByProductCode(o.getProductCode()).orElseThrow().getUnitPrice())).collect(Collectors.toList()));
         for (OrderItemDto orderItemDto : orderItemsDto) {
-            Product product = productRepository.findByProductCode(orderItemDto.getProductCode()).get();
+            Product product = productRepository.findByProductCode(orderItemDto.getProductCode()).orElseThrow();
 
             if (product.getUnitInStock() - orderItemDto.getQuantity() > 0) {
                 product.setUnitInStock(product.getUnitInStock() - orderItemDto.getQuantity());
@@ -68,24 +72,28 @@ public class OrderService {
         return order;
     }
 
-    public List<OrderResponse> listAllOrders() {
-        List<OrderResponse> orderList = orderRepository.findAll().stream()
+
+    public Page<OrderResponse> getAllOrdersPaginated(int pageNumber, int pageSize) {
+        Pageable pageRequest = PageRequest.of(pageNumber, pageSize);
+        Page<Order> pageResult = orderRepository.findAll(pageRequest);
+        List<OrderResponse> orderList = pageResult.stream()
                 .map(order ->
-                        new OrderResponse(mapOrderToOrderDto(order) ,
+                        new OrderResponse(mapOrderToOrderDto(order),
                                 order.getOrderDetails().stream().map(this::mapOrderItemsToOrderItemsDto).collect(Collectors.toList())))
                 .collect(Collectors.toList());
-        return orderList;
+        return new PageImpl<>(orderList, pageRequest, pageResult.getTotalElements());
     }
 
-    public List<OrderResponse> listOrders(Long user_id) {
-        List<OrderResponse> orderList = orderRepository.findAllByUserIdOrderByCreatedAtDesc(user_id).stream()
+    public Page<OrderResponse> getOrdersForUser(Long user_id, int pageNumber, int pageSize) {
+        Pageable pageRequest = PageRequest.of(pageNumber, pageSize);
+        Page<Order> pageResult = orderRepository.findAllByUserIdOrderByCreatedAtDesc(user_id, pageRequest);
+        List<OrderResponse> orderList = pageResult.stream()
                 .map(order ->
-                        new OrderResponse(mapOrderToOrderDto(order) ,
+                        new OrderResponse(mapOrderToOrderDto(order),
                                 order.getOrderDetails().stream().map(this::mapOrderItemsToOrderItemsDto).collect(Collectors.toList())))
-                                .collect(Collectors.toList());
-        return orderList;
+                .collect(Collectors.toList());
+        return new PageImpl<>(orderList, pageRequest, pageResult.getTotalElements());
     }
-
     private OrderResponseDto mapOrderToOrderDto(Order order) {
         return new OrderResponseDto(order.getId(),
                 order.getCustomer().getFirstName() +" " +order.getCustomer().getLastName());

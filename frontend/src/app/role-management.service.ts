@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {UserRetrieved} from "./user/user-retrieved";
 import {AuthService} from "./auth/auth.service";
-import {ActivatedRoute} from "@angular/router";
 import {Role} from "./user/role";
 
 @Injectable({

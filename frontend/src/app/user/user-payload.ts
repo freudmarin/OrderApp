@@ -1,5 +1,3 @@
-import {FetchedRole} from "./fetched-role";
-
 export class UserPayload {
   id:number;
   username: String;

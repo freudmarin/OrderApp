@@ -1,45 +1,32 @@
-<div class="container-xl">
-  <div class="table-responsive">
-    <div class="table-wrapper">
-      <div class="table-title">
-        <div class="row">
-          <div class="col-sm-6">
-            <h4 *ngIf="!roleManagementService.isAdmin"><b>Manage customers</b></h4>
-            <h4 *ngIf="roleManagementService.isAdmin"><b>View Customers</b></h4>
-          </div>
-          <div class="col-sm-6">
-            <button *ngIf="!roleManagementService.isAdmin" class="btn btn-success" (click)="addCustomer()">
-              <span> Add Customer</span>
-            </button>
-          </div>
-        </div>
-      </div>
-      <table class="table table-striped table-hover table-bordered table-content">
-        <thead>
-        <tr class="center-align">
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Address</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let customer of customers">
-          <td>{{customer.firstName}}</td>
-          <td>{{customer.lastName}}</td>
-          <td>{{customer.address}}</td>
-          <td *ngIf="!roleManagementService.isAdmin" align="center">
-            <a href="#" [routerLink]="['/customer/', customer.id]" class="btn btn-info">Edit</a>
-            <button type="button" (click)="deleteCustomer(customer.id)" class="btn btn-danger"
-                    style="margin-left: 5px;"> Delete
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td *ngIf="customers.length == 0" colspan="6">No customers were found</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+<div class="mat-elevation-z4">
+  <mat-table color="primary">
+    <span *ngIf="!roleManagementService.isAdmin">Manage Customers</span>
+    <span *ngIf="roleManagementService.isAdmin">View Customers</span>
+    <span class="spacer"></span>
+    <button *ngIf="!roleManagementService.isAdmin" mat-raised-button color="accent" (click)="addCustomer()">Add Customer</button>
+  </mat-table>
+  <mat-table [dataSource]="customerDatasource">
+    <ng-container matColumnDef="firstName">
+      <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+      <mat-cell *matCellDef="let customer"> {{customer.firstName}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="lastName">
+      <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
+      <mat-cell *matCellDef="let customer"> {{customer.lastName}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="address">
+      <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
+      <mat-cell *matCellDef="let customer"> {{customer.address}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="action" *ngIf="!roleManagementService.isAdmin">
+      <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+      <mat-cell *matCellDef="let customer">
+        <a mat-button [routerLink]="['/customer/', customer.id]" color="primary">Edit</a>
+        <button mat-button color="warn" (click)="deleteCustomer(customer.id)">Delete</button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" [pageIndex]="currentPage" (page)="loadCustomers()"></mat-paginator>
 </div>
-

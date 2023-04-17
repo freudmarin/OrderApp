@@ -1,31 +1,22 @@
 <div class="container">
-  <form class="form-signin" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <h1 class="h3 mb-3 font-weight-normal">Please Sign in</h1>
-    <div class="form-group">
-      <label for="inputUsername" class="sr-only">Username</label>
-      <input type="text" id="inputUsername" [formControlName]="'username'" class="form-control" placeholder="Username" >
-      <span class="text-danger"
-            *ngIf="(loginFormControl.username.touched || submitted) && loginFormControl.username.errors?.required">
-                               Username is required
-                            </span>
-    </div>
-    <div class="form-group">
-      <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" id="inputPassword" [formControlName]="'password'" class="form-control" placeholder="Password" >
-      <span class="text-danger"
-            *ngIf="(loginFormControl.password.touched || submitted) && loginFormControl.password.errors?.required">
-                            Password is required
-                            </span>
-    </div>
-    <div class="form-group">
-      <button class="btn btn-primary btn-block">
-        Login
-      </button>
-    </div>
-  </form>
-  <div class="alert alert-danger"
-       role="alert"
-       *ngIf="isLoginFailed && submitted">
-    Login failed: {{ errorMessage }}
-  </div>
+  <mat-card class="my-card">
+    <form class="example-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <h1 mat-card-title>Please Sign in</h1>
+      <mat-form-field class="example-full-width">
+        <mat-label>Username</mat-label>
+        <input matInput type="text" [formControlName]="'username'" placeholder="Username">
+        <mat-error *ngIf="(loginFormControl.username.touched || submitted) && loginFormControl.username.errors?.required">
+          Username is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" [formControlName]="'password'" placeholder="Password">
+        <mat-error *ngIf="(loginFormControl.password.touched || submitted) && loginFormControl.password.errors?.required">
+          Password is required
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Login</button>
+    </form>
+  </mat-card>
 </div>

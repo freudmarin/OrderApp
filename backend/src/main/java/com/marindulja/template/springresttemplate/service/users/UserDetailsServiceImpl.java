@@ -8,6 +8,9 @@ import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,6 +24,9 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 @Slf4j
@@ -31,16 +37,28 @@ public class UserDetailsServiceImpl implements UserService {
 
     private final PasswordEncoder passwordEncoder;
 
-    private ModelMapper mapper = new ModelMapper();
+    private final  ModelMapper mapper = new ModelMapper();
     @Override
-    public List<UserDto> getAllUsers() {
-        List<User> users = userRepository.findAll();
-        return users.stream().map(user -> mapToDTO(user)).collect(Collectors.toList());
+    public PageImpl<UserDto> getPaginatedUsers(Pageable pageRequest)  {
+        Page<User> pageResult = userRepository.findAll(pageRequest);
+        List<UserDto> usersDto = pageResult
+                .stream()
+                .map(this::mapToDTO)
+                .collect(toList());
+        return new PageImpl<>(usersDto, pageRequest , pageResult.getTotalElements());
     }
 
     @Override
+    public List<UserDto> getAllUsers() {
+        Iterable<User> users = userRepository.findAll();
+        return StreamSupport.stream(users.spliterator(), false).map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
+
+
+    @Override
     public List<String> getAllRoles() {
-        return Arrays.asList(Role.values()).stream().map(r->r.getAuthority()).collect(Collectors.toList());
+        return Arrays.stream(Role.values()).map(Role::getAuthority).collect(Collectors.toList());
 
     }
 
@@ -127,12 +145,10 @@ public class UserDetailsServiceImpl implements UserService {
 
 
     private UserDto mapToDTO(User user) {
-        UserDto userDto = mapper.map(user, UserDto.class);
-        return userDto;
+        return mapper.map(user, UserDto.class);
     }
 
     private User mapToEntity(UserDto userDto) {
-        User user = mapper.map(userDto, User.class);
-        return user;
+        return mapper.map(userDto, User.class);
     }
 }

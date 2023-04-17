@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Product} from "./product";
+import {Page} from "../page";
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,15 @@ export class ProductService {
   constructor(private httpClient: HttpClient) {
   }
 
+  getAllPaginated(request) :Observable<Page<Product>> {
+    const params = request;
+    return this.httpClient.get<Page<Product>>(this.productsUrl + '/paginated', {params});
+  }
+
   getAll() {
     return this.httpClient.get<Product[]>(this.productsUrl);
   }
+
   addProduct(product): Observable<Product> {
     return this.httpClient.post<Product>(this.productsUrl + '/add', product);
   }

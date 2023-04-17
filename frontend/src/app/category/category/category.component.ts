@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {UserPayload} from "../../user/user-payload";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CustomValidationService} from "../../user/custom-validation.service";
 import {CategoryService} from "../category-service";
@@ -18,7 +17,7 @@ export class CategoryComponent implements OnInit {
   submitted = false;
 
   constructor(private formBuilder: FormBuilder, private categoryService: CategoryService, private router: Router,
-              private route: ActivatedRoute, private customValidator: CustomValidationService) {
+              private route: ActivatedRoute) {
     this.categoryForm = this.formBuilder.group({
       name: ['', Validators.required],
     });

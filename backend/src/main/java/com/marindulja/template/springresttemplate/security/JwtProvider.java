@@ -2,15 +2,11 @@ package com.marindulja.template.springresttemplate.security;
 
 import com.marindulja.template.springresttemplate.exception.OrderAppException;
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.SignatureException;
-import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
 
 @Service
 public class JwtProvider {

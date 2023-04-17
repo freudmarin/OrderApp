@@ -1,39 +1,26 @@
-<div class="container-xl">
-  <div class="table-responsive">
-    <div class="table-wrapper">
-      <div class="table-title">
-        <div class="row">
-          <div class="col-sm-6">
-            <h4 *ngIf="roleManagementService.isAdmin"><b>Manage Categories</b></h4>
-            <h4 *ngIf="!roleManagementService.isAdmin"><b>View Categories</b></h4>
-          </div>
-          <div class="col-sm-6">
-            <button *ngIf="roleManagementService.isAdmin" class="btn btn-success" (click)="addCategory()">
-              <span> Add Category </span>
-            </button>
-          </div>
-        </div>
-      </div>
-      <table class="table table-striped table-hover table-bordered table-content">
-        <thead>
-        <tr class="center-align">
-          <th>Name</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let category of categories">
-          <td>{{category.name}}</td>
-          <td  *ngIf="roleManagementService.isAdmin" align="center">
-            <a href="#" [routerLink]="['/category/', category.id]" class="btn btn-info">Edit</a>
-            <button type="button"  (click)="deleteCategory(category.id)" class="btn btn-danger" style="margin-left: 5px;"> Delete
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td *ngIf="categories.length == 0" colspan="6">No categories were found</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+<div class="container">
+  <h1 *ngIf="roleManagementService.isAdmin">Manage Categories</h1>
+  <h1 *ngIf="!roleManagementService.isAdmin">View Categories</h1>
+  <div *ngIf="roleManagementService.isAdmin" class="add-category-button">
+    <button mat-raised-button color="primary" (click)="addCategory()">
+      <mat-icon>add</mat-icon> Add Category
+    </button>
   </div>
+
+  <mat-table [dataSource]="categoryDatasource" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let category">{{ category.name }}</mat-cell>
+    </ng-container>
+    <ng-container *ngIf="roleManagementService.isAdmin" matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+      <mat-cell *matCellDef="let category">
+        <button mat-raised-button color="primary" [routerLink]="['/category/', category.id]">Edit</button>
+        <button mat-raised-button color="warn" (click)="deleteCategory(category.id)" style="margin-left: 5px;">Delete</button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" [pageIndex]="currentPage" (page)="loadCategories()"></mat-paginator>
 </div>

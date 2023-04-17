@@ -6,6 +6,9 @@ import com.marindulja.template.springresttemplate.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -13,6 +16,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 @Slf4j
@@ -20,12 +26,23 @@ import java.util.stream.Collectors;
 public class CategoryServiceImp implements CategoryService {
 
     private final CategoryRepository categoryRepository;
-    private ModelMapper mapper = new ModelMapper();
+    private final ModelMapper mapper = new ModelMapper();
+
+    @Override
+    public Page<CategoryDto> getPaginatedCategories(Pageable pageRequest) {
+        Page<Category> pageResult = categoryRepository.findAll(pageRequest);
+        List<CategoryDto> categoriesDto = pageResult
+                .stream()
+                .map(this::mapToDTO)
+                .collect(toList());
+        return new PageImpl<>(categoriesDto, pageRequest, pageResult.getTotalElements());
+    }
 
     @Override
     public List<CategoryDto> getAllCategories() {
-        List<Category> categories = categoryRepository.findAll();
-        return categories.stream().map(this::mapToDTO).collect(Collectors.toList());
+        Iterable<Category> categories = categoryRepository.findAll();
+        return StreamSupport.stream(categories.spliterator(), false).map(this::mapToDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -70,12 +87,10 @@ public class CategoryServiceImp implements CategoryService {
     }
 
     private CategoryDto mapToDTO(Category category) {
-        CategoryDto categoryDto = mapper.map(category, CategoryDto.class);
-        return categoryDto;
+        return mapper.map(category, CategoryDto.class);
     }
 
     private Category mapToEntity(CategoryDto categoryDto) {
-        Category category = mapper.map(categoryDto, Category.class);
-        return category;
+        return mapper.map(categoryDto, Category.class);
     }
 }

@@ -1,20 +1,21 @@
-<div class="container justify-content-center">
-<form class="form-signin" [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
-  <h1 class="h3 mb-3 font-weight-normal" *ngIf="!onUpdate" >Please add the category</h1>
-  <h1 class="h3 mb-3 font-weight-normal" *ngIf="!onUpdate" >Please update the category</h1>
-  <div class="form-group">
-    <label for="inputName"> Name</label>
-    <input type="text" id="inputName" [formControlName]="'name'" class="form-control" placeholder="Name" >
-    <span class="text-danger"
-          *ngIf="(categoryFormControl.name.touched || submitted) && categoryFormControl.name.errors?.required">
-                               Name is required
-                            </span>
-  </div>
-
-  <button *ngIf="!onUpdate" class="btn btn-lg btn-primary btn-block" type="submit">
-    Add Category</button>
-  <button *ngIf="onUpdate" class="btn btn-lg btn-primary btn-block" type="submit">
-    Update Category</button>
-</form>
+<div fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="form-card">
+    <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+      <h1 class="mat-h1" *ngIf="!onUpdate">Please add the category</h1>
+      <h1 class="mat-h1" *ngIf="onUpdate">Please update the category</h1>
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput type="text" formControlName="name" placeholder="Name">
+        <mat-error *ngIf="(categoryFormControl.name.touched || submitted) && categoryFormControl.name.errors?.required">
+          Name is required
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" *ngIf="!onUpdate" type="submit">
+        Add Category
+      </button>
+      <button mat-raised-button color="primary" *ngIf="onUpdate" type="submit">
+        Update Category
+      </button>
+    </form>
+  </mat-card>
 </div>
-

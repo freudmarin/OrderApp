@@ -3,6 +3,8 @@ package com.marindulja.template.springresttemplate.controller;
 import com.marindulja.template.springresttemplate.dto.CategoryDto;
 import com.marindulja.template.springresttemplate.service.categories.CategoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,6 +28,13 @@ public class CategoryController {
     public List<CategoryDto> getAllCategories() {
         return categoryService.getAllCategories();
     }
+    @GetMapping("paginated")
+    public Page<CategoryDto> getAllCategoriesPaginated(@RequestParam(name="page", defaultValue = "0") Integer page,
+                                                      @RequestParam(name="size", defaultValue = "5") Integer size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return  categoryService.getPaginatedCategories(pageRequest);
+    }
+
 
     @GetMapping("{id}")
     public ResponseEntity<CategoryDto> getUserById(@PathVariable("id") long id) {

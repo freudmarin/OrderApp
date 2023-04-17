@@ -5,12 +5,14 @@ import com.marindulja.template.springresttemplate.dto.OrderResponse;
 import com.marindulja.template.springresttemplate.service.AuthService;
 import com.marindulja.template.springresttemplate.service.orders.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -20,15 +22,18 @@ public class OrdersController {
     private final AuthService authService;
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("all/admin")
-    public ResponseEntity<List<OrderResponse>> getAllOrders() {
-        return new ResponseEntity<>(orderService.listAllOrders(), HttpStatus.OK);
+    @GetMapping("/admin/paginated")
+    public ResponseEntity<Page<OrderResponse>> getAllOrders(@RequestParam(name = "page", defaultValue = "0") Integer page,
+                                                            @RequestParam(name = "size", defaultValue = "5") Integer size) {
+        return new ResponseEntity<>(orderService.getAllOrdersPaginated(page, size), HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping()
-    public ResponseEntity<List<OrderResponse>> getOrdersByUser() {
-        return new ResponseEntity<>(orderService.listOrders(Long.valueOf(authService.getCurrentUser().get().getUsername())), HttpStatus.OK);
+    public ResponseEntity<Page<OrderResponse>> getOrdersByUser(@RequestParam(name = "page", defaultValue = "0") Integer page,
+                                                               @RequestParam(name = "size", defaultValue = "5") Integer size) {
+        Optional<User> currentUser = authService.getCurrentUser();
+        return currentUser.map(user -> new ResponseEntity<>(orderService.getOrdersForUser(Long.valueOf(user.getUsername()), page, size), HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PreAuthorize("hasRole('USER')")

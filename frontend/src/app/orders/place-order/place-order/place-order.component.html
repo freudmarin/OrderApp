@@ -1,34 +1,46 @@
-<div class="container justify-content-center">
-  <form [formGroup]="placeOrderForm" (ngSubmit)="onSubmit()" class="place-order-form">
-    <div class="form-group">
-      <label for="customerId">Customer Name:</label>
-      <select id="customerId" [formControlName]="'customerId'" class="form-control">
-        <!--At ngValue we pass the object and display the value-->
-        <option *ngFor="let customer of customers"
-                [ngValue]="customer.id">{{customer.firstName + " " + customer.lastName}}</option>
-      </select>
-    </div>
-    <label>Order Items</label>
-    <button style="margin-left:10px;" class="btn btn-primary btn-sm" (click)="addItem()"><i class="fa fa-plus"></i></button>
-    <div formArrayName="items">
-      <div *ngFor="let item of items.controls; let i = index" [formGroupName]="i" class="item-group">
-          <label for="productCode">Product code:</label>
-          <input type="text" id="productCode" formControlName="productCode" class="form-control"/>
-          <div *ngIf="item.get('productCode').invalid && item.get('productCode').touched" class="error">
-            Product code is required.
-          </div>
-        <div class="form-group">
-          <label for="quantity">Quantity:</label>
-          <input type="number" id="quantity" formControlName="quantity" class="form-control"/>
-          <div *ngIf="item.get('quantity').invalid && item.get('quantity').touched" class="error">
-            Quantity is required and must be greater than or equal to 1.
-          </div>
+<mat-card class="mat-elevation-z2">
+  <mat-card-title>Place Order</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="placeOrderForm" (ngSubmit)="onSubmit()" class="place-order-form">
+      <mat-form-field>
+        <mat-label>Customer Name</mat-label>
+        <mat-select [formControlName]="'customerId'">
+          <mat-option *ngFor="let customer of customers" [value]="customer.id">
+            {{ customer.firstName + " " + customer.lastName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <h3>Order Items</h3>
+      <button mat-icon-button color="primary" (click)="addItem()">
+        <mat-icon>add</mat-icon>
+      </button>
+
+      <div formArrayName="items">
+        <div *ngFor="let item of items.controls; let i = index" [formGroupName]="i" class="item-group">
+          <mat-form-field>
+            <mat-label>Product Code</mat-label>
+            <input matInput type="text" formControlName="productCode" required>
+            <mat-error *ngIf="item.get('productCode').invalid && item.get('productCode').touched">
+              Product code is required.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Quantity</mat-label>
+            <input matInput type="number" formControlName="quantity" required min="1">
+            <mat-error *ngIf="item.get('quantity').invalid && item.get('quantity').touched">
+              Quantity is required and must be greater than or equal to 1.
+            </mat-error>
+          </mat-form-field>
+
+          <button mat-icon-button color="warn" (click)="removeItem(i)">
+            <mat-icon>remove</mat-icon>
+          </button>
         </div>
-      <button class="btn btn-danger btn-sm" (click)="removeItem(i)"><i class="fa fa-minus"></i></button>
-      <div class="form-group">
       </div>
-      </div>
-      <button type="submit" class="btn btn-success">Add Order</button>
-    </div>
-  </form>
-</div>
+
+      <button mat-raised-button color="primary" type="submit">Add Order</button>
+    </form>
+  </mat-card-content>
+</mat-card>

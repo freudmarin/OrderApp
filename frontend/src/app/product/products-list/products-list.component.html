@@ -1,51 +1,49 @@
-<div class="container-xl">
-  <div class="table-responsive">
-    <div class="table-wrapper">
-      <div class="table-title">
-        <div class="row">
-          <div class="col-sm-6">
-            <h4 *ngIf="!roleManagementService.isAdmin"><b>Manage Products</b></h4>
-            <h4 *ngIf="roleManagementService.isAdmin"><b>View Products</b></h4>
-          </div>
-          <div class="col-sm-6">
-            <button *ngIf="!roleManagementService.isAdmin" class="btn btn-success" (click)="addProduct()">
-              <span> Add Product</span>
-            </button>
-          </div>
-        </div>
-      </div>
-      <table class="table table-striped table-hover table-bordered table-content">
-        <thead>
-        <tr class="center-align">
-          <th>Product Code</th>
-          <th>Product Name</th>
-          <th>Product Description</th>
-          <th>Category</th>
-          <th>Unit Price</th>
-          <th>Unit in stock</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let product of products">
-          <td>{{product.productCode}}</td>
-          <td>{{product.productName}}</td>
-          <td>{{product.description}}</td>
-          <td>{{product.category.name}}</td>
-          <td>{{product.unitPrice}}</td>
-          <td>{{product.unitInStock}}</td>
-          <td *ngIf="!roleManagementService.isAdmin" align="center">
-            <a href="#" [routerLink]="['/product/', product.id]" class="btn btn-info">Edit</a>
-            <button type="button" (click)="deleteProduct(product.id)" class="btn btn-danger"
-                    style="margin-left: 5px;"> Delete
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td *ngIf="products.length == 0" colspan="6">No products were found</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+<div class="container">
+  <h1 *ngIf="!roleManagementService.isAdmin">Manage Products</h1>
+  <h1 *ngIf="roleManagementService.isAdmin">View Products</h1>
+  <div *ngIf="!roleManagementService.isAdmin" class="add-product-button">
+    <button mat-icon-button color="primary" (click)="addProduct()">
+      <mat-icon>add</mat-icon>
+    </button>
   </div>
+  <mat-table [dataSource]="productDatasource">
+    <ng-container matColumnDef="productCode">
+      <mat-header-cell *matHeaderCellDef>Product Code</mat-header-cell>
+      <mat-cell *matCellDef="let product">{{ product.productCode }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="productName">
+      <mat-header-cell *matHeaderCellDef>Product Name</mat-header-cell>
+      <mat-cell *matCellDef="let product">{{ product.productName }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef>Product Description</mat-header-cell>
+      <mat-cell *matCellDef="let product">{{ product.description }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="category">
+      <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
+      <mat-cell *matCellDef="let product">{{ product.category.name }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="unitPrice">
+      <mat-header-cell *matHeaderCellDef>Unit Price</mat-header-cell>
+      <mat-cell *matCellDef="let product">{{ product.unitPrice }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="unitInStock">
+      <mat-header-cell *matHeaderCellDef>Unit in stock</mat-header-cell>
+      <mat-cell *matCellDef="let product">{{ product.unitInStock }}</mat-cell>
+    </ng-container>
+    <ng-container *ngIf="!roleManagementService.isAdmin" matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+      <mat-cell *matCellDef="let product">
+        <button mat-icon-button color="primary" [routerLink]="['/product/', product.id]">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteProduct(product.id)" style="margin-left: 5px;">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator class ="align-paginator" [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" [pageIndex]="currentPage" (page)="loadProducts()"></mat-paginator>
 </div>
-

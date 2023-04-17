@@ -3,6 +3,8 @@ package com.marindulja.template.springresttemplate.controller;
 import com.marindulja.template.springresttemplate.dto.UserDto;
 import com.marindulja.template.springresttemplate.service.users.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,7 +14,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("api/users")
 @PreAuthorize("hasRole('ADMIN')")
 public class UsersController {
 
@@ -21,6 +23,13 @@ public class UsersController {
     @PostMapping("add")
     public ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto) {
       return new ResponseEntity<>(userDetailsService.addUser(userDto), HttpStatus.OK);
+    }
+
+    @GetMapping("paginated")
+    public Page<UserDto> getAllUsersPaginated(@RequestParam(name="page", defaultValue = "0") Integer page,
+                                              @RequestParam(name="size", defaultValue = "5") Integer size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return userDetailsService.getPaginatedUsers(pageRequest);
     }
 
     @GetMapping()

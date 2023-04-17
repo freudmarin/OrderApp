@@ -6,6 +6,9 @@ import com.marindulja.template.springresttemplate.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -13,6 +16,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 @Slf4j
@@ -20,13 +26,25 @@ import java.util.stream.Collectors;
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
-    private ModelMapper mapper = new ModelMapper();
+    private final ModelMapper mapper = new ModelMapper();
+
+    @Override
+    public Page<CustomerDto> getPaginatedCustomers(Pageable pageRequest)  {
+        Page<Customer> pageResult = customerRepository.findAll(pageRequest);
+        List<CustomerDto> customersDto = pageResult
+                .stream()
+                .map(this::mapToDTO)
+                .collect(toList());
+        return new PageImpl<>(customersDto, pageRequest , pageResult.getTotalElements());
+    }
 
     @Override
     public List<CustomerDto> getAllCustomers() {
-        List<Customer> customers = customerRepository.findAll();
-        return customers.stream().map(this::mapToDTO).collect(Collectors.toList());
+        Iterable<Customer> categories = customerRepository.findAll();
+        return StreamSupport.stream(categories.spliterator(), false).map(this::mapToDTO)
+                .collect(Collectors.toList());
     }
+
 
     @Override
     public CustomerDto addCustomer(CustomerDto customerToBeAdded) {
@@ -75,12 +93,10 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     private CustomerDto mapToDTO(Customer customer) {
-        CustomerDto customerDto = mapper.map(customer, CustomerDto.class);
-        return customerDto;
+        return mapper.map(customer, CustomerDto.class);
     }
 
     private Customer mapToEntity(CustomerDto customerDto) {
-        Customer customer = mapper.map(customerDto, Customer.class);
-        return customer;
+        return mapper.map(customerDto, Customer.class);
     }
 }
