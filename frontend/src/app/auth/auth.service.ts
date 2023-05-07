@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {map} from "rxjs/operators";
-import {Router} from "@angular/router";
-import {UserRetrieved} from "../user/user-retrieved";
+import {map} from 'rxjs/operators';
+import {Router} from '@angular/router';
+import {UserRetrieved} from '../user/user-retrieved';
 
 
 @Injectable({
@@ -18,10 +18,10 @@ export class AuthService {
     this.user = this.userSubject.asObservable();
   }
 
-  login(username: String, password: String) {
-    return this.httpClient.post<any>(this.url + 'login', {username,password}).pipe(map(user => {
+  login(username: string, password: string) {
+    return this.httpClient.post<any>(this.url + 'login', {username, password}).pipe(map(user => {
       localStorage.setItem('user', JSON.stringify(user));
-      localStorage.setItem('authenticationToken', user.authenticationToken)
+      localStorage.setItem('authenticationToken', user.authenticationToken);
       this.userSubject.next(user);
       console.log(user);
       return user;

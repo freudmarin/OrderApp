@@ -1,10 +1,11 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {RoleManagementService} from "../../role-management.service";
-import {Router} from "@angular/router";
-import {ProductService} from "../product.service";
-import {MatPaginator} from "@angular/material/paginator";
-import {ProductDataSource} from "./product-data-source";
-import {tap} from "rxjs/operators";
+import {RoleManagementService} from '../../role-management.service';
+import {Router} from '@angular/router';
+import {ProductService} from '../product.service';
+import {MatPaginator} from '@angular/material/paginator';
+import {ProductDataSource} from './product-data-source';
+import {tap} from 'rxjs/operators';
+import {OrdersService} from '../../orders/order/order.service';
 
 @Component({
   selector: 'app-products-list',
@@ -14,7 +15,10 @@ import {tap} from "rxjs/operators";
 export class ProductsListComponent implements OnInit, AfterViewInit {
   public roleManagementService: RoleManagementService;
   productDatasource: ProductDataSource;
-  constructor(public productService: ProductService, private router: Router, roleManagementService: RoleManagementService) {
+  constructor(public productService: ProductService,
+              public orderService: OrdersService,
+              private router: Router,
+              roleManagementService: RoleManagementService) {
     this.roleManagementService = roleManagementService;
   }
 
@@ -57,7 +61,7 @@ export class ProductsListComponent implements OnInit, AfterViewInit {
     this.productDatasource.loadProducts(this.paginator.pageIndex, this.paginator.pageSize);
   }
   deleteProduct(id: number) {
-    this.productService.delete(id)
+      this.productService.delete(id)
       .subscribe(
         data => {
           console.log(data);
@@ -65,7 +69,6 @@ export class ProductsListComponent implements OnInit, AfterViewInit {
         },
         error => console.log(error));
   }
-
   addProduct() {
     this.router.navigate(['product']);
   }

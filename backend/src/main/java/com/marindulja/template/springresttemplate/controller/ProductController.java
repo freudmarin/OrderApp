@@ -33,7 +33,7 @@ public class ProductController {
         return productService.getAllProducts();
     }
     @GetMapping("{id}")
-    public ResponseEntity<ProductDto> getCustomerById(@PathVariable("id") long id) {
+    public ResponseEntity<ProductDto> getProductById(@PathVariable("id") long id) {
         return productService.getProductById(id);
     }
 
@@ -43,7 +43,7 @@ public class ProductController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<HttpStatus> deleteCustomer(@PathVariable("id") long id) {
+    public ResponseEntity<HttpStatus> deleteProduct(@PathVariable("id") long id) {
         return productService.deleteProductById(id);
     }
 }

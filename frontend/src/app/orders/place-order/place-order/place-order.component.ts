@@ -1,9 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {OrderRequest, OrdersService} from "../../order/order.service";
-import {CustomerService} from "../../../customer/customer.service";
-import {Customer} from "../../../customer/customer";
-import {ActivatedRoute, Router} from "@angular/router";
+import {OrderRequest, OrdersService} from '../../order/order.service';
+import {CustomerService} from '../../../customer/customer.service';
+import {Customer} from '../../../customer/customer';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-place-order',

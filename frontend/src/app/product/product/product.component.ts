@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
-import {ProductService} from "../product.service";
-import {CategoryService} from "../../category/category-service";
-import {Category} from "../../category/category";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ProductService} from '../product.service';
+import {CategoryService} from '../../category/category-service';
+import {Category} from '../../category/category';
 
 @Component({
   selector: 'app-product',
@@ -18,7 +18,9 @@ export class ProductComponent implements OnInit {
 
   categories: Category[];
 
-  constructor(private formBuilder: FormBuilder, private categoryService: CategoryService, private productService: ProductService, private router: Router,
+  constructor(private formBuilder: FormBuilder,
+              private categoryService: CategoryService,
+              private productService: ProductService, private router: Router,
               private route: ActivatedRoute) {
     this.productForm = this.formBuilder.group({
       productCode: ['', Validators.required],
@@ -26,7 +28,7 @@ export class ProductComponent implements OnInit {
       description: [''],
       category: ['', Validators.required],
       unitPrice: ['', [Validators.required, Validators.min(0)]],
-      unitInStock: ['', [Validators.required,Validators.min(1)]],
+      unitInStock: ['', [Validators.required, Validators.min(1)]],
       discount : ['', [Validators.required, Validators.min(0), Validators.max(100)]]
     });
   }

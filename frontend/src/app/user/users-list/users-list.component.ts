@@ -1,11 +1,11 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {UserService} from "../user.service";
-import {UserPayload} from "../user-payload";
-import {Router} from "@angular/router";
-import {RoleManagementService} from "../../role-management.service";
-import {MatPaginator} from "@angular/material/paginator";
-import {tap} from "rxjs/operators";
-import {UserDataSource} from "./user-data-source";
+import {UserService} from '../user.service';
+import {UserPayload} from '../user-payload';
+import {Router} from '@angular/router';
+import {RoleManagementService} from '../../role-management.service';
+import {MatPaginator} from '@angular/material/paginator';
+import {tap} from 'rxjs/operators';
+import {UserDataSource} from './user-data-source';
 
 @Component({
   selector: 'app-user-list',

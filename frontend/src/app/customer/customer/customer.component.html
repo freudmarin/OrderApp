@@ -1,8 +1,7 @@
-<div class="container mat-elevation-z4">
+<mat-card class="mat-elevation-z4">
+  <h1 class="mat-h1" *ngIf="!onUpdate">Add Customer</h1>
+  <h1 class="mat-h1" *ngIf="onUpdate">Update Customer</h1>
   <form class="form-signin" [formGroup]="customerForm" (ngSubmit)="onSubmit()">
-    <h1 class="mat-h1 mb-3 font-weight-normal" *ngIf="!onUpdate">Add Customer</h1>
-    <h1 class="mat-h1 mb-3 font-weight-normal" *ngIf="onUpdate">Update Customer</h1>
-
     <mat-form-field class="form-group">
       <mat-label>First Name</mat-label>
       <input matInput type="text" id="inputFirstName" [formControlName]="'firstName'" placeholder="First Name">
@@ -36,4 +35,4 @@
       </button>
     </div>
   </form>
-</div>
+</mat-card>

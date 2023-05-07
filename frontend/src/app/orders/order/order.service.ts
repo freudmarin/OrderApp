@@ -1,16 +1,17 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {Page} from '../../page';
 
 export class OrderResponseDto {
   orderId: number;
-  customerName: String;
+  customerName: string;
 }
 
 export class OrderItemDto {
   price: number;
   quantity: number;
-  productCode: number;
+  productCode: string;
 }
 
 export class OrderRequest {
@@ -32,12 +33,14 @@ export class OrdersService {
 
   constructor(private http: HttpClient) {}
 
-  getAllOrders(): Observable<OrderResponse[]> {
-    return this.http.get<OrderResponse[]>(`${this.ordersUrl}/all/admin`);
+  getAllOrdersPaginated(request): Observable<Page<OrderResponse>> {
+    const params = request;
+    return this.http.get<Page<OrderResponse>>(`${this.ordersUrl}/admin/paginated`, {params});
   }
 
-  getOrdersByUser(): Observable<OrderResponse[]> {
-    return this.http.get<OrderResponse[]>(this.ordersUrl);
+  getOrdersByUser(request): Observable<Page<OrderResponse>> {
+    const params = request;
+    return this.http.get<Page<OrderResponse>>(this.ordersUrl, {params});
   }
 
   placeOrder(orderReq: OrderRequest): Observable<void> {

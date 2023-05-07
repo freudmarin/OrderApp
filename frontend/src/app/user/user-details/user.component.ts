@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UserService} from "../user.service";
-import {UserPayload} from "../user-payload";
-import {CustomValidationService} from "../custom-validation.service";
+import {UserService} from '../user.service';
+import {UserPayload} from '../user-payload';
+import {CustomValidationService} from '../custom-validation.service';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +15,7 @@ export class UserComponent implements OnInit {
   onUpdate: boolean;
   userForm: FormGroup;
   userPayload: UserPayload;
-  roles: String[];
+  roles: string[];
   submitted = false;
 
   constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router,

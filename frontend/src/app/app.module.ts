@@ -10,34 +10,34 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {HomeComponent} from './home/home.component';
-import {FooterComponent} from "./footer/footer.component";
+import {FooterComponent} from './footer/footer.component';
 import {UsersListComponent} from './user/users-list/users-list.component';
-import {AuthInterceptor} from "./auth-interceptor";
-//import {AuthGuard} from "./auth.guard";
-import {Role} from "./user/role";
-import {AuthGuard} from "./auth.guard";
+import {AuthInterceptor} from './auth-interceptor';
+// import {AuthGuard} from "./auth.guard";
+import {Role} from './user/role';
+import {AuthGuard} from './auth.guard';
 import {CategoriesListComponent} from './category/categories-list/categories-list.component';
 import {CategoryComponent} from './category/category/category.component';
 import {CustomerComponent} from './customer/customer/customer.component';
-import {CustomersListComponent} from "./customer/customers-list/customers-list.component";
+import {CustomersListComponent} from './customer/customers-list/customers-list.component';
 import {ProductsListComponent} from './product/products-list/products-list.component';
 import {ProductComponent} from './product/product/product.component';
 import {OrderComponent} from './orders/order/order.component';
 import {PlaceOrderComponent} from './orders/place-order/place-order/place-order.component';
-import {NgxWebstorageModule} from "ngx-webstorage";
+import {NgxWebstorageModule} from 'ngx-webstorage';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
-import {MatCardModule} from "@angular/material/card";
-import {_MatMenuDirectivesModule, MatMenuModule} from "@angular/material/menu";
-import {MatToolbarModule} from "@angular/material/toolbar";
-import {MatDividerModule} from "@angular/material/divider";
-import {MatSelectModule} from "@angular/material/select";
+import {MatCardModule} from '@angular/material/card';
+import {_MatMenuDirectivesModule, MatMenuModule} from '@angular/material/menu';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatSelectModule} from '@angular/material/select';
 import {MatDialogModule} from '@angular/material/dialog';
-import {DialogComponent} from "./utils/dialog.component";
-import {MatPaginatorModule} from "@angular/material/paginator";
+import {DialogComponent} from './utils/dialog.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -113,7 +113,8 @@ import {MatPaginatorModule} from "@angular/material/paginator";
       {path: 'login', component: LoginComponent},
       {path: 'orders', component: OrderComponent, canActivate: [AuthGuard], data: {roles: [Role.Admin, Role.User]}},
       {path: 'place-order', component: PlaceOrderComponent, canActivate: [AuthGuard], data: {roles: [Role.User]}}
-    ]), HttpClientModule, BrowserAnimationsModule, _MatMenuDirectivesModule, MatToolbarModule, MatMenuModule, MatDividerModule, MatSelectModule
+    ]), HttpClientModule, BrowserAnimationsModule, _MatMenuDirectivesModule,
+    MatToolbarModule, MatMenuModule, MatDividerModule, MatSelectModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]

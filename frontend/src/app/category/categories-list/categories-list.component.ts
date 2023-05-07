@@ -1,10 +1,10 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {Router} from "@angular/router";
-import {RoleManagementService} from "../../role-management.service";
-import {MatPaginator} from "@angular/material/paginator";
-import {tap} from "rxjs/operators";
-import {CategoryDataSource} from "./category-data-source";
-import {CategoryService} from "../category-service";
+import {Router} from '@angular/router';
+import {RoleManagementService} from '../../role-management.service';
+import {MatPaginator} from '@angular/material/paginator';
+import {tap} from 'rxjs/operators';
+import {CategoryService} from '../category-service';
+import {CategoryDataSource} from './category-data-source';
 
 @Component({
   selector: 'app-categories-list',
@@ -68,6 +68,6 @@ export class CategoriesListComponent implements OnInit, AfterViewInit {
   }
 
   addCategory() {
-    this.router.navigate(['categrory']);
+    this.router.navigate(['category']);
   }
 }

@@ -5,9 +5,7 @@ import com.marindulja.template.springresttemplate.dto.OrderResponse;
 import com.marindulja.template.springresttemplate.dto.OrderResponseDto;
 import com.marindulja.template.springresttemplate.dto.PlaceOrderDto;
 import com.marindulja.template.springresttemplate.exception.OrderAppException;
-import com.marindulja.template.springresttemplate.model.Order;
-import com.marindulja.template.springresttemplate.model.OrderItem;
-import com.marindulja.template.springresttemplate.model.Product;
+import com.marindulja.template.springresttemplate.model.*;
 import com.marindulja.template.springresttemplate.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -40,7 +38,7 @@ public class OrderService {
         PlaceOrderDto placeOrderDto = new PlaceOrderDto();
         placeOrderDto.setUserId(userId);
         placeOrderDto.setCustomerId(customerID);
-        Double totalPrice = 0.00;
+        double totalPrice = 0.00;
         Order order = saveOrder(placeOrderDto);
         //has to be improved
         orderItemsRepository.saveAll(orderItemsDto.stream().map(o-> new OrderItem(
@@ -68,7 +66,9 @@ public class OrderService {
     }
 
     private Order getOrderFromDto(PlaceOrderDto orderDto) {
-        Order order = new Order(customerRepository.findById(orderDto.getCustomerId()).get(), userRepository.findById(orderDto.getUserId()).get());
+        Customer customer = customerRepository.findById(orderDto.getCustomerId()).orElseThrow();
+        User user =  userRepository.findById(orderDto.getUserId()).orElseThrow();
+        Order order = new Order(customer, user);
         return order;
     }
 

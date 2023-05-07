@@ -1,6 +1,4 @@
 <div class="container">
-  <h1 *ngIf="!roleManagementService.isAdmin">Manage Products</h1>
-  <h1 *ngIf="roleManagementService.isAdmin">View Products</h1>
   <div *ngIf="!roleManagementService.isAdmin" class="add-product-button">
     <button mat-icon-button color="primary" (click)="addProduct()">
       <mat-icon>add</mat-icon>
@@ -34,10 +32,10 @@
     <ng-container *ngIf="!roleManagementService.isAdmin" matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
       <mat-cell *matCellDef="let product">
-        <button mat-icon-button color="primary" [routerLink]="['/product/', product.id]">
+        <button mat-raised-button color="primary" [routerLink]="['/product/', product.id]">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-icon-button color="warn" (click)="deleteProduct(product.id)" style="margin-left: 5px;">
+        <button mat-raised-button color="warn" (click)="deleteProduct(product.id)" style="margin-left: 5px;">
           <mat-icon>delete</mat-icon>
         </button>
       </mat-cell>

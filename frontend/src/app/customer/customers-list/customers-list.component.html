@@ -1,10 +1,10 @@
 <div class="mat-elevation-z4">
-  <mat-table color="primary">
-    <span *ngIf="!roleManagementService.isAdmin">Manage Customers</span>
-    <span *ngIf="roleManagementService.isAdmin">View Customers</span>
     <span class="spacer"></span>
-    <button *ngIf="!roleManagementService.isAdmin" mat-raised-button color="accent" (click)="addCustomer()">Add Customer</button>
-  </mat-table>
+  <div *ngIf="!roleManagementService.isAdmin" class="add-customer-button">
+    <button mat-icon-button color="primary" (click)="addCustomer()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
   <mat-table [dataSource]="customerDatasource">
     <ng-container matColumnDef="firstName">
       <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
@@ -18,11 +18,15 @@
       <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
       <mat-cell *matCellDef="let customer"> {{customer.address}} </mat-cell>
     </ng-container>
-    <ng-container matColumnDef="action" *ngIf="!roleManagementService.isAdmin">
+    <ng-container matColumnDef="actions" *ngIf="!roleManagementService.isAdmin">
       <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
       <mat-cell *matCellDef="let customer">
-        <a mat-button [routerLink]="['/customer/', customer.id]" color="primary">Edit</a>
-        <button mat-button color="warn" (click)="deleteCustomer(customer.id)">Delete</button>
+        <a mat-raised-button [routerLink]="['/customer/', customer.id]" color="primary">
+          <mat-icon>edit</mat-icon>
+        </a>
+        <button mat-raised-button color="warn" (click)="deleteCustomer(customer.id)" style="margin-left: 5px;">
+          <mat-icon>delete</mat-icon>
+        </button>
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

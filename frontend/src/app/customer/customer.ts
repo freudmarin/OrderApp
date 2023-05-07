@@ -1,6 +1,6 @@
 export class Customer {
-  id : number;
+  id: number;
   firstName: string;
-  lastName : string;
+  lastName: string;
   address: string;
 }

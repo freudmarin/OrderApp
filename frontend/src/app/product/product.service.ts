@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {Product} from "./product";
-import {Page} from "../page";
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Product} from './product';
+import {Page} from '../page';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class ProductService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getAllPaginated(request) :Observable<Page<Product>> {
+  getAllPaginated(request): Observable<Page<Product>> {
     const params = request;
     return this.httpClient.get<Page<Product>>(this.productsUrl + '/paginated', {params});
   }
@@ -30,7 +30,7 @@ export class ProductService {
     return this.httpClient.get<Product>(`${this.productsUrl}/${id}`);
   }
 
-  update(id, product : Product) {
+  update(id, product: Product) {
     return this.httpClient.put(`${this.productsUrl}/${id}`, product);
   }
 

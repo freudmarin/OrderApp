@@ -1,24 +1,32 @@
-container {
-  padding: 1rem;
+.mat-form-field {
+  margin-bottom: 16px;
 }
-
-.add-category-button {
+.mat-card-content {
   display: flex;
-  justify-content: flex-end;
-  margin-bottom: 1rem;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.mat-table {
+.mat-form-field {
   width: 100%;
-  overflow-x: auto;
 }
 
-.mat-header-cell,
-.mat-cell {
-  padding: 1rem;
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
-.no-categories {
-  margin-top: 1rem;
-  text-align: center;
+.mat-card {
+  width: 50%;
+  max-width: 600px;
+  min-width: 300px;
+}
+
+.button-container , h1 {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
 }

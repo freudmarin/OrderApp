@@ -1,6 +1,4 @@
 <div class="container">
-  <h1 *ngIf="roleManagementService.isAdmin">Manage Categories</h1>
-  <h1 *ngIf="!roleManagementService.isAdmin">View Categories</h1>
   <div *ngIf="roleManagementService.isAdmin" class="add-category-button">
     <button mat-raised-button color="primary" (click)="addCategory()">
       <mat-icon>add</mat-icon> Add Category
@@ -15,8 +13,12 @@
     <ng-container *ngIf="roleManagementService.isAdmin" matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
       <mat-cell *matCellDef="let category">
-        <button mat-raised-button color="primary" [routerLink]="['/category/', category.id]">Edit</button>
-        <button mat-raised-button color="warn" (click)="deleteCategory(category.id)" style="margin-left: 5px;">Delete</button>
+        <button mat-raised-button color="primary" [routerLink]="['/category/', category.id]">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-raised-button color="warn" (click)="deleteCategory(category.id)" style="margin-left: 5px;">
+        <mat-icon>delete</mat-icon>
+        </button>
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

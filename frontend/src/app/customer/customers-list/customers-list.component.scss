@@ -1,56 +1,31 @@
-.container-xl {
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !important;
-  padding: 0px;
-  margin-top: 6%;
+.container {
+  padding: 0.5rem;
+  margin-top: 0.5rem; /* Add this line to reduce the top margin */
+  margin-left: 1.5rem; /* Add this line to reduce the left margin */
+}
 
-  .table-responsive {
-    margin: 30px 0;
+.header {
+  text-align: center;
+}
 
-    .table-wrapper {
-      background: #fff;
-      padding: 20px 25px;
-      border-radius: 3px;
-      min-width: 1000px;
-      box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+.add-customer-button {
+  display: flex;
+  justify-content: flex-start; /* Change this line to align the button to the left */
+  margin-bottom: 1rem;
+  margin-left: 0.5rem;
+}
 
-      .table-title {
-        padding-bottom: 15px;
-        background: #418a8a;
-        color: #fff;
-        padding: 16px 30px;
-        min-width: 100%;
-        margin: -20px -25px 10px;
-        border-radius: 3px 3px 0 0;
+.mat-table {
+  width: 100%;
+}
 
-        .btn {
-          color: #fff;
-          float: right;
-          font-size: 13px;
-          border: none;
-          min-width: 50px;
-          border-radius: 2px;
-          border: none;
-          outline: none !important;
-          margin-left: 10px;
+.mat-header-cell,
+.mat-cell {
+  padding: 1rem;
+}
 
-          i {
-            float: left;
-            font-size: 21px;
-            margin-right: 5px;
-          }
-
-          span {
-            float: left;
-            margin-top: 2px;
-          }
-        }
-      }
-
-      .table-content {
-        .center-align {
-          text-align: center;
-        }
-      }
-    }
-  }
+.align-paginator {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 1rem; /* Adjust this value as needed */
 }

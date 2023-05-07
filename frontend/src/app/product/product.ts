@@ -1,12 +1,12 @@
-import {Category} from "../category/category";
+import {Category} from '../category/category';
 
 export class Product {
   id: number;
-  productCode : String;
-  productName : String;
-  description : String;
-  category : Category;
-  unitPrice : number;
-  unitInStock : number;
-  discount : number;
+  productCode: string;
+  productName: string;
+  description: string;
+  category: Category;
+  unitPrice: number;
+  unitInStock: number;
+  discount: number;
 }

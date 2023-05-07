@@ -1,3 +1,3 @@
 export class FetchedRole {
-  name : String;
+  name: string;
 }

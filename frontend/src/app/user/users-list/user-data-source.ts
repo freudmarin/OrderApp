@@ -1,10 +1,10 @@
 import {DataSource} from '@angular/cdk/table';
 import {CollectionViewer} from '@angular/cdk/collections';
-import {BehaviorSubject, Observable, of} from "rxjs";
-import {catchError, finalize} from "rxjs/operators";
-import {UserService} from "../User.service";
-import {Page} from "../../page";
-import {UserPayload} from "../user-payload";
+import {BehaviorSubject, Observable, of} from 'rxjs';
+import {catchError, finalize} from 'rxjs/operators';
+import {UserService} from '../User.service';
+import {Page} from '../../page';
+import {UserPayload} from '../user-payload';
 
 export class UserDataSource implements DataSource<UserPayload>{
 
@@ -13,7 +13,7 @@ export class UserDataSource implements DataSource<UserPayload>{
   private countSubject = new BehaviorSubject<number>(0);
   public counter$ = this.countSubject.asObservable();
 
-  constructor(private userService : UserService) { }
+  constructor(private userService: UserService) { }
 
   connect(collectionViewer: CollectionViewer): Observable<UserPayload[]> {
     return this.userSubject.asObservable();

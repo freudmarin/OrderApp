@@ -1,5 +1,5 @@
 export class UserRetrieved {
-  username: String;
-  role : String;
+  username: string;
+  role: string;
   authenticationToken: string;
 }

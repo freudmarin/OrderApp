@@ -1,45 +1,32 @@
-<div class="mat-elevation-z2">
-  <mat-toolbar>
-    <div class="mat-toolbar-row">
-      <div class="col-sm-6">
-        <h4 *ngIf="!roleManagementService.isAdmin"><b>Orders of {{roleManagementService.user.username}}</b></h4>
-        <h4 *ngIf="roleManagementService.isAdmin"><b>All orders</b></h4>
-      </div>
-      <div class="col-sm-6">
-        <button mat-raised-button *ngIf="!roleManagementService.isAdmin" color="primary" (click)="displayPlaceOrderPage()">
-          <mat-icon>add_shopping_cart</mat-icon>
-          <span>Place Order</span>
-        </button>
-      </div>
-    </div>
-  </mat-toolbar>
-  <div class="mat-table-responsive">
-    <table mat-table class="mat-elevation-z2" [dataSource]="orders">
-      <ng-container matColumnDef="orderId">
-        <th mat-header-cell *matHeaderCellDef>Order ID</th>
-        <td mat-cell *matCellDef="let order">{{ order.order.orderId }}</td>
-      </ng-container>
-      <ng-container matColumnDef="customerName">
-        <th mat-header-cell *matHeaderCellDef>Customer Full Name</th>
-        <td mat-cell *matCellDef="let order">{{ order.order.customerName }}</td>
-      </ng-container>
-      <ng-container matColumnDef="items">
-        <th mat-header-cell *matHeaderCellDef>Items</th>
-        <td mat-cell *matCellDef="let order">
-          <ul>
-            <li *ngFor="let item of order.items">
-              Product Code: {{ item.productCode }}
-              Quantity: {{ item.quantity }}
-              Price: {{ item.price }}
-            </li>
-          </ul>
-        </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="['orderId', 'customerName', 'items']"></tr>
-      <tr mat-row *matRowDef="let row; columns: ['orderId', 'customerName', 'items'];"></tr>
-      <tr mat-row *matNoDataRow>
-        <td colspan="6" class="mat-cell" *matNoData>No products were found</td>
-      </tr>
-    </table>
+<div class="container">
+  <div *ngIf="!roleManagementService.isAdmin" class="add-product-button">
+    <button mat-icon-button color="primary" (click)="displayPlaceOrder()">
+      <mat-icon>add</mat-icon>
+    </button>
   </div>
+  <mat-table [dataSource]="orderDatasource">
+    <ng-container matColumnDef="orderId">
+      <mat-header-cell *matHeaderCellDef> Order ID </mat-header-cell>
+      <mat-cell *matCellDef="let order">{{ order.order.orderId}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="customerName">
+      <mat-header-cell *matHeaderCellDef>Customer Name </mat-header-cell>
+      <mat-cell *matCellDef="let order">{{ order.order.customerName }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="items">
+      <mat-header-cell *matHeaderCellDef>Items</mat-header-cell>
+      <mat-cell *matCellDef="let order">
+        <ul>
+          <li *ngFor="let item of order.items">
+            Product Code: {{ item.productCode }}
+            Quantity: {{ item.quantity }}
+            Price: {{ item.price }}
+          </li>
+        </ul>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator class ="align-paginator" [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" [pageIndex]="currentPage" (page)="loadOrders()"></mat-paginator>
 </div>

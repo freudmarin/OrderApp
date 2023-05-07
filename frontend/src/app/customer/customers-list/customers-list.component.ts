@@ -1,11 +1,11 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from "@angular/core";
-import {Customer} from "../customer";
-import {RoleManagementService} from "../../role-management.service";
-import {CustomerDataSource} from "./customer-data-source";
-import {CustomerService} from "../customer.service";
-import {Router} from "@angular/router";
-import {MatPaginator} from "@angular/material/paginator";
-import {tap} from "rxjs/operators";
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {Customer} from '../customer';
+import {RoleManagementService} from '../../role-management.service';
+import {CustomerDataSource} from './customer-data-source';
+import {CustomerService} from '../customer.service';
+import {Router} from '@angular/router';
+import {MatPaginator} from '@angular/material/paginator';
+import {tap} from 'rxjs/operators';
 
 
 @Component({

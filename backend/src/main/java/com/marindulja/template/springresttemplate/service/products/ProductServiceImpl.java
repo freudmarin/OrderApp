@@ -69,7 +69,7 @@ public class ProductServiceImpl implements ProductService {
         }
 
         @Override
-        public ResponseEntity<ProductDto> getProductById ( long id){
+        public ResponseEntity<ProductDto> getProductById (long id){
             Optional<Product> productData = productRepository.findById(id);
             if (productData.isPresent()) {
                 return new ResponseEntity<>(mapToDTO(productData.get()), HttpStatus.OK);
@@ -97,7 +97,7 @@ public class ProductServiceImpl implements ProductService {
         }
 
         @Override
-        public ResponseEntity<HttpStatus> deleteProductById ( long id){
+        public ResponseEntity<HttpStatus> deleteProductById (long id){
             try {
                 productRepository.deleteById(id);
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);

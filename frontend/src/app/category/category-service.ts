@@ -1,19 +1,19 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {Category} from "./category";
-import {Page} from "../page";
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Category} from './category';
+import {Page} from '../page';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
-  private categoriesUrl= 'http://localhost:8080/api/categories';
+  private categoriesUrl = 'http://localhost:8080/api/categories';
 
   constructor(private httpClient: HttpClient) {
   }
 
-  getAllPaginated(request) :Observable<Page<Category>> {
+  getAllPaginated(request): Observable<Page<Category>> {
     const params = request;
     return this.httpClient.get<Page<Category>>(this.categoriesUrl + '/paginated', {params});
   }

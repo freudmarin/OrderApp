@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {Customer} from "./customer";
-import {Page} from "../page";
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Customer} from './customer';
+import {Page} from '../page';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class CustomerService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getAllPaginated(request) : Observable<Page<Customer>> {
+  getAllPaginated(request): Observable<Page<Customer>> {
     const params = request;
     return this.httpClient.get<Page<Customer>>(this.customersUrl + '/paginated', {params});
   }
@@ -29,7 +29,7 @@ export class CustomerService {
     return this.httpClient.get<Customer>(`${this.customersUrl}/${id}`);
   }
 
-  update(id, customer : Customer) {
+  update(id, customer: Customer) {
     return this.httpClient.put(`${this.customersUrl}/${id}`, customer);
   }
 

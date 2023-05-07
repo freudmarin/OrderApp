@@ -22,7 +22,7 @@ public class OrdersController {
     private final AuthService authService;
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/admin/paginated")
+    @GetMapping("admin/paginated")
     public ResponseEntity<Page<OrderResponse>> getAllOrders(@RequestParam(name = "page", defaultValue = "0") Integer page,
                                                             @RequestParam(name = "size", defaultValue = "5") Integer size) {
         return new ResponseEntity<>(orderService.getAllOrdersPaginated(page, size), HttpStatus.OK);

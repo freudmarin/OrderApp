@@ -1,18 +1,17 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
-import {CustomValidationService} from "../../user/custom-validation.service";
-import {CategoryService} from "../category-service";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CategoryService} from '../category-service';
 
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss']
+  styleUrls: ['./category.component.css']
 })
 export class CategoryComponent implements OnInit {
 
   id: number;
-  onUpdate : boolean;
+  onUpdate: boolean;
   categoryForm: FormGroup;
   submitted = false;
 
@@ -25,7 +24,7 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params.id;
-    if(this.id > 0) {
+    if (this.id > 0) {
       this.onUpdate = true;
       this.categoryService.get(this.id).subscribe(data => {
         this.categoryForm.patchValue(data);

@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
-import {LoginPayload} from "../loginPayload";
-import {MatDialog} from "@angular/material/dialog";
-import {DialogComponent} from "../../utils/dialog.component";
+import {LoginPayload} from '../loginPayload';
+import {MatDialog} from '@angular/material/dialog';
+import {DialogComponent} from '../../utils/dialog.component';
 
 @Component({
   selector: 'app-login',
@@ -19,11 +19,11 @@ export class LoginComponent implements OnInit {
   submitted: boolean;
   errorMessage = '';
 
-  constructor(private authService: AuthService, private router: Router, public fb:FormBuilder,
-  private dialog: MatDialog) {
+  constructor(private authService: AuthService, private router: Router, public fb: FormBuilder,
+              private dialog: MatDialog) {
     this.loginForm = this.fb.group({
-      username:  ['',Validators.required],
-      password:  ['',Validators.required]
+      username:  ['', Validators.required],
+      password:  ['', Validators.required]
     });
     this.loginPayload = {
       username: '',
