@@ -28,9 +28,11 @@ public class CustomerController {
     }
     @GetMapping("paginated")
     public Page<CustomerDto> getAllCustomersPaginated(@RequestParam(name="page", defaultValue = "0") Integer page,
-                                              @RequestParam(name="size", defaultValue = "5") Integer size) {
+                                                      @RequestParam(name="size", defaultValue = "5") Integer size,
+                                                      @RequestParam(name="searchValue") String searchValue)
+    {
         PageRequest pageRequest = PageRequest.of(page, size);
-        return customerService.getPaginatedCustomers(pageRequest);
+        return customerService.getPaginatedAndFilteredCustomers(pageRequest, searchValue);
     }
     @GetMapping("{id}")
     public ResponseEntity<CustomerDto> getCustomerById(@PathVariable("id") long id) {

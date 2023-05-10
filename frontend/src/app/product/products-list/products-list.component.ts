@@ -29,12 +29,22 @@ export class ProductsListComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
+  searchValue: string;
   ngOnInit() {
     this.displayedColumns = this.roleManagementService.isAdmin
       ? ['productCode', 'productName', 'description', 'category', 'unitPrice', 'unitInStock']
       : ['productCode', 'productName', 'description', 'category', 'unitPrice', 'unitInStock', 'actions'];
     this.productDatasource = new ProductDataSource(this.productService);
     this.productDatasource.loadProducts();
+  }
+
+  applyFilter() {
+    this.productDatasource.loadProducts(this.paginator.pageIndex, this.paginator.pageSize, this.searchValue);
+  }
+
+  clearSearch() {
+    this.searchValue = '';
+    this.applyFilter();
   }
 
   refreshList() {

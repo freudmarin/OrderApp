@@ -25,9 +25,9 @@ export class CustomerDataSource implements DataSource<Customer>{
     this.countSubject.complete();
   }
 
-  loadCustomers(pageNumber = 0, pageSize = 10) {
+  loadCustomers(pageNumber = 0, pageSize = 10, searchValue: string = '') {
     this.loadingSubject.next(true);
-    this.customerService.getAllPaginated({ page: pageNumber, size: pageSize })
+    this.customerService.getAllPaginated({ page: pageNumber, size: pageSize, searchValue })
       .pipe(
         catchError(() => of([])),
         finalize(() => this.loadingSubject.next(false))

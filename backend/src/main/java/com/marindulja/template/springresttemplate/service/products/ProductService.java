@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface ProductService {
-    Page<ProductDto> getPaginatedProducts(Pageable pageRequest);
+    Page<ProductDto> getPaginatedAndFilteredProducts(Pageable pageRequest, String searchValue);
 
     List<ProductDto> getAllProducts();
     ProductDto addProduct(ProductDto productToBeAdded);

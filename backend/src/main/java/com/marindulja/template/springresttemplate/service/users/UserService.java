@@ -18,7 +18,7 @@ public interface UserService extends UserDetailsService {
      *
      * @return all users stored into the system
      */
-    Page<UserDto> getPaginatedUsers(Pageable pageRequest);
+    Page<UserDto> getPaginatedAndFilteredUsers(Pageable pageRequest, String searchValue);
 
     List<UserDto> getAllUsers();
 

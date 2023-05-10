@@ -26,10 +26,11 @@ public class UsersController {
     }
 
     @GetMapping("paginated")
-    public Page<UserDto> getAllUsersPaginated(@RequestParam(name="page", defaultValue = "0") Integer page,
-                                              @RequestParam(name="size", defaultValue = "5") Integer size) {
+    public Page<UserDto> getAllUsersPaginatedAndFiltered(@RequestParam(name="page", defaultValue = "0") Integer page,
+                                              @RequestParam(name="size", defaultValue = "5") Integer size,
+                                                         @RequestParam(name="searchValue") String searchValue) {
         PageRequest pageRequest = PageRequest.of(page, size);
-        return userDetailsService.getPaginatedUsers(pageRequest);
+        return userDetailsService.getPaginatedAndFilteredUsers(pageRequest, searchValue);
     }
 
     @GetMapping()

@@ -25,9 +25,9 @@ export class UserDataSource implements DataSource<UserPayload>{
     this.countSubject.complete();
   }
 
-  loadUsers(pageNumber = 0, pageSize = 5) {
+  loadUsers(pageNumber = 0, pageSize = 5, searchValue: string = '') {
     this.loadingSubject.next(true);
-    this.userService.getAllPaginated({ page: pageNumber, size: pageSize })
+    this.userService.getAllPaginated({ page: pageNumber, size: pageSize, searchValue})
       .pipe(
         catchError(() => of([])),
         finalize(() => this.loadingSubject.next(false))

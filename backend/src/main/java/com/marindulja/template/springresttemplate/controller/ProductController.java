@@ -22,10 +22,12 @@ public class ProductController {
         return new ResponseEntity<>(productService.addProduct(productDto), HttpStatus.OK);
     }
     @GetMapping("paginated")
-    public Page<ProductDto> getAllProductsPaginated(@RequestParam(name="page", defaultValue = "0") Integer page,
-                                                    @RequestParam(name="size", defaultValue = "5") Integer size) {
+    public Page<ProductDto> getAllProductsPaginatedAndFiltered(@RequestParam(name="page", defaultValue = "0") Integer page,
+                                                               @RequestParam(name="size", defaultValue = "5") Integer size,
+                                                               @RequestParam(name="searchValue") String searchValue)
+    {
         PageRequest pageRequest = PageRequest.of(page, size);
-        return productService.getPaginatedProducts(pageRequest);
+        return productService.getPaginatedAndFilteredProducts(pageRequest, searchValue);
     }
 
     @GetMapping()

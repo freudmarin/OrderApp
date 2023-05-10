@@ -1,12 +1,22 @@
-.container {
-  padding: 0.5rem;
+.controls-container {
+  position: relative;
+  margin-bottom: 16px; /* Adjust the space between the controls and the table */
 }
 
-.add-user-button {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 1rem;
-  margin-left: 0.5rem;
+.add-user-container {
+  /* Add any additional styles for the "Add User" button container if needed */
+}
+
+.search-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  /* Add any additional styles for the search container if needed */
+}
+
+.search-field {
+  /* Set the width of the search field as needed */
+  width: 200px;
 }
 
 .mat-table {

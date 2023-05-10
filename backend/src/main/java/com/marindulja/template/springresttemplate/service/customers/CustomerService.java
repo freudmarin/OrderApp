@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface CustomerService {
-    Page<CustomerDto> getPaginatedCustomers(Pageable pageRequest);
+    Page<CustomerDto> getPaginatedAndFilteredCustomers(Pageable pageRequest, String searchValue);
     List<CustomerDto> getAllCustomers();
     CustomerDto addCustomer(CustomerDto customerToBeAdded);
     ResponseEntity<CustomerDto> getCustomerById(long id);

@@ -27,6 +27,7 @@ export class CustomersListComponent implements OnInit, AfterViewInit {
   pageSize = 5;
   currentPage = 0;
 
+  searchValue: string;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   ngOnInit() {
@@ -35,6 +36,16 @@ export class CustomersListComponent implements OnInit, AfterViewInit {
     this.customerDatasource = new CustomerDataSource(this.customerService);
     this.customerDatasource.loadCustomers();
   }
+
+  applyFilter() {
+    this.customerDatasource.loadCustomers(this.paginator.pageIndex, this.paginator.pageSize, this.searchValue);
+  }
+
+  clearSearch() {
+    this.searchValue = '';
+    this.applyFilter();
+  }
+
 
   refreshList() {
     this.customerDatasource.loadCustomers();

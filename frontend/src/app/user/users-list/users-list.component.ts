@@ -22,6 +22,7 @@ export class UsersListComponent implements OnInit, AfterViewInit {
   }
 
   displayedColumns: string[];
+  searchValue: string;
   pageSize = 5;
   currentPage = 0;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -32,6 +33,15 @@ export class UsersListComponent implements OnInit, AfterViewInit {
       : ['fullName', 'username', 'role', 'jobTitle'];
     this.userDatasource = new UserDataSource(this.userService);
     this.userDatasource.loadUsers();
+  }
+
+  applyFilter() {
+    this.userDatasource.loadUsers(this.paginator.pageIndex, this.paginator.pageSize, this.searchValue);
+  }
+
+  clearSearch() {
+    this.searchValue = '';
+    this.applyFilter();
   }
 
   refreshList() {

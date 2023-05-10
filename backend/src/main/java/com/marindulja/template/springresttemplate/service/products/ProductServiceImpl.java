@@ -34,13 +34,14 @@ public class ProductServiceImpl implements ProductService {
     private final ModelMapper mapper = new ModelMapper();
 
     @Override
-    public Page<ProductDto> getPaginatedProducts(Pageable pageRequest) {
+    public Page<ProductDto> getPaginatedAndFilteredProducts(Pageable pageRequest, String searchValue) {
         Page<Product> pageResult = productRepository.findAll(pageRequest);
         List<ProductDto> productsDto = pageResult
                 .stream()
+                .filter(res -> res.getProductName().contains(searchValue) || res.getDescription().contains(searchValue))
                 .map(this::mapToDTO)
                 .collect(toList());
-        return new PageImpl<>(productsDto, pageRequest, pageResult.getTotalElements());
+        return new PageImpl<>(productsDto, pageRequest, productsDto.size());
     }
 
     @Override

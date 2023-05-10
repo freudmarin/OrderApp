@@ -29,13 +29,14 @@ public class CustomerServiceImpl implements CustomerService {
     private final ModelMapper mapper = new ModelMapper();
 
     @Override
-    public Page<CustomerDto> getPaginatedCustomers(Pageable pageRequest)  {
+    public Page<CustomerDto> getPaginatedAndFilteredCustomers(Pageable pageRequest, String searchValue)  {
         Page<Customer> pageResult = customerRepository.findAll(pageRequest);
         List<CustomerDto> customersDto = pageResult
                 .stream()
+                .filter(res-> res.getFirstName().contains(searchValue) || res.getLastName().contains(searchValue))
                 .map(this::mapToDTO)
                 .collect(toList());
-        return new PageImpl<>(customersDto, pageRequest , pageResult.getTotalElements());
+        return new PageImpl<>(customersDto, pageRequest, customersDto.size());
     }
 
     @Override

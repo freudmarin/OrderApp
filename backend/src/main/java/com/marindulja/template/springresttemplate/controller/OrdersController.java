@@ -33,7 +33,8 @@ public class OrdersController {
     public ResponseEntity<Page<OrderResponse>> getOrdersByUser(@RequestParam(name = "page", defaultValue = "0") Integer page,
                                                                @RequestParam(name = "size", defaultValue = "5") Integer size) {
         Optional<User> currentUser = authService.getCurrentUser();
-        return currentUser.map(user -> new ResponseEntity<>(orderService.getOrdersForUser(Long.valueOf(user.getUsername()), page, size), HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return currentUser.map(user -> new ResponseEntity<>
+                (orderService.getOrdersForUser(Long.valueOf(user.getUsername()), page, size), HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PreAuthorize("hasRole('USER')")

@@ -25,9 +25,9 @@ export class ProductDataSource implements DataSource<Product>{
     this.countSubject.complete();
   }
 
-  loadProducts(pageNumber = 0, pageSize = 5) {
+  loadProducts(pageNumber = 0, pageSize = 5, searchValue: string = '') {
     this.loadingSubject.next(true);
-    this.productService.getAllPaginated({ page: pageNumber, size: pageSize })
+    this.productService.getAllPaginated({ page: pageNumber, size: pageSize, searchValue })
       .pipe(
         catchError(() => of([])),
         finalize(() => this.loadingSubject.next(false))

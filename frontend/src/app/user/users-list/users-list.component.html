@@ -1,8 +1,18 @@
 <div class="container">
-  <div class="add-user-button">
-    <button mat-raised-button color="primary" (click)="addUser()">
-      <mat-icon>add</mat-icon> Add User
-    </button>
+  <div class="control-container">
+    <div class="add-user-container">
+      <button mat-raised-button color="primary" (click)="addUser()">
+        <mat-icon>add</mat-icon> Add User
+      </button>
+    </div>
+    <div class="search-container">
+      <mat-form-field class="search-field">
+        <input matInput placeholder="Search" [(ngModel)]="searchValue" (keyup)="applyFilter()">
+        <button mat-icon-button matSuffix *ngIf="searchValue" (click)="clearSearch()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
   </div>
   <mat-table [dataSource]="userDatasource">
     <ng-container matColumnDef="fullName">

@@ -39,13 +39,15 @@ public class UserDetailsServiceImpl implements UserService {
 
     private final  ModelMapper mapper = new ModelMapper();
     @Override
-    public PageImpl<UserDto> getPaginatedUsers(Pageable pageRequest)  {
+    public PageImpl<UserDto> getPaginatedAndFilteredUsers(Pageable pageRequest, String searchValue)  {
         Page<User> pageResult = userRepository.findAll(pageRequest);
         List<UserDto> usersDto = pageResult
                 .stream()
+                .filter(res-> res.getFullName().contains(searchValue) || res.getUsername().contains(searchValue)
+                || res.getJobTitle().contains(searchValue))
                 .map(this::mapToDTO)
                 .collect(toList());
-        return new PageImpl<>(usersDto, pageRequest , pageResult.getTotalElements());
+        return new PageImpl<>(usersDto, pageRequest , usersDto.size());
     }
 
     @Override
