@@ -3,6 +3,7 @@ package com.marindulja.template.springresttemplate.service;
 import com.marindulja.template.springresttemplate.dto.LoginRequest;
 import com.marindulja.template.springresttemplate.security.JwtProvider;
 import com.marindulja.template.springresttemplate.service.users.UserService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +16,14 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 @Slf4j
 public class AuthService {
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    UserService userService;
-    @Autowired
-    private JwtProvider jwtProvider;
+    final UserService userService;
+    private final JwtProvider jwtProvider;
+
     public AuthenticationResponse login(LoginRequest loginRequest) {
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
                 loginRequest.getPassword()));

@@ -9,8 +9,8 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface CategoryService {
-    Page<CategoryDto> getPaginatedCategories(Pageable pageRequest);
-
+    Page<CategoryDto> getPaginatedAndFilteredCategories(Pageable pageRequest,
+    String searchValue);
     List<CategoryDto> getAllCategories();
     CategoryDto addCategory(CategoryDto categoryToBeAdded);
     ResponseEntity<CategoryDto> getCategoryById(long id);

@@ -28,11 +28,13 @@ public class CategoryController {
     public List<CategoryDto> getAllCategories() {
         return categoryService.getAllCategories();
     }
+
     @GetMapping("paginated")
-    public Page<CategoryDto> getAllCategoriesPaginated(@RequestParam(name="page", defaultValue = "0") Integer page,
-                                                      @RequestParam(name="size", defaultValue = "5") Integer size) {
+    public Page<CategoryDto> getAllCategoriesPaginated(@RequestParam(name = "page", defaultValue = "0") Integer page,
+                                                       @RequestParam(name = "size", defaultValue = "5") Integer size,
+                                                       @RequestParam(name = "searchValue") String searchValue) {
         PageRequest pageRequest = PageRequest.of(page, size);
-        return  categoryService.getPaginatedCategories(pageRequest);
+        return categoryService.getPaginatedAndFilteredCategories(pageRequest, searchValue);
     }
 
 

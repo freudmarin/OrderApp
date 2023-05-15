@@ -29,10 +29,11 @@ public class CategoryServiceImp implements CategoryService {
     private final ModelMapper mapper = new ModelMapper();
 
     @Override
-    public Page<CategoryDto> getPaginatedCategories(Pageable pageRequest) {
+    public Page<CategoryDto> getPaginatedAndFilteredCategories(Pageable pageRequest, String searchValue) {
         Page<Category> pageResult = categoryRepository.findAll(pageRequest);
         List<CategoryDto> categoriesDto = pageResult
                 .stream()
+                .filter(res -> res.getName().contains(searchValue))
                 .map(this::mapToDTO)
                 .collect(toList());
         return new PageImpl<>(categoriesDto, pageRequest, pageResult.getTotalElements());

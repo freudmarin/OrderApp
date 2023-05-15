@@ -42,6 +42,6 @@ public class OrdersController {
     public ResponseEntity<Void> placeOrder(@RequestBody OrderRequest orderReq) {
         long userId = Long.parseLong(authService.getCurrentUser().get().getUsername());
         orderService.placeOrder(orderReq.getCustomerId(), userId, orderReq.getItems());
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
