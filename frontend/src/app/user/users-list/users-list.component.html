@@ -41,5 +41,8 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
+  <div class="no-users" *ngIf="!userDatasource.counter$">
+    No users found.
+  </div>
   <mat-paginator class ="align-paginator" [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" [pageIndex]="currentPage" (page)="loadUsers()"></mat-paginator>
 </div>

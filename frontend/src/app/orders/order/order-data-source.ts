@@ -26,10 +26,10 @@ export class OrderDataSource implements DataSource<OrderResponse> {
     this.countSubject.complete();
   }
 
-  loadOrders(pageNumber = 0, pageSize = 5) {
+  loadOrders(pageNumber = 0, pageSize = 5, searchValue: string = '') {
     this.loadingSubject.next(true);
     if (this.roleService.isAdmin) {
-      this.orderService.getAllOrdersPaginated({page: pageNumber, size: pageSize})
+      this.orderService.getAllOrdersPaginated({page: pageNumber, size: pageSize, searchValue})
         .pipe(
           catchError(() => of([])),
           finalize(() => this.loadingSubject.next(false))
@@ -40,7 +40,7 @@ export class OrderDataSource implements DataSource<OrderResponse> {
           }
         );
     } else {
-      this.orderService.getOrdersByUser({page: pageNumber, size: pageSize})
+      this.orderService.getOrdersByUser({page: pageNumber, size: pageSize, searchValue})
         .pipe(
           catchError(() => of([])),
           finalize(() => this.loadingSubject.next(false))

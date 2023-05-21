@@ -24,17 +24,19 @@ public class OrdersController {
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("admin/paginated")
     public ResponseEntity<Page<OrderResponse>> getAllOrders(@RequestParam(name = "page", defaultValue = "0") Integer page,
-                                                            @RequestParam(name = "size", defaultValue = "5") Integer size) {
-        return new ResponseEntity<>(orderService.getAllOrdersPaginated(page, size), HttpStatus.OK);
+                                                            @RequestParam(name = "size", defaultValue = "5") Integer size,
+                                                            @RequestParam(name="searchValue") String searchValue) {
+        return new ResponseEntity<>(orderService.getAllOrdersPaginated(page, size, searchValue), HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping()
     public ResponseEntity<Page<OrderResponse>> getOrdersByUser(@RequestParam(name = "page", defaultValue = "0") Integer page,
-                                                               @RequestParam(name = "size", defaultValue = "5") Integer size) {
+                                                               @RequestParam(name = "size", defaultValue = "5") Integer size,
+                                                               @RequestParam(name="searchValue") String searchValue) {
         Optional<User> currentUser = authService.getCurrentUser();
         return currentUser.map(user -> new ResponseEntity<>
-                (orderService.getOrdersForUser(Long.valueOf(user.getUsername()), page, size), HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                (orderService.getOrdersPaginatedForUser(Long.valueOf(user.getUsername()), page, size, searchValue), HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PreAuthorize("hasRole('USER')")

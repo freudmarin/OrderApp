@@ -23,6 +23,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
 
   pageSize = 5;
   currentPage = 0;
+  searchValue: string;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -68,5 +69,14 @@ export class OrderComponent implements OnInit, AfterViewInit {
 
   displayPlaceOrder() {
     this.router.navigate(['place-order']);
+  }
+
+  applyFilter() {
+    this.orderDatasource.loadOrders(this.paginator.pageIndex, this.paginator.pageSize, this.searchValue);
+  }
+
+  clearSearch() {
+    this.searchValue = '';
+    this.applyFilter();
   }
 }

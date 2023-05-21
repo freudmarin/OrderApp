@@ -12,34 +12,46 @@
           <mat-icon>close</mat-icon>
         </button>
       </mat-form-field>
-</div>
+    </div>
   </div>
-  <mat-table [dataSource]="customerDatasource"  class="mat-elevation-z8">
+
+  <mat-table [dataSource]="customerDatasource" class="mat-elevation-z8">
     <ng-container matColumnDef="firstName">
-      <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
-      <mat-cell *matCellDef="let customer"> {{customer.firstName}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef>First Name</mat-header-cell>
+      <mat-cell *matCellDef="let customer">{{ customer.firstName }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="lastName">
-      <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
-      <mat-cell *matCellDef="let customer"> {{customer.lastName}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef>Last Name</mat-header-cell>
+      <mat-cell *matCellDef="let customer">{{ customer.lastName }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="address">
-      <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
-      <mat-cell *matCellDef="let customer"> {{customer.address}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef>Address</mat-header-cell>
+      <mat-cell *matCellDef="let customer">{{ customer.address }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="actions" *ngIf="!roleManagementService.isAdmin">
       <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
       <mat-cell *matCellDef="let customer">
-        <a mat-raised-button [routerLink]="['/customer/', customer.id]" color="primary">
+        <button mat-icon-button color="primary" [routerLink]="['/customer/', customer.id]">
           <mat-icon>edit</mat-icon>
-        </a>
-        <button mat-raised-button color="warn" (click)="deleteCustomer(customer.id)" style="margin-left: 5px;">
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteCustomer(customer.id)">
           <mat-icon>delete</mat-icon>
         </button>
       </mat-cell>
     </ng-container>
+
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
-  <mat-paginator class ="align-paginator" [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" [pageIndex]="currentPage" (page)="loadCustomers()"></mat-paginator>
+
+  <div class="no-customers" *ngIf="!customerDatasource.counter$">
+    No customers found.
+  </div>
+
+  <mat-paginator class="align-paginator"
+                 [pageSizeOptions]="[5, 10, 20]"
+                 [pageSize]="5"
+                 [pageIndex]="currentPage"
+                 (page)="loadCustomers()">
+  </mat-paginator>
 </div>

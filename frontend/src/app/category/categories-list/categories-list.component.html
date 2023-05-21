@@ -25,5 +25,8 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
+  <div class="no-categories" *ngIf="!categoryDatasource.counter$">
+    No customers found.
+  </div>
   <mat-paginator class ="align-paginator"  [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" [pageIndex]="currentPage" (page)="loadCategories()"></mat-paginator>
 </div>

@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.marindulja.template.springresttemplate</groupId>
-    <artifactId>spring-ng-blog</artifactId>
+    <artifactId>backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>spring-ng-blog</name>
     <description>Demo project for Spring Boot</description>

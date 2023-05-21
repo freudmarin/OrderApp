@@ -2,15 +2,16 @@
   max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f5f5f5;
+  background-color: #ffffff;
   border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .control-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .add-customer-button {
@@ -39,9 +40,10 @@
 }
 
 .no-customers {
-  margin-top: 2rem;
+  margin-top: 1rem;
   text-align: center;
   font-size: 1.2rem;
+  color: #999999;
 }
 
 .align-paginator {
@@ -51,10 +53,7 @@
 }
 
 .mat-column-actions {
-  /* adjust the column width as per the requirement */
-  width: 180px;
-  /* add overflow property */
-  overflow: visible;
+  width: auto;
 }
 
 /* Responsive design */
@@ -64,3 +63,36 @@
   }
 }
 
+
+.mat-cell {
+  display: flex;
+  align-items: center;
+}
+
+.mat-icon-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.mat-icon-button:hover {
+  background-color: #eeeeee;
+}
+
+.mat-icon-button mat-icon {
+  font-size: 1.2rem;
+}
+
+.mat-icon-button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.mat-icon-button[disabled]:hover {
+  background-color: transparent;
+}

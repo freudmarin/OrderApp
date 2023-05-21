@@ -4,13 +4,15 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 @Component({
   selector: 'app-dialog',
   template: `
-    <h2 mat-dialog-title>{{ data.title }}</h2>
+    <h2 mat-dialog-title class="dialog-title">{{ data.title }}</h2>
     <mat-dialog-content>
-      <mat-icon>error_outline</mat-icon>
-      <p>{{ data.message }}</p>
+      <div class="icon-container">
+        <mat-icon class="dialog-icon">error_outline</mat-icon>
+      </div>
+      <p class="dialog-message">{{ data.message }}</p>
     </mat-dialog-content>
     <mat-dialog-actions>
-      <button mat-button mat-dialog-close>OK</button>
+      <button mat-raised-button color="primary" mat-dialog-close class="dialog-button">OK</button>
     </mat-dialog-actions>
   `,
   styleUrls: ['./dialog.component.scss']

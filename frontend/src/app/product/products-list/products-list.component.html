@@ -36,22 +36,33 @@
       <mat-cell *matCellDef="let product">{{ product.unitPrice }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="unitInStock">
-      <mat-header-cell *matHeaderCellDef>Unit in stock</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>Unit in Stock</mat-header-cell>
       <mat-cell *matCellDef="let product">{{ product.unitInStock }}</mat-cell>
     </ng-container>
     <ng-container *ngIf="!roleManagementService.isAdmin" matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
       <mat-cell *matCellDef="let product">
-        <button mat-raised-button color="primary" [routerLink]="['/product/', product.id]">
+        <button mat-icon-button color="primary" [routerLink]="['/product/', product.id]">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-raised-button color="warn" (click)="deleteProduct(product.id)" style="margin-left: 5px;">
+        <button mat-icon-button color="warn" (click)="deleteProduct(product.id)">
           <mat-icon>delete</mat-icon>
         </button>
       </mat-cell>
     </ng-container>
+
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
-  <mat-paginator class="align-paginator" [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" [pageIndex]="currentPage" (page)="loadProducts()"></mat-paginator>
+
+  <div class="no-products" *ngIf="!productDatasource.counter$">
+    No products found.
+  </div>
+
+  <mat-paginator class="align-paginator"
+                 [pageSizeOptions]="[5, 10, 20]"
+                 [pageSize]="5"
+                 [pageIndex]="currentPage"
+                 (page)="loadProducts()">
+  </mat-paginator>
 </div>
