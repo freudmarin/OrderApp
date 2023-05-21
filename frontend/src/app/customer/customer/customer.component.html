@@ -2,7 +2,7 @@
   <h1 class="mat-h1" *ngIf="!onUpdate">Add Customer</h1>
   <h1 class="mat-h1" *ngIf="onUpdate">Update Customer</h1>
   <form class="form-signin" [formGroup]="customerForm" (ngSubmit)="onSubmit()">
-    <mat-form-field class="form-group">
+    <mat-form-field class="form-group" appearance="outline">
       <mat-label>First Name</mat-label>
       <input matInput type="text" id="inputFirstName" [formControlName]="'firstName'" placeholder="First Name">
       <mat-error *ngIf="(customerFormControl.firstName.touched || submitted) && customerFormControl.firstName.errors?.required">
@@ -10,7 +10,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field class="form-group">
+    <mat-form-field class="form-group" appearance="outline">
       <mat-label>Last Name</mat-label>
       <input matInput type="text" id="inputLastName" [formControlName]="'lastName'" placeholder="Last Name">
       <mat-error *ngIf="(customerFormControl.lastName.touched || submitted) && customerFormControl.lastName.errors?.required">
@@ -18,7 +18,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field class="form-group">
+    <mat-form-field class="form-group" appearance="outline">
       <mat-label>Address</mat-label>
       <input matInput type="text" id="inputAddress" [formControlName]="'address'" placeholder="Address">
       <mat-error *ngIf="(customerFormControl.address.touched || submitted) && customerFormControl.address.errors?.required">

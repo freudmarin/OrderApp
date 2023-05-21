@@ -4,7 +4,7 @@
       <mat-icon>add</mat-icon>
     </button>
   </div>
-  <mat-table [dataSource]="orderDatasource">
+  <mat-table [dataSource]="orderDatasource" class="mat-elevation-z8">
     <ng-container matColumnDef="orderId">
       <mat-header-cell *matHeaderCellDef> Order ID </mat-header-cell>
       <mat-cell *matCellDef="let order">{{ order.order.orderId}}</mat-cell>

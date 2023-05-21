@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.loginPayload.username, this.loginPayload.password).subscribe((data) => {
         this.isLoggedIn = true;
         console.log('login success');
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/products');
       }, error => {
         this.isLoggedIn = true;
         this.dialog.open(DialogComponent, {

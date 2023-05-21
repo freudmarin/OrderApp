@@ -5,41 +5,41 @@
   </mat-card-title>
   <mat-card-content>
     <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label>Full Name</mat-label>
         <input matInput type="text" id="inputFullName" [formControlName]="'fullName'" placeholder="Full Name">
         <mat-error *ngIf="(userFormControl.fullName.touched || submitted) && userFormControl.fullName.errors?.required">
           Full Name is required
         </mat-error>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label>Username</mat-label>
         <input matInput type="text" id="inputUsername" [formControlName]="'username'" placeholder="Username">
         <mat-error *ngIf="(userFormControl.username.touched || submitted) && userFormControl.username.errors?.required">
           User Name is required
         </mat-error>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label>Job Title</mat-label>
         <input matInput type="text" id="inputJobTitle" [formControlName]="'jobTitle'" placeholder="Job Title">
         <mat-error *ngIf="(userFormControl.jobTitle.touched || submitted) && userFormControl.jobTitle.errors?.required">
           Job Title is required
         </mat-error>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label>Role</mat-label>
         <mat-select id="role" [formControlName]="'role'">
-          <mat-option *ngFor="let role of roles" [value]="role">{{ role }}</mat-option>
+          <mat-option *ngFor="let role of roles" [value]="role">{{ role | titlecase }}</mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field *ngIf="!onUpdate">
+      <mat-form-field *ngIf="!onUpdate" appearance="outline">
         <mat-label>Password</mat-label>
         <input matInput type="password" id="inputPassword" [formControlName]="'password'" placeholder="Password">
         <mat-error *ngIf="(userFormControl.password.touched || submitted) && !onUpdate && userFormControl.password.errors?.required">
           Password is required
         </mat-error>
       </mat-form-field>
-      <mat-form-field *ngIf="!onUpdate">
+      <mat-form-field *ngIf="!onUpdate" appearance="outline">
         <mat-label>Confirm Password</mat-label>
         <input matInput type="password" id="inputConfirmPassword" [formControlName]="'confirmPassword'" placeholder="Confirm Password">
         <mat-error *ngIf="(userFormControl.confirmPassword.touched || submitted) && !onUpdate && userFormControl.confirmPassword.errors?.required">

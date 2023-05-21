@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "~9.1.4",
     "@angular/router": "~9.1.4",
     "@ng-bootstrap/ng-bootstrap": "^6.2.0",
+    "@ngmodule/material-carousel": "^0.6.0",
     "animate.css": "^4.1.0",
     "bootstrap": "^4.6.2",
     "bootstrap-select": "^1.13.17",

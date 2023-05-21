@@ -40,8 +40,12 @@ public class OrdersController {
     @PreAuthorize("hasRole('USER')")
     @PostMapping("add")
     public ResponseEntity<Void> placeOrder(@RequestBody OrderRequest orderReq) {
-        long userId = Long.parseLong(authService.getCurrentUser().get().getUsername());
-        orderService.placeOrder(orderReq.getCustomerId(), userId, orderReq.getItems());
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        Optional<User> currentUser = authService.getCurrentUser();
+        if (currentUser.isPresent()) {
+            long userId = Long.parseLong(currentUser.get().getUsername());
+            orderService.placeOrder(orderReq.getCustomerId(), userId, orderReq.getItems());
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

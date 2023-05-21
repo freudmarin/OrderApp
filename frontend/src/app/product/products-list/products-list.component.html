@@ -14,12 +14,7 @@
       </mat-form-field>
     </div>
   </div>
-  <div *ngIf="!roleManagementService.isAdmin" class="add-product-button">
-    <button mat-icon-button color="primary" (click)="addProduct()">
-      <mat-icon>add</mat-icon>
-    </button>
-  </div>
-  <mat-table [dataSource]="productDatasource">
+  <mat-table [dataSource]="productDatasource" class="mat-elevation-z8">
     <ng-container matColumnDef="productCode">
       <mat-header-cell *matHeaderCellDef>Product Code</mat-header-cell>
       <mat-cell *matCellDef="let product">{{ product.productCode }}</mat-cell>
@@ -58,5 +53,5 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
-  <mat-paginator class ="align-paginator" [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" [pageIndex]="currentPage" (page)="loadProducts()"></mat-paginator>
+  <mat-paginator class="align-paginator" [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" [pageIndex]="currentPage" (page)="loadProducts()"></mat-paginator>
 </div>

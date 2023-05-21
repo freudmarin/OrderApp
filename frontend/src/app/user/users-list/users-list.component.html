@@ -1,6 +1,6 @@
 <div class="container">
-  <div class="control-container">
-    <div class="add-user-container">
+    <div class="control-container">
+    <div>
       <button mat-raised-button color="primary" (click)="addUser()">
         <mat-icon>add</mat-icon> Add User
       </button>
@@ -13,8 +13,8 @@
         </button>
       </mat-form-field>
     </div>
-  </div>
-  <mat-table [dataSource]="userDatasource">
+</div>
+  <mat-table [dataSource]="userDatasource" class="mat-elevation-z8">
     <ng-container matColumnDef="fullName">
       <mat-header-cell *matHeaderCellDef>FullName</mat-header-cell>
       <mat-cell *matCellDef="let user">{{ user.fullName }}</mat-cell>
@@ -25,7 +25,7 @@
     </ng-container>
     <ng-container matColumnDef="role">
       <mat-header-cell *matHeaderCellDef>Role</mat-header-cell>
-      <mat-cell *matCellDef="let user">{{ user.role }}</mat-cell>
+      <mat-cell *matCellDef="let user">{{ user.role | titlecase }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="jobTitle">
       <mat-header-cell *matHeaderCellDef>Job Tittle</mat-header-cell>
@@ -41,5 +41,5 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" [pageIndex]="currentPage" (page)="loadUsers()"></mat-paginator>
+  <mat-paginator class ="align-paginator" [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" [pageIndex]="currentPage" (page)="loadUsers()"></mat-paginator>
 </div>

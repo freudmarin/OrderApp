@@ -1,10 +1,11 @@
 <div class="container">
+  <div class="control-container">
   <div *ngIf="roleManagementService.isAdmin" class="add-category-button">
     <button mat-raised-button color="primary" (click)="addCategory()">
       <mat-icon>add</mat-icon> Add Category
     </button>
   </div>
-
+  </div>
   <mat-table [dataSource]="categoryDatasource" class="mat-elevation-z8">
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
@@ -24,5 +25,5 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" [pageIndex]="currentPage" (page)="loadCategories()"></mat-paginator>
+  <mat-paginator class ="align-paginator"  [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" [pageIndex]="currentPage" (page)="loadCategories()"></mat-paginator>
 </div>

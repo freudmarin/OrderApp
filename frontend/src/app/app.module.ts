@@ -38,6 +38,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDialogModule} from '@angular/material/dialog';
 import {DialogComponent} from './utils/dialog.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatCarouselModule} from '@ngmodule/material-carousel';
 
 @NgModule({
   declarations: [
@@ -114,7 +115,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
       {path: 'orders', component: OrderComponent, canActivate: [AuthGuard], data: {roles: [Role.Admin, Role.User]}},
       {path: 'place-order', component: PlaceOrderComponent, canActivate: [AuthGuard], data: {roles: [Role.User]}}
     ]), HttpClientModule, BrowserAnimationsModule, _MatMenuDirectivesModule,
-    MatToolbarModule, MatMenuModule, MatDividerModule, MatSelectModule
+    MatToolbarModule, MatMenuModule, MatDividerModule, MatSelectModule, MatCarouselModule.forRoot()
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
