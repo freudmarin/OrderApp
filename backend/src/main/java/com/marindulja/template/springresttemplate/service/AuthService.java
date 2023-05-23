@@ -1,12 +1,12 @@
 package com.marindulja.template.springresttemplate.service;
 
+import com.marindulja.template.springresttemplate.adapters.UserAdapter;
 import com.marindulja.template.springresttemplate.dto.LoginRequest;
 import com.marindulja.template.springresttemplate.security.JwtProvider;
 import com.marindulja.template.springresttemplate.service.users.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -31,11 +31,11 @@ public class AuthService {
         String role = userService.loadUserByUsername(loginRequest.getUsername()).getAuthorities().
                 stream().map(grantedAuthority -> StringUtils.remove(grantedAuthority.getAuthority(),"ROLE_")).findFirst().get();
         String authenticationToken = jwtProvider.generateToken(authenticate);
-        return new AuthenticationResponse(authenticationToken, loginRequest.getUsername(),role);
+        return new AuthenticationResponse(authenticationToken, loginRequest.getUsername(), role);
     }
 
-    public Optional<org.springframework.security.core.userdetails.User> getCurrentUser() {
-        org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder.
+    public Optional<UserAdapter> getCurrentUser() {
+        UserAdapter principal = (UserAdapter) SecurityContextHolder.
                 getContext().getAuthentication().getPrincipal();
         return Optional.of(principal);
     }

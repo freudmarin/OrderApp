@@ -23,7 +23,7 @@ export class CategoriesListComponent implements OnInit, AfterViewInit {
 
   pageSize = 5;
   currentPage = 0;
-
+  searchValue: string;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   ngOnInit() {
@@ -69,5 +69,14 @@ export class CategoriesListComponent implements OnInit, AfterViewInit {
 
   addCategory() {
     this.router.navigate(['category']);
+  }
+
+  applyFilter() {
+    this.categoryDatasource.loadCategories(this.paginator.pageIndex, this.paginator.pageSize, this.searchValue);
+  }
+
+  clearSearch() {
+    this.searchValue = '';
+    this.applyFilter();
   }
 }

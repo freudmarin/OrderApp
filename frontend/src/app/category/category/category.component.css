@@ -4,7 +4,8 @@
 .mat-card-content {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center; /* This aligns items along the cross axis. */
+  justify-content: center; /* This aligns items along the main axis. */
 }
 
 .mat-form-field {
@@ -30,3 +31,4 @@
   width: 100%;
   margin-top: 20px;
 }
+

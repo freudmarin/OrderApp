@@ -5,6 +5,14 @@
       <mat-icon>add</mat-icon> Add Category
     </button>
   </div>
+    <div class="search-container">
+      <mat-form-field class="search-field">
+        <input matInput placeholder="Search" [(ngModel)]="searchValue" (keyup)="applyFilter()">
+        <button mat-icon-button matSuffix *ngIf="searchValue" (click)="clearSearch()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
   </div>
   <mat-table [dataSource]="categoryDatasource" class="mat-elevation-z8">
     <ng-container matColumnDef="name">

@@ -72,9 +72,9 @@ public class CustomerServiceImpl implements CustomerService {
         Optional<Customer> customerData = customerRepository.findById(id);
         if (customerData.isPresent()) {
             Customer customer = customerData.get();
-            customer.setFirstName(customer.getFirstName());
-            customer.setLastName(customer.getLastName());
-            customer.setAddress(customer.getAddress());
+            customer.setFirstName(customerDto.getFirstName());
+            customer.setLastName(customerDto.getLastName());
+            customer.setAddress(customerDto.getAddress());
 
             Customer updatedCustomer = customerRepository.save(customer);
             return new ResponseEntity<>(mapToDTO(updatedCustomer), HttpStatus.OK);

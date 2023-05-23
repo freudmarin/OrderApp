@@ -22,13 +22,13 @@ public class UsersController {
 
     @PostMapping("add")
     public ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto) {
-      return new ResponseEntity<>(userDetailsService.addUser(userDto), HttpStatus.OK);
+        return new ResponseEntity<>(userDetailsService.addUser(userDto), HttpStatus.OK);
     }
 
     @GetMapping("paginated")
-    public Page<UserDto> getAllUsersPaginatedAndFiltered(@RequestParam(name="page", defaultValue = "0") Integer page,
-                                              @RequestParam(name="size", defaultValue = "5") Integer size,
-                                                         @RequestParam(name="searchValue") String searchValue) {
+    public Page<UserDto> getAllUsersPaginatedAndFiltered(@RequestParam(name = "page", defaultValue = "0") Integer page,
+                                                         @RequestParam(name = "size", defaultValue = "5") Integer size,
+                                                         @RequestParam(name = "searchValue") String searchValue) {
         PageRequest pageRequest = PageRequest.of(page, size);
         return userDetailsService.getPaginatedAndFilteredUsers(pageRequest, searchValue);
     }
@@ -45,12 +45,14 @@ public class UsersController {
 
     @GetMapping("{id}")
     public ResponseEntity<UserDto> getUserById(@PathVariable("id") long id) {
-       return userDetailsService.getUserById(id);
+        return userDetailsService.getUserById(id);
     }
+
     @PutMapping("{id}")
     public ResponseEntity<UserDto> updateUser(@PathVariable("id") long id, @RequestBody UserDto user) {
         return userDetailsService.updateUserById(id, user);
     }
+
     @DeleteMapping("{id}")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") long id) {
         return userDetailsService.deleteUserById(id);

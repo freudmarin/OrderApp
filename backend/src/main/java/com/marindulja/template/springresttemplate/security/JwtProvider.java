@@ -1,11 +1,11 @@
 package com.marindulja.template.springresttemplate.security;
 
+import com.marindulja.template.springresttemplate.adapters.UserAdapter;
 import com.marindulja.template.springresttemplate.exception.OrderAppException;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,7 +14,7 @@ public class JwtProvider {
     private String secretKey;
     // generate token
     public String generateToken(Authentication authentication){
-        User principal = (User) authentication.getPrincipal();
+        UserAdapter principal = (UserAdapter) authentication.getPrincipal();
         return Jwts.builder()
                 .setSubject(principal.getUsername())
                 .signWith(SignatureAlgorithm.HS512, secretKey)

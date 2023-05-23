@@ -1,5 +1,6 @@
 package com.marindulja.template.springresttemplate.service.users;
 
+import com.marindulja.template.springresttemplate.adapters.UserAdapter;
 import com.marindulja.template.springresttemplate.dto.UserDto;
 import com.marindulja.template.springresttemplate.model.Role;
 import com.marindulja.template.springresttemplate.model.User;
@@ -37,17 +38,18 @@ public class UserDetailsServiceImpl implements UserService {
 
     private final PasswordEncoder passwordEncoder;
 
-    private final  ModelMapper mapper = new ModelMapper();
+    private final ModelMapper mapper = new ModelMapper();
+
     @Override
-    public PageImpl<UserDto> getPaginatedAndFilteredUsers(Pageable pageRequest, String searchValue)  {
+    public PageImpl<UserDto> getPaginatedAndFilteredUsers(Pageable pageRequest, String searchValue) {
         Page<User> pageResult = userRepository.findAll(pageRequest);
         List<UserDto> usersDto = pageResult
                 .stream()
-                .filter(res-> res.getFullName().contains(searchValue) || res.getUsername().contains(searchValue)
-                || res.getJobTitle().contains(searchValue))
+                .filter(res -> res.getFullName().contains(searchValue) || res.getUsername().contains(searchValue)
+                        || res.getJobTitle().contains(searchValue))
                 .map(this::mapToDTO)
                 .collect(toList());
-        return new PageImpl<>(usersDto, pageRequest , usersDto.size());
+        return new PageImpl<>(usersDto, pageRequest, usersDto.size());
     }
 
     @Override
@@ -104,7 +106,6 @@ public class UserDetailsServiceImpl implements UserService {
             _user.setJobTitle(userDto.getJobTitle());
             _user.setPassword(passwordEncoder.encode(userDto.getPassword()));
             User updatedUser = userRepository.save(_user);
-
             return new ResponseEntity<>(mapToDTO(updatedUser), HttpStatus.OK);
         } else {
             throw new com.marindulja.template.springresttemplate.exception.NotFoundException("User not found");
@@ -126,14 +127,9 @@ public class UserDetailsServiceImpl implements UserService {
         log.debug("Load user for authentication spring security");
         try {
             User user = findByUsername(username);
-
             String role = user.getRole().getAuthority();
             List<GrantedAuthority> grantedAuthorities = AuthorityUtils.createAuthorityList("ROLE_" + role);
-
-            return new org.springframework.security.core.userdetails.User(
-                    Long.toString(user.getId()),
-                    user.getPassword(),
-                    grantedAuthorities);
+            return new UserAdapter(user.getId(), user.getPassword(), grantedAuthorities, userRepository);
 
         } catch (NotFoundException e) {
             throw new UsernameNotFoundException(e.getMessage(), e);
