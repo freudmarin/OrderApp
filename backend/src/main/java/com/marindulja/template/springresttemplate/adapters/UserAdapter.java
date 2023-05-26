@@ -1,5 +1,6 @@
 package com.marindulja.template.springresttemplate.adapters;
 
+import com.marindulja.template.springresttemplate.model.User;
 import com.marindulja.template.springresttemplate.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,7 +11,7 @@ public class UserAdapter implements UserDetails {
 
     private final Long userId;
     private final String password;
-    private final  Collection<? extends GrantedAuthority> authorities;
+    private final Collection<? extends GrantedAuthority> authorities;
 
     private final UserRepository userRepository;
 
@@ -44,6 +45,10 @@ public class UserAdapter implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
+        User user = userRepository.findById(Long.valueOf(userId)).get();
+        if (user.isDeleted()) {
+            return false;
+        }
         return true;
     }
 

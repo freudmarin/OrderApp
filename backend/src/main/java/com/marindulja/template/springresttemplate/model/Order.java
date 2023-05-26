@@ -13,6 +13,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Table(name = "orders")
+
+//many orders from 1 customer
 public class Order extends BaseEntity<Long> {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = true)

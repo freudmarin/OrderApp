@@ -2,15 +2,19 @@ package com.marindulja.template.springresttemplate.service;
 
 import com.marindulja.template.springresttemplate.adapters.UserAdapter;
 import com.marindulja.template.springresttemplate.dto.LoginRequest;
+import com.marindulja.template.springresttemplate.exception.OrderAppException;
+import com.marindulja.template.springresttemplate.repository.UserRepository;
 import com.marindulja.template.springresttemplate.security.JwtProvider;
 import com.marindulja.template.springresttemplate.service.users.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -19,6 +23,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 public class AuthService {
+    private final UserRepository userRepository;
     private final AuthenticationManager authenticationManager;
 
     final UserService userService;
@@ -28,10 +33,14 @@ public class AuthService {
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
                 loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authenticate);
-        String role = userService.loadUserByUsername(loginRequest.getUsername()).getAuthorities().
-                stream().map(grantedAuthority -> StringUtils.remove(grantedAuthority.getAuthority(),"ROLE_")).findFirst().get();
-        String authenticationToken = jwtProvider.generateToken(authenticate);
-        return new AuthenticationResponse(authenticationToken, loginRequest.getUsername(), role);
+        UserDetails userDetails = userService.loadUserByUsername(loginRequest.getUsername());
+        if (userDetails != null) {
+            String role = userDetails.getAuthorities().
+                    stream().map(grantedAuthority -> StringUtils.remove(grantedAuthority.getAuthority(), "ROLE_")).findFirst().get();
+            String authenticationToken = jwtProvider.generateToken(authenticate);
+            return new AuthenticationResponse(authenticationToken, loginRequest.getUsername(), role);
+        }
+        throw new OrderAppException(HttpStatus.BAD_REQUEST, "Login was not possible");
     }
 
     public Optional<UserAdapter> getCurrentUser() {

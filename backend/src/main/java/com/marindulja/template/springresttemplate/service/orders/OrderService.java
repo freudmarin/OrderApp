@@ -8,6 +8,7 @@ import com.marindulja.template.springresttemplate.exception.OrderAppException;
 import com.marindulja.template.springresttemplate.model.*;
 import com.marindulja.template.springresttemplate.repository.*;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class OrderService {
     private final OrderRepository orderRepository;
 
@@ -49,6 +51,7 @@ public class OrderService {
                 product.setUnitInStock(product.getUnitInStock() - orderItemDto.getQuantity());
                 productRepository.save(product);
             } else {
+                log.info("You cannot make this order, because there is not enough stock left");
                 throw new OrderAppException(HttpStatus.BAD_REQUEST, "You cannot make this order, because there is not enough stock left");
             }
             totalPrice += product.getUnitPrice() * orderItemDto.getQuantity() - ((double) product.getDiscount() / 100 * product.getUnitPrice() * orderItemDto.getQuantity());

@@ -14,5 +14,5 @@ public interface CustomerService {
     CustomerDto addCustomer(CustomerDto customerToBeAdded);
     ResponseEntity<CustomerDto> getCustomerById(long id);
     ResponseEntity<CustomerDto> updateCustomerById(long id, CustomerDto customer);
-    ResponseEntity<HttpStatus> deleteCustomerById(long id);
+    void  deleteCustomerById(long id);
 }

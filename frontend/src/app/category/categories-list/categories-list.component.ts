@@ -5,6 +5,8 @@ import {MatPaginator} from '@angular/material/paginator';
 import {tap} from 'rxjs/operators';
 import {CategoryService} from '../category-service';
 import {CategoryDataSource} from './category-data-source';
+import {Category} from '../category';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-categories-list',
@@ -14,6 +16,7 @@ import {CategoryDataSource} from './category-data-source';
 export class CategoriesListComponent implements OnInit, AfterViewInit {
   public roleManagementService: RoleManagementService;
   categoryDatasource: CategoryDataSource;
+  categoryToBeDeleted: Observable<Category>;
 
   constructor(public categoryService: CategoryService, private router: Router, roleManagementService: RoleManagementService) {
     this.roleManagementService = roleManagementService;

@@ -1,7 +1,9 @@
 package com.marindulja.template.springresttemplate.service.categories;
 
 import com.marindulja.template.springresttemplate.dto.CategoryDto;
+import com.marindulja.template.springresttemplate.exception.NotFoundException;
 import com.marindulja.template.springresttemplate.model.Category;
+import com.marindulja.template.springresttemplate.model.Product;
 import com.marindulja.template.springresttemplate.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +36,7 @@ public class CategoryServiceImp implements CategoryService {
         List<CategoryDto> categoriesDto = pageResult
                 .stream()
                 .filter(res -> res.getName().contains(searchValue))
+                .filter(category -> !category.isDeleted())
                 .map(this::mapToDTO)
                 .collect(toList());
         return new PageImpl<>(categoriesDto, pageRequest, pageResult.getTotalElements());
@@ -42,7 +45,9 @@ public class CategoryServiceImp implements CategoryService {
     @Override
     public List<CategoryDto> getAllCategories() {
         Iterable<Category> categories = categoryRepository.findAll();
-        return StreamSupport.stream(categories.spliterator(), false).map(this::mapToDTO)
+        return StreamSupport.stream(categories.spliterator(), false)
+                .filter(category -> !category.isDeleted())
+                .map(this::mapToDTO)
                 .collect(Collectors.toList());
     }
 
@@ -78,13 +83,13 @@ public class CategoryServiceImp implements CategoryService {
     }
 
     @Override
-    public ResponseEntity<HttpStatus> deleteCategoryById(long id) {
-        try {
-            categoryRepository.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            throw new com.marindulja.template.springresttemplate.exception.NotFoundException("User not found");
+    public void  deleteCategoryById(long id) {
+        Category category = categoryRepository.findById(id).orElseThrow(() -> new NotFoundException("Category not found"));
+        category.setDeleted(true);
+        for (Product product : category.getProducts()) {
+            product.setDeleted(true);
         }
+        categoryRepository.save(category);  // This will trigger the update of all associated products
     }
 
     private CategoryDto mapToDTO(Category category) {

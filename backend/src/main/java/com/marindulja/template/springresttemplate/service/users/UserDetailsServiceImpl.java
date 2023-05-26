@@ -47,6 +47,7 @@ public class UserDetailsServiceImpl implements UserService {
                 .stream()
                 .filter(res -> res.getFullName().contains(searchValue) || res.getUsername().contains(searchValue)
                         || res.getJobTitle().contains(searchValue))
+                .filter(user -> !user.isDeleted())
                 .map(this::mapToDTO)
                 .collect(toList());
         return new PageImpl<>(usersDto, pageRequest, usersDto.size());
@@ -55,7 +56,9 @@ public class UserDetailsServiceImpl implements UserService {
     @Override
     public List<UserDto> getAllUsers() {
         Iterable<User> users = userRepository.findAll();
-        return StreamSupport.stream(users.spliterator(), false).map(this::mapToDTO)
+        return StreamSupport.stream(users.spliterator(), false)
+                .filter(user -> !user.isDeleted())
+                .map(this::mapToDTO)
                 .collect(Collectors.toList());
     }
 
@@ -112,13 +115,10 @@ public class UserDetailsServiceImpl implements UserService {
         }
     }
 
-    public ResponseEntity<HttpStatus> deleteUserById(long id) {
-        try {
-            userRepository.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            throw new com.marindulja.template.springresttemplate.exception.NotFoundException("User not found");
-        }
+    public void deleteUserById(long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new com.marindulja.template.springresttemplate.exception.NotFoundException("Product not found"));
+        user.setDeleted(true);
+        userRepository.save(user);
     }
 
     @Override
@@ -129,12 +129,14 @@ public class UserDetailsServiceImpl implements UserService {
             User user = findByUsername(username);
             String role = user.getRole().getAuthority();
             List<GrantedAuthority> grantedAuthorities = AuthorityUtils.createAuthorityList("ROLE_" + role);
-            return new UserAdapter(user.getId(), user.getPassword(), grantedAuthorities, userRepository);
-
+            UserAdapter userAdapter =new UserAdapter(user.getId(), user.getPassword(), grantedAuthorities, userRepository);
+            if (userAdapter.isAccountNonLocked())
+                return userAdapter;
+            else
+                return null;
         } catch (NotFoundException e) {
             throw new UsernameNotFoundException(e.getMessage(), e);
         }
-
     }
 
     private Collection<? extends GrantedAuthority> getAuthorities(String role_user) {

@@ -15,7 +15,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "products")
-@OnDelete(action = OnDeleteAction.CASCADE)
 public class Product extends BaseEntity<Long> {
 
     @Column(name = "product_code", nullable = false, unique = true)
@@ -27,11 +26,15 @@ public class Product extends BaseEntity<Long> {
     @Column(name = "unit_price", nullable = false)
     private double unitPrice;
     @Column(name = "unit_in_stock", nullable = false)
-    private Long  unitInStock;
+    private Integer  unitInStock;
 
-    private Double discount;
+    private Integer discount;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @Column(name= "is_deleted")
+    private boolean isDeleted;
 
 }

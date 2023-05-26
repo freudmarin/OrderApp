@@ -38,11 +38,13 @@ public class User extends BaseEntity<Long> {
     private Role role;
 
     @OneToMany(
-            mappedBy = "customer",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+            mappedBy = "user"
     )
     private List<Order> orders = new ArrayList<>();
+
+    @Column(name= "is_deleted")
+    private boolean isDeleted;
+
 
     public User(String username, String password, String fullName, String jobTitle, Role role) {
         this.username = username;

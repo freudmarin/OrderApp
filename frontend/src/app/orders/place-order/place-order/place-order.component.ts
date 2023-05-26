@@ -63,25 +63,16 @@ export class PlaceOrderComponent implements OnInit {
   onSubmit(): void {
     if (this.placeOrderForm.valid) {
       const orderReq: OrderRequest = this.placeOrderForm.value;
-      if (this.products.some(product => product.unitInStock <= 0)) {
-        this.dialog.open(DialogComponent, {
-          data: {title: 'Order not processed', message: 'There is not enough stock left'},
-          panelClass: 'custom-dialog'
-        });
-      } else {
-        console.log(orderReq);
-        this.ordersService.placeOrder(orderReq).subscribe(() => {
-          this.placeOrderForm.reset();
-          this.items.clear();
-          this.items.push(this.createItemFormGroup());
-          this.router.navigateByUrl('/orders');
-        }, onerror => {
-          this.dialog.open(DialogComponent, {
-            data: {title: 'Order not processed', message: 'There is not enough stock left'},
-            panelClass: 'custom-dialog'
-          });
-        });
-      }
+      console.log(orderReq);
+      this.ordersService.placeOrder(orderReq).subscribe(() => {
+        this.placeOrderForm.reset();
+        this.items.clear();
+        this.items.push(this.createItemFormGroup());
+        this.router.navigateByUrl('/orders');
+      }, () => this.dialog.open(DialogComponent, {
+        data: {title: 'Order not processed', message: 'There is not enough stock left'},
+        panelClass: 'custom-dialog'
+      }));
     }
   }
 }

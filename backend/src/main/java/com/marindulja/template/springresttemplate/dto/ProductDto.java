@@ -20,9 +20,9 @@ public class ProductDto {
     @NotBlank(message = "Price is mandatory")
     private Long unitPrice;
     @NotBlank(message = "Stock number is mandatory")
-    private Long unitInStock;
+    private Integer unitInStock;
 
-    @NotBlank(message = "Stock number is mandatory")
-    private Long discount;
+    @NotBlank(message = "Discount is mandatory")
+    private Integer discount;
 
 }

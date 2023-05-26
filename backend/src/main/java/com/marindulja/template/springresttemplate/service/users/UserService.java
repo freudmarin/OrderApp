@@ -39,5 +39,5 @@ public interface UserService extends UserDetailsService {
 
     ResponseEntity<UserDto> updateUserById(long id, UserDto user);
 
-    ResponseEntity<HttpStatus> deleteUserById(long id);
+   void  deleteUserById(long id);
 }

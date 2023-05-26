@@ -39,6 +39,7 @@ public class ProductServiceImpl implements ProductService {
         List<ProductDto> productsDto = pageResult
                 .stream()
                 .filter(res -> res.getProductName().contains(searchValue) || res.getDescription().contains(searchValue))
+                .filter(prod -> !prod.isDeleted())
                 .map(this::mapToDTO)
                 .collect(toList());
         return new PageImpl<>(productsDto, pageRequest, productsDto.size());
@@ -47,7 +48,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductDto> getAllProducts() {
         Iterable<Product> products = productRepository.findAll();
-        return StreamSupport.stream(products.spliterator(), false).map(this::mapToDTO)
+        return StreamSupport.stream(products.spliterator(), false).filter(prod -> !prod.isDeleted()).map(this::mapToDTO)
                 .collect(Collectors.toList());
     }
 
@@ -62,56 +63,55 @@ public class ProductServiceImpl implements ProductService {
             product.setCategory(category.get());
             product.setUnitPrice(productToBeAdded.getUnitPrice());
             product.setUnitInStock(productToBeAdded.getUnitInStock());
+            product.setDiscount(productToBeAdded.getDiscount());
             Product savedProduct = productRepository.save(product);
             return mapToDTO(savedProduct);
         } else {
             throw new NotFoundException("Category not found");
         }
-        }
+    }
 
-        @Override
-        public ResponseEntity<ProductDto> getProductById (long id){
-            Optional<Product> productData = productRepository.findById(id);
-            if (productData.isPresent()) {
-                return new ResponseEntity<>(mapToDTO(productData.get()), HttpStatus.OK);
-            } else {
-                throw new com.marindulja.template.springresttemplate.exception.NotFoundException("Product was  not found");
-            }
-        }
-
-        @Override
-        public ResponseEntity<ProductDto> updateProductById ( long id, ProductDto productDto){
-            Optional<Product> productData = productRepository.findById(id);
-            if (productData.isPresent()) {
-                Product product = productData.get();
-                product.setProductCode(productDto.getProductCode());
-                product.setProductName(productDto.getProductName());
-                product.setDescription(productDto.getDescription());
-                product.setCategory(categoryRepository.findById(productDto.getCategory().getId()).orElseThrow());
-                product.setUnitPrice(productDto.getUnitPrice());
-                product.setUnitInStock(productDto.getUnitInStock());
-                Product updatedProduct = productRepository.save(product);
-                return new ResponseEntity<>(mapToDTO(updatedProduct), HttpStatus.OK);
-            } else {
-                throw new com.marindulja.template.springresttemplate.exception.NotFoundException("Product was not found");
-            }
-        }
-
-        @Override
-        public ResponseEntity<HttpStatus> deleteProductById (long id){
-            try {
-                productRepository.deleteById(id);
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            } catch (Exception e) {
-                throw new com.marindulja.template.springresttemplate.exception.NotFoundException("Product was  not found");
-            }
-        }
-
-        private ProductDto mapToDTO (Product product){
-            return mapper.map(product, ProductDto.class);
-        }
-
-        private Product mapToEntity (ProductDto productDto){
-            return mapper.map(productDto, Product.class);
+    @Override
+    public ResponseEntity<ProductDto> getProductById(long id) {
+        Optional<Product> productData = productRepository.findById(id);
+        if (productData.isPresent()) {
+            return new ResponseEntity<>(mapToDTO(productData.get()), HttpStatus.OK);
+        } else {
+            throw new com.marindulja.template.springresttemplate.exception.NotFoundException("Product was  not found");
         }
     }
+
+    @Override
+    public ResponseEntity<ProductDto> updateProductById(long id, ProductDto productDto) {
+        Optional<Product> productData = productRepository.findById(id);
+        if (productData.isPresent()) {
+            Product product = productData.get();
+            product.setProductCode(productDto.getProductCode());
+            product.setProductName(productDto.getProductName());
+            product.setDescription(productDto.getDescription());
+            product.setCategory(categoryRepository.findById(productDto.getCategory().getId()).orElseThrow());
+            product.setUnitPrice(productDto.getUnitPrice());
+            product.setUnitInStock(productDto.getUnitInStock());
+            product.setDiscount(productDto.getDiscount());
+            Product updatedProduct = productRepository.save(product);
+            return new ResponseEntity<>(mapToDTO(updatedProduct), HttpStatus.OK);
+        } else {
+            throw new com.marindulja.template.springresttemplate.exception.NotFoundException("Product was not found");
+        }
+    }
+
+    @Override
+    public void deleteProductById(long id) {
+        Product product = productRepository.findById(id).orElseThrow(() -> new NotFoundException("Product not found"));
+        product.setDeleted(true);
+        productRepository.save(product);
+    }
+
+    private ProductDto mapToDTO(Product product) {
+        return mapper.map(product, ProductDto.class);
+    }
+
+    private Product mapToEntity(ProductDto productDto) {
+        return mapper.map(productDto, Product.class);
+    }
+}

@@ -15,5 +15,5 @@ public interface CategoryService {
     CategoryDto addCategory(CategoryDto categoryToBeAdded);
     ResponseEntity<CategoryDto> getCategoryById(long id);
     ResponseEntity<CategoryDto> updateUserById(long id, CategoryDto category);
-    ResponseEntity<HttpStatus> deleteCategoryById(long id);
+    void  deleteCategoryById(long id);
 }

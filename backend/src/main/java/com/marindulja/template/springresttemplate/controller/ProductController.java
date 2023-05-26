@@ -45,7 +45,7 @@ public class ProductController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<HttpStatus> deleteProduct(@PathVariable("id") long id) {
-        return productService.deleteProductById(id);
+    public void deleteProduct(@PathVariable("id") long id) {
+      productService.deleteProductById(id);
     }
 }

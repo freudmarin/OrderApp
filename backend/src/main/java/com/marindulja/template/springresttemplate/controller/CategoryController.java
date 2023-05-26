@@ -49,7 +49,7 @@ public class CategoryController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") long id) {
-        return categoryService.deleteCategoryById(id);
+    public void deleteCategory(@PathVariable("id") long id) {
+        categoryService.deleteCategoryById(id);
     }
 }

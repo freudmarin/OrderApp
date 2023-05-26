@@ -25,4 +25,7 @@ public class Customer extends BaseEntity<Long> {
     private String lastName;
 
     private String address;
+
+    @Column(name= "is_deleted")
+    private boolean isDeleted;
 }
