@@ -23,24 +23,13 @@ public class OrdersController {
     private final AuthService authService;
     private final UserRepository userRepository;
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("admin/paginated")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+    @GetMapping("paginated")
     public ResponseEntity<Page<OrderResponse>> getAllOrders(@RequestParam(name = "page", defaultValue = "0") Integer page,
                                                             @RequestParam(name = "size", defaultValue = "5") Integer size,
                                                             @RequestParam(name = "searchValue") String searchValue) {
-        return new ResponseEntity<>(orderService.getAllOrdersPaginated(page, size, searchValue), HttpStatus.OK);
+        return new ResponseEntity<>(orderService.getOrdersPaginated(page, size, searchValue), HttpStatus.OK);
     }
-
-    @PreAuthorize("hasRole('USER')")
-    @GetMapping()
-    public ResponseEntity<Page<OrderResponse>> getOrdersByUser(@RequestParam(name = "page", defaultValue = "0") Integer page,
-                                                               @RequestParam(name = "size", defaultValue = "5") Integer size,
-                                                               @RequestParam(name = "searchValue") String searchValue) {
-        Optional<UserAdapter> currentUser = authService.getCurrentUser();
-        return currentUser.map(user -> new ResponseEntity<>
-                (orderService.getOrdersPaginatedForUser(userRepository.findByUsername(currentUser.get().getUsername()).get().getId(), page, size, searchValue), HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
-
     @PreAuthorize("hasRole('USER')")
     @PostMapping("add")
     public ResponseEntity<Void> placeOrder(@RequestBody OrderRequest orderReq) {
@@ -51,5 +40,11 @@ public class OrdersController {
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+    @GetMapping("{id}")
+    public ResponseEntity<OrderResponse> getSpecificOrder(@PathVariable("id") Integer orderId) {
+        return new ResponseEntity<>(orderService.getOrderByID(orderId), HttpStatus.OK);
     }
 }

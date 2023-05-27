@@ -33,9 +33,9 @@ export class OrdersService {
 
   constructor(private http: HttpClient) {}
 
-  getAllOrdersPaginated(request): Observable<Page<OrderResponse>> {
+  getOrdersPaginated(request): Observable<Page<OrderResponse>> {
     const params = request;
-    return this.http.get<Page<OrderResponse>>(`${this.ordersUrl}/admin/paginated`, {params});
+    return this.http.get<Page<OrderResponse>>(`${this.ordersUrl}/paginated`, {params});
   }
 
   getOrdersByUser(request): Observable<Page<OrderResponse>> {

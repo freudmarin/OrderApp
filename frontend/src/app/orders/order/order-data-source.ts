@@ -28,28 +28,15 @@ export class OrderDataSource implements DataSource<OrderResponse> {
 
   loadOrders(pageNumber = 0, pageSize = 5, searchValue: string = '') {
     this.loadingSubject.next(true);
-    if (this.roleService.isAdmin) {
-      this.orderService.getAllOrdersPaginated({page: pageNumber, size: pageSize, searchValue})
-        .pipe(
-          catchError(() => of([])),
-          finalize(() => this.loadingSubject.next(false))
-        )
-        .subscribe((result: Page<OrderResponse>) => {
-            this.orderSubject.next(result.content);
-            this.countSubject.next(result.totalElements);
-          }
-        );
-    } else {
-      this.orderService.getOrdersByUser({page: pageNumber, size: pageSize, searchValue})
-        .pipe(
-          catchError(() => of([])),
-          finalize(() => this.loadingSubject.next(false))
-        )
-        .subscribe((result: Page<OrderResponse>) => {
-            this.orderSubject.next(result.content);
-            this.countSubject.next(result.totalElements);
-          }
-        );
-    }
+    this.orderService.getOrdersPaginated({page: pageNumber, size: pageSize, searchValue})
+      .pipe(
+        catchError(() => of([])),
+        finalize(() => this.loadingSubject.next(false))
+      )
+      .subscribe((result: Page<OrderResponse>) => {
+          this.orderSubject.next(result.content);
+          this.countSubject.next(result.totalElements);
+        }
+      );
   }
 }
