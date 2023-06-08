@@ -11,17 +11,3 @@ Backend: Spring Boot
 Frontend: Angular
 Database: Postgresql
 
-Installation
-Clone the repository
-git clone https://github.com/freudmarin/OrderApp
-Navigate into the backend project directory and build the Spring Boot project using Maven
-cd OrderApp/backend
-mvn package
-Start the Spring Boot application
-java -jar target/name-of-your-jar-file.jar
-Navigate into the frontend project directory and install the dependencies
-cd frontend
-npm install
-Start the Angular app
-ng serve --port 4200 
-
