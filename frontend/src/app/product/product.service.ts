@@ -37,4 +37,8 @@ export class ProductService {
   delete(id) {
     return this.httpClient.delete(`${this.productsUrl}/${id}`);
   }
+
+  isProductCodeNotUnique(code: string): Observable<boolean> {
+    return this.httpClient.get<boolean>(`${this.productsUrl}/validateCode/${code}`);
+  }
 }

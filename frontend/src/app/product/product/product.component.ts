@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ProductService} from '../product.service';
 import {CategoryService} from '../../category/category-service';
 import {Category} from '../../category/category';
-
+import {CustomValidationService} from '../custom-validation.service';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -21,9 +21,13 @@ export class ProductComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private categoryService: CategoryService,
               private productService: ProductService, private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private customValidationService: CustomValidationService) {
     this.productForm = this.formBuilder.group({
-      productCode: ['', Validators.required],
+      productCode: ['',
+        [Validators.required],
+        [this.customValidationService.uniqueProductCodeValidator()],
+      ],
       productName: ['', Validators.required],
       description: [''],
       category: ['', Validators.required],
