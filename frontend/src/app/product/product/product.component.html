@@ -10,7 +10,7 @@
       <mat-error *ngIf="(productFormControl.productCode.touched || submitted) && productFormControl.productCode.errors?.required">
         Product Code is required
       </mat-error>
-      <mat-error *ngIf="productFormControl['productCode'].errors?.productCodeNotUnique">
+      <mat-error *ngIf="(productFormControl['productCode'].errors?.productCodeNotUnique)">
         Product Code must be unique
       </mat-error>
     </mat-form-field>

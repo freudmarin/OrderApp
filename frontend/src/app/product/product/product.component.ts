@@ -26,7 +26,7 @@ export class ProductComponent implements OnInit {
     this.productForm = this.formBuilder.group({
       productCode: ['',
         [Validators.required],
-        [this.customValidationService.uniqueProductCodeValidator()],
+        [this.customValidationService.uniqueProductCodeValidator(this.id)],
       ],
       productName: ['', Validators.required],
       description: [''],
