@@ -13,14 +13,10 @@ export class CustomValidationService {
 
   uniqueProductCodeValidator(id: number): AsyncValidatorFn {
     return (control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
-      if (!id) {
-        return this.productService.isProductCodeNotUnique(control.value).pipe(
-          map(isNotUnique => (isNotUnique ? { productCodeNotUnique: true } : null)),
-          catchError(() => of(null))
-        );
-      }
-
-      return of(null);
+      return this.productService.isProductCodeNotUnique(control.value, id).pipe(
+        map(isNotUnique => (isNotUnique ? { productCodeNotUnique: true } : null)),
+        catchError(() => of(null))
+      );
     };
   }
 }

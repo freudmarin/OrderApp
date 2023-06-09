@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {Product} from './product';
 import {Page} from '../page';
+import {map, switchMap} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +39,10 @@ export class ProductService {
     return this.httpClient.delete(`${this.productsUrl}/${id}`);
   }
 
-  isProductCodeNotUnique(code: string): Observable<boolean> {
-    return this.httpClient.get<boolean>(`${this.productsUrl}/validateCode/${code}`);
+  isProductCodeNotUnique(productCode: string, id: number): Observable<boolean> {
+    if (id > 0) {
+      return of(false);
+    }
+    return this.httpClient.get<boolean>(`${this.productsUrl}/validateCode/${productCode}`);
   }
 }

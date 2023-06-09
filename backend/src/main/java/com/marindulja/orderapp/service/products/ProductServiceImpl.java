@@ -54,7 +54,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto addProduct(ProductDto productToBeAdded) {
-        Optional<Category> category = categoryRepository.findById(productToBeAdded.getCategory().getId());
+        Optional<Category> category = categoryRepository.
+                findById(productToBeAdded.getCategory().getId());
         if (category.isPresent()) {
             Product product = new Product();
             product.setProductCode(productToBeAdded.getProductCode());
@@ -102,7 +103,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void deleteProductById(long id) {
-        Product product = productRepository.findById(id).orElseThrow(() -> new NotFoundException("Product not found"));
+        Product product = productRepository.findById(id).orElseThrow(()
+                -> new NotFoundException("Product not found"));
         product.setDeleted(true);
         productRepository.save(product);
     }
@@ -110,6 +112,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public boolean isProductNotUnique(String productCode) {
         Optional<Product> productData = productRepository.findByProductCode(productCode).stream().filter(prod -> !prod.isDeleted()).findFirst();
+
         if (productData.isPresent()) {
             return true;
         }
