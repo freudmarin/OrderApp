@@ -38,7 +38,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDialogModule} from '@angular/material/dialog';
 import {DialogComponent} from './utils/dialog.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatCarouselModule} from '@ngmodule/material-carousel';
+import {MatCarouselModule} from '@ngbmodule/material-carousel';
+
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import {MatCarouselModule} from '@ngmodule/material-carousel';
     MatDialogModule,
     MatPaginatorModule,
     ReactiveFormsModule,
+    MatCarouselModule.forRoot(),
     NgxWebstorageModule.forRoot(),
     RouterModule.forRoot([
       {path: '', component: HomeComponent},

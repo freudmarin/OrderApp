@@ -65,7 +65,8 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ]
+              ],
+              "showCircularDependencies": false
             }
           }
         },
@@ -76,7 +77,8 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "frontend:build:production"
+              "browserTarget": "frontend:build:production",
+              "showCircularDependencies": false
             }
           }
         },

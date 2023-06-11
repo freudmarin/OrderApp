@@ -23,6 +23,7 @@ export class ProductComponent implements OnInit {
               private productService: ProductService, private router: Router,
               private route: ActivatedRoute,
               private customValidationService: CustomValidationService) {
+    this.id = this.route.snapshot.params.id;
     this.productForm = this.formBuilder.group({
       productCode: ['',
         [Validators.required],
@@ -38,7 +39,6 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.id = this.route.snapshot.params.id;
     if (this.id > 0) {
       this.onUpdate = true;
       this.productService.get(this.id).subscribe(data => {
